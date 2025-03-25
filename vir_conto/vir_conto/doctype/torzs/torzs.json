@@ -1,0 +1,67 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-24 23:07:32.181726",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_fmlp",
+  "f_kod",
+  "f_nev",
+  "f_nev2"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_fmlp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "f_kod",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "f_kod",
+   "length": 4,
+   "reqd": 1
+  },
+  {
+   "fieldname": "f_nev",
+   "fieldtype": "Data",
+   "label": "f_nev",
+   "length": 35,
+   "reqd": 1
+  },
+  {
+   "fieldname": "f_nev2",
+   "fieldtype": "Data",
+   "label": "f_nev2",
+   "length": 35,
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-25 09:22:39.885657",
+ "modified_by": "Administrator",
+ "module": "Vir Conto",
+ "name": "torzs",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

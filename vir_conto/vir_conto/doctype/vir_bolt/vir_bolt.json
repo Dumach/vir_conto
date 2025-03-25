@@ -1,0 +1,210 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-24 23:14:55.793127",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "rkod",
+  "rnev",
+  "datum",
+  "ho",
+  "keszlet",
+  "nbesz_kp",
+  "bbesz_kp",
+  "nbesz_nkp",
+  "bbesz_nkp",
+  "nert_ossz",
+  "bert_ossz",
+  "vevok",
+  "kosara",
+  "nszallrend",
+  "bszallrend",
+  "haszon",
+  "hkulcs",
+  "neg_keszlm",
+  "bert_eng",
+  "bsaj_felh",
+  "bselejt"
+ ],
+ "fields": [
+  {
+   "fieldname": "rkod",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "rkod",
+   "length": 10,
+   "options": "raktnev",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rnev",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "rnev",
+   "length": 15,
+   "reqd": 1
+  },
+  {
+   "fieldname": "datum",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "datum",
+   "length": 10,
+   "reqd": 1
+  },
+  {
+   "fieldname": "ho",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "ho",
+   "length": 2,
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "keszlet",
+   "fieldtype": "Int",
+   "label": "keszlet",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "nbesz_kp",
+   "fieldtype": "Int",
+   "label": "nbesz_kp",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "bbesz_kp",
+   "fieldtype": "Int",
+   "label": "bbesz_kp",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "nbesz_nkp",
+   "fieldtype": "Int",
+   "label": "nbesz_nkp",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "bbesz_nkp",
+   "fieldtype": "Int",
+   "label": "bbesz_nkp",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "nert_ossz",
+   "fieldtype": "Int",
+   "label": "nert_ossz",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "bert_ossz",
+   "fieldtype": "Int",
+   "label": "bert_ossz",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "vevok",
+   "fieldtype": "Int",
+   "label": "vevok",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "kosara",
+   "fieldtype": "Int",
+   "label": "kosara",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "nszallrend",
+   "fieldtype": "Int",
+   "label": "nszallrend",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "bszallrend",
+   "fieldtype": "Int",
+   "label": "bszallrend",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "haszon",
+   "fieldtype": "Int",
+   "label": "haszon",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "hkulcs",
+   "fieldtype": "Int",
+   "label": "hkulcs",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "neg_keszlm",
+   "fieldtype": "Int",
+   "label": "neg_keszlm",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "bert_eng",
+   "fieldtype": "Int",
+   "label": "bert_eng",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "bsaj_felh",
+   "fieldtype": "Int",
+   "label": "bsaj_felh",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "bselejt",
+   "fieldtype": "Int",
+   "label": "bselejt",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-25 09:23:25.075590",
+ "modified_by": "Administrator",
+ "module": "Vir Conto",
+ "name": "vir_bolt",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
