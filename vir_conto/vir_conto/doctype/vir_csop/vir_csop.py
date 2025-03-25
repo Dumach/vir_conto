@@ -23,5 +23,4 @@ class vir_csop(Document):
 		tipus: DF.Link
 	# end: auto-generated types
 
-	from typing import TYPE_CHECKING
 	pass

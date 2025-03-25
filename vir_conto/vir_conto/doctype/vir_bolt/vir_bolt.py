@@ -37,5 +37,4 @@ class vir_bolt(Document):
 		vevok: DF.Int
 	# end: auto-generated types
 
-	from typing import TYPE_CHECKING
 	pass

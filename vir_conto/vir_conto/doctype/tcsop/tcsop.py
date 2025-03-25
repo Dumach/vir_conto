@@ -21,5 +21,4 @@ class tcsop(Document):
 		tarhely: DF.Data
 	# end: auto-generated types
 
-	from typing import TYPE_CHECKING
 	pass

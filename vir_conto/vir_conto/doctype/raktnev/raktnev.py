@@ -31,6 +31,4 @@ class raktnev(Document):
 		sorrend: DF.Int
 	# end: auto-generated types
 
-	from typing import TYPE_CHECKING
-
 	pass
