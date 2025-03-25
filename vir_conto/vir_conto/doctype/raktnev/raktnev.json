@@ -6,7 +6,20 @@
  "engine": "InnoDB",
  "field_order": [
   "r_kod",
-  "rnev"
+  "rnev",
+  "rirsz",
+  "rvaros",
+  "rcim",
+  "rtel",
+  "megye",
+  "f_kod",
+  "nagyker",
+  "negativk",
+  "boltkat",
+  "sorrend",
+  "keszletkez",
+  "cim_kod",
+  "gyszam"
  ],
  "fields": [
   {
@@ -23,12 +36,104 @@
    "label": "rnev",
    "length": 30,
    "reqd": 1
+  },
+  {
+   "fieldname": "rirsz",
+   "fieldtype": "Data",
+   "label": "rirsz",
+   "length": 10,
+   "reqd": 1
+  },
+  {
+   "fieldname": "rvaros",
+   "fieldtype": "Data",
+   "label": "rvaros",
+   "length": 30,
+   "reqd": 1
+  },
+  {
+   "fieldname": "rcim",
+   "fieldtype": "Data",
+   "label": "rcim",
+   "length": 50,
+   "reqd": 1
+  },
+  {
+   "fieldname": "rtel",
+   "fieldtype": "Data",
+   "label": "rtel",
+   "length": 15,
+   "reqd": 1
+  },
+  {
+   "fieldname": "megye",
+   "fieldtype": "Data",
+   "label": "megye",
+   "length": 2,
+   "reqd": 1
+  },
+  {
+   "fieldname": "f_kod",
+   "fieldtype": "Link",
+   "label": "f_kod",
+   "length": 5,
+   "options": "torzs",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nagyker",
+   "fieldtype": "Data",
+   "label": "nagyker",
+   "length": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "negativk",
+   "fieldtype": "Data",
+   "label": "negativk",
+   "length": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "boltkat",
+   "fieldtype": "Data",
+   "label": "boltkat",
+   "length": 1,
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "sorrend",
+   "fieldtype": "Int",
+   "label": "sorrend",
+   "reqd": 1
+  },
+  {
+   "fieldname": "keszletkez",
+   "fieldtype": "Data",
+   "label": "keszletkez",
+   "length": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "cim_kod",
+   "fieldtype": "Data",
+   "label": "cim_kod",
+   "length": 10,
+   "reqd": 1
+  },
+  {
+   "fieldname": "gyszam",
+   "fieldtype": "Data",
+   "label": "gyszam",
+   "length": 1,
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 09:23:07.487546",
+ "modified": "2025-03-25 09:51:56.323491",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "raktnev",

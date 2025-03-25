@@ -14,8 +14,21 @@ class raktnev(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
+		boltkat: DF.Data
+		cim_kod: DF.Data
+		f_kod: DF.Link
+		gyszam: DF.Data
+		keszletkez: DF.Data
+		megye: DF.Data
+		nagyker: DF.Data
+		negativk: DF.Data
 		r_kod: DF.Data
+		rcim: DF.Data
+		rirsz: DF.Data
 		rnev: DF.Data
+		rtel: DF.Data
+		rvaros: DF.Data
+		sorrend: DF.Int
 	# end: auto-generated types
 
 	from typing import TYPE_CHECKING
