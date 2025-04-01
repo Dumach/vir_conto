@@ -21,9 +21,9 @@ class vir_bolt(Document):
 		bsaj_felh: DF.Int
 		bselejt: DF.Int
 		bszallrend: DF.Int
-		datum: DF.Data
+		datum: DF.Date
 		haszon: DF.Int
-		hkulcs: DF.Int
+		hkulcs: DF.Float
 		ho: DF.Data
 		keszlet: DF.Int
 		kosara: DF.Int

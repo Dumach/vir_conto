@@ -47,7 +47,7 @@
   },
   {
    "fieldname": "datum",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "in_list_view": 1,
    "label": "datum",
    "length": 10,
@@ -148,8 +148,9 @@
   {
    "default": "0",
    "fieldname": "hkulcs",
-   "fieldtype": "Int",
+   "fieldtype": "Float",
    "label": "hkulcs",
+   "precision": "2",
    "reqd": 1
   },
   {
@@ -184,7 +185,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 09:23:25.075590",
+ "modified": "2025-03-31 09:43:47.106705",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",

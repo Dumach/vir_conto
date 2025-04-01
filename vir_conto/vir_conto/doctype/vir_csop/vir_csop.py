@@ -16,11 +16,11 @@ class vir_csop(Document):
 
 		bert: DF.Int
 		csop: DF.Data
-		datum: DF.Data
+		datum: DF.Date
 		ho: DF.Data
 		nert: DF.Int
 		rkod: DF.Link
-		tipus: DF.Link
+		tipus: DF.Data
 	# end: auto-generated types
 
 	pass
