@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:kod",
  "creation": "2025-03-24 23:24:17.412058",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -18,15 +19,14 @@
    "in_list_view": 1,
    "label": "nev",
    "length": 50,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "default": "0",
    "fieldname": "rend",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "rend",
-   "reqd": 1
+   "label": "rend"
   },
   {
    "fieldname": "tarhely",
@@ -34,15 +34,16 @@
    "in_list_view": 1,
    "label": "tarhely",
    "length": 3,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "focsop",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "focsop",
-   "options": "tfocsop",
-   "reqd": 1
+   "length": 10,
+   "not_nullable": 1,
+   "options": "tfocsop"
   },
   {
    "fieldname": "kod",
@@ -50,16 +51,19 @@
    "in_list_view": 1,
    "label": "kod",
    "length": 10,
-   "reqd": 1
+   "not_nullable": 1,
+   "reqd": 1,
+   "unique": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 09:23:52.672564",
+ "modified": "2025-04-05 16:33:43.577266",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "tcsop",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -71,6 +75,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "cconto_system",
    "share": 1,
    "write": 1
   }

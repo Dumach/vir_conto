@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:f_kod",
  "creation": "2025-03-24 23:07:32.181726",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -21,13 +22,16 @@
    "in_list_view": 1,
    "label": "f_kod",
    "length": 4,
-   "reqd": 1
+   "not_nullable": 1,
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "f_nev",
    "fieldtype": "Data",
    "label": "f_nev",
    "length": 35,
+   "not_nullable": 1,
    "reqd": 1
   },
   {
@@ -35,16 +39,17 @@
    "fieldtype": "Data",
    "label": "f_nev2",
    "length": 35,
-   "reqd": 1
+   "not_nullable": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 09:22:39.885657",
+ "modified": "2025-04-05 16:34:19.134220",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "torzs",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -56,6 +61,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "cconto_system",
    "share": 1,
    "write": 1
   }

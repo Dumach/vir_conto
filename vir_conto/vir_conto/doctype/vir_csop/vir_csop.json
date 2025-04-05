@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "autoincrement",
  "creation": "2025-03-24 23:21:00.482581",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -20,6 +21,7 @@
    "in_list_view": 1,
    "label": "rkod",
    "length": 10,
+   "not_nullable": 1,
    "options": "raktnev",
    "reqd": 1
   },
@@ -35,45 +37,45 @@
    "fieldtype": "Data",
    "label": "ho",
    "length": 2,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "tipus",
    "fieldtype": "Data",
    "label": "tipus",
    "length": 10,
-   "options": "tfocsop",
+   "not_nullable": 1,
    "reqd": 1
   },
   {
    "fieldname": "csop",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "csop",
-   "length": 5,
-   "reqd": 1
+   "length": 10,
+   "not_nullable": 1,
+   "options": "tfocsop"
   },
   {
    "default": "0",
    "fieldname": "nert",
    "fieldtype": "Int",
-   "label": "nert",
-   "reqd": 1
+   "label": "nert"
   },
   {
    "default": "0",
    "fieldname": "bert",
    "fieldtype": "Int",
-   "label": "bert",
-   "reqd": 1
+   "label": "bert"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-31 09:45:14.800007",
+ "modified": "2025-04-05 16:33:55.790611",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_csop",
+ "naming_rule": "Autoincrement",
  "owner": "Administrator",
  "permissions": [
   {
@@ -85,6 +87,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "cconto_system",
    "share": 1,
    "write": 1
   }

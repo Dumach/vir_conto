@@ -22,9 +22,9 @@ class raktnev(Document):
 		megye: DF.Data
 		nagyker: DF.Data
 		negativk: DF.Data
-		r_kod: DF.Data
 		rcim: DF.Data
 		rirsz: DF.Data
+		rkod: DF.Data
 		rnev: DF.Data
 		rtel: DF.Data
 		rvaros: DF.Data

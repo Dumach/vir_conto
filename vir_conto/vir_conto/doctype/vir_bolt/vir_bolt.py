@@ -27,6 +27,7 @@ class vir_bolt(Document):
 		ho: DF.Data
 		keszlet: DF.Int
 		kosara: DF.Int
+		name: DF.Int | None
 		nbesz_kp: DF.Int
 		nbesz_nkp: DF.Int
 		neg_keszlm: DF.Int

@@ -1,7 +1,7 @@
 # Copyright (c) 2025, Alex Nagy and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 from frappe.model.document import Document
 
 
@@ -19,4 +19,9 @@ class datapacket(Document):
 		is_processed: DF.Check
 	# end: auto-generated types
 
-	pass
+	def after_insert(self):
+		# TODO:
+		#  - get file from storage
+		#  - unzip
+		#  - update or create doctype
+		pass

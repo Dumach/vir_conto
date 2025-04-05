@@ -1,11 +1,12 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:rkod",
  "creation": "2025-03-24 23:12:10.979009",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "r_kod",
+  "rkod",
   "rnev",
   "rirsz",
   "rvaros",
@@ -23,18 +24,11 @@
  ],
  "fields": [
   {
-   "fieldname": "r_kod",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "rkod",
-   "length": 5,
-   "reqd": 1
-  },
-  {
    "fieldname": "rnev",
    "fieldtype": "Data",
    "label": "rnev",
    "length": 30,
+   "not_nullable": 1,
    "reqd": 1
   },
   {
@@ -42,101 +36,111 @@
    "fieldtype": "Data",
    "label": "rirsz",
    "length": 10,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "rvaros",
    "fieldtype": "Data",
    "label": "rvaros",
    "length": 30,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "rcim",
    "fieldtype": "Data",
    "label": "rcim",
    "length": 50,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "rtel",
    "fieldtype": "Data",
    "label": "rtel",
-   "length": 15,
-   "reqd": 1
+   "length": 16,
+   "not_nullable": 1
   },
   {
    "fieldname": "megye",
    "fieldtype": "Data",
    "label": "megye",
    "length": 2,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "f_kod",
    "fieldtype": "Link",
    "label": "f_kod",
    "length": 5,
-   "options": "torzs",
-   "reqd": 1
+   "not_nullable": 1,
+   "options": "torzs"
   },
   {
    "fieldname": "nagyker",
    "fieldtype": "Data",
    "label": "nagyker",
    "length": 1,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "negativk",
    "fieldtype": "Data",
    "label": "negativk",
    "length": 1,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "boltkat",
    "fieldtype": "Data",
    "label": "boltkat",
    "length": 1,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "default": "0",
    "fieldname": "sorrend",
    "fieldtype": "Int",
-   "label": "sorrend",
-   "reqd": 1
+   "label": "sorrend"
   },
   {
    "fieldname": "keszletkez",
    "fieldtype": "Data",
    "label": "keszletkez",
    "length": 1,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "cim_kod",
    "fieldtype": "Data",
    "label": "cim_kod",
    "length": 10,
-   "reqd": 1
+   "not_nullable": 1
   },
   {
    "fieldname": "gyszam",
    "fieldtype": "Data",
    "label": "gyszam",
    "length": 1,
-   "reqd": 1
+   "not_nullable": 1
+  },
+  {
+   "fieldname": "rkod",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "rkod",
+   "length": 5,
+   "not_nullable": 1,
+   "reqd": 1,
+   "unique": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 09:51:56.323491",
+ "modified": "2025-04-05 16:34:12.686613",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "raktnev",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -150,10 +154,23 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "cconto_system",
+   "share": 1,
+   "write": 1
   }
  ],
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "rnev"
 }
