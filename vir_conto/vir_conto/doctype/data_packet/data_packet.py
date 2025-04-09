@@ -25,7 +25,6 @@ class datapacket(Document):
 
 	def after_insert(self):
 		# TODO:
-		#  - update or create doctype
 		#  - change naming setting on: vir_csop, vir_bolt
 
 		file_url = os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
@@ -35,7 +34,6 @@ class datapacket(Document):
 
 		# Create the extraction directory if it doesn't exist
 		if not os.path.exists(extraction_dir):
-			print(extraction_dir)
 			os.makedirs(extraction_dir)
 
 		# Open the zip file
@@ -45,38 +43,24 @@ class datapacket(Document):
 
 		# Process dbf files
 		encoding = "cp1250"
-
-		# tfocsop
-		doctype = "tfocsop"
-		dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
-		process_dbf(dbf_file, doctype, encoding)
-
-		# tcsop
-		doctype = "tcsop"
-		dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
-		process_dbf(dbf_file, doctype, encoding)
-
-		# raktnev
-		doctype = "raktnev"
-		dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
-		process_dbf(dbf_file, doctype, encoding)
-
-		# torzs
-		doctype = "torzs"
-		dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
-		process_dbf(dbf_file, doctype, encoding)
-
-		# vir_csop
-		doctype = "vir_csop"
-		dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
-		process_dbf(dbf_file, doctype, encoding)
-
-		# vir_bolt
-		doctype = "vir_bolt"
-		dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
-		process_dbf(dbf_file, doctype, encoding)
+		doctypes = frappe.get_all(
+			"DocType", filters={"Module": "Vir Conto", "name": ["!=", "data-packet"]}, pluck="name"
+		)
+		for doctype in doctypes:
+			dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
+			process_dbf(dbf_file, doctype, encoding)
 
 		self.is_processed = True
+
+
+PRIMARY_KEYS = {
+	"tfocsop": "kod",
+	"tcsop": "kod",
+	"raktnev": "rkod",
+	"torzs": "f_kod",
+	"vir_csop": "kod",
+	"vir_bolt": "kod",
+}
 
 
 def process_dbf(dbf_file: str, doctype: str, encoding: str):
@@ -87,40 +71,24 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str):
 
 		for record in table:
 			row = {}
-			print(record)
 			for field_name in field_names:
 				field_info = table.field_info(field_name)
-				# Strings are not trimmed by default
 				if field_info.py_type is str:
-					value = record[field_name].strip()
+					# Strings are not trimmed by default
+					value = str(record[field_name]).strip()
 				else:
 					value = record[field_name]
-
 				row[field_name.lower()] = value
 			row["doctype"] = doctype
-			insert_db(row)
+			insert_into_db(doctype, row)
 
 	except dbf.exceptions.DbfError as e:
 		print(e.message)
 
 
-def insert_db(row):
-	# create a new document or update existing
-	doctype = row["doctype"]
-	pkey = ""
-	match doctype:
-		case "tfocsop":
-			pkey = "kod"
-		case "tcsop":
-			pkey = "kod"
-		case "raktnev":
-			pkey = "rkod"
-		case "torzs":
-			pkey = "f_kod"
-		case "vir_csop":
-			pkey = "kod"
-		case "vir_bolt":
-			pkey = "kod"
+def insert_into_db(doctype: str, row):
+	# Selects the primary key for the appropriate doctype
+	pkey = PRIMARY_KEYS[doctype]
 
 	if not frappe.db.exists(doctype, row[pkey]):
 		# create new
