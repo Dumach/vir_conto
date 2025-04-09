@@ -1,0 +1,14 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2025-04-09 20:27:38.540866",
+  "name": "cconto_system_user_profile",
+  "role_profile": "cconto_system_user_profile",
+  "roles": [
+   {
+    "role": "cconto_system"
+   }
+  ]
+ }
+]

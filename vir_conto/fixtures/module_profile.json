@@ -1,0 +1,47 @@
+[
+ {
+  "block_modules": [
+   {
+    "module": "Automation"
+   },
+   {
+    "module": "Contacts"
+   },
+   {
+    "module": "Core"
+   },
+   {
+    "module": "Custom"
+   },
+   {
+    "module": "Desk"
+   },
+   {
+    "module": "Email"
+   },
+   {
+    "module": "Geo"
+   },
+   {
+    "module": "Integrations"
+   },
+   {
+    "module": "Printing"
+   },
+   {
+    "module": "Social"
+   },
+   {
+    "module": "Website"
+   },
+   {
+    "module": "Workflow"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Module Profile",
+  "modified": "2025-04-09 20:28:36.125031",
+  "module_profile_name": "cconto_system_user_profile",
+  "name": "cconto_system_user_profile"
+ }
+]
