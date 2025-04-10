@@ -97,7 +97,7 @@ fixtures = [
 
 # before_install = "vir_conto.install.before_install"
 after_install = "vir_conto.install.after_install"
-
+after_sync = "vir_conto.install.after_sync"
 # Uninstallation
 # ------------
 

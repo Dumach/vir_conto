@@ -33,7 +33,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-01 15:48:31.717729",
+ "modified": "2025-04-10 09:22:33.368320",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "data-packet",
@@ -60,7 +60,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Cconto Manager",
+   "role": "cconto_system",
    "share": 1,
    "write": 1
   }
