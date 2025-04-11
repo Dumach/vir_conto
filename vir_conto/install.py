@@ -1,12 +1,13 @@
+import json
 import os
 
 import frappe
 from dotenv import load_dotenv
+from frappe.core.doctype.user.user import User
 from frappe.utils.password import update_password
 
 
 def after_install():
-	# path = os.path.join(os.getcwd(), frappe.get_site_path()[2:], ".env")
 	# TODO:
 	# - set system settings to hungarian
 	pass
@@ -15,17 +16,15 @@ def after_install():
 def after_sync():
 	path = os.path.join(os.getcwd(), ".env")
 	load_dotenv(dotenv_path=path)
-	# create_system_user_profiles()
+
 	create_system_user()
 
 
-# def create_system_user_profiles():
-# if not frappe.db.exists("Role Profile", "cconto_system_user_profile"):
-
-
 def create_system_user():
-	new_user = frappe.new_doc("User")
+	print("Creating System User")
+	new_user: User = frappe.new_doc("User")
 
+	print("Configuring System User")
 	new_user.email = os.environ.get("CCONTO_SYS_USR_EMAIL")
 	new_user.username = os.environ.get("CCONTO_SYS_USR_USERNAME")
 	new_user.first_name = os.environ.get("CCONTO_SYS_USR_USERNAME")
@@ -37,5 +36,12 @@ def create_system_user():
 	new_user.insert()
 	update_password(new_user.name, os.environ.get("CCONTO_SYS_USR_PASSWORD"))
 
-	# TODO:
-	#  - Generate API key to access from main program.
+	print("Generating API key")
+	api_key = frappe.generate_hash(length=15)
+	api_secret = frappe.generate_hash(length=15)
+	new_user.api_key = api_key
+	new_user.api_secret = api_secret
+	new_user.save()
+	key_path = os.path.join(frappe.get_site_path(), "key.json")
+	with open(key_path, "w", encoding="utf8") as json_file:
+		json.dump({"api_key": api_key, "api_secret": api_secret}, json_file, ensure_ascii=True)
