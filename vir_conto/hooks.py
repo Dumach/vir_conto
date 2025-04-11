@@ -64,6 +64,16 @@ app_license = "agpl-3.0"
 # 	"Role": "home_page"
 # }
 
+# Fixtures
+# ----------
+fixtures = [
+	# export only those records that match the filters from the Role table
+	{"dt": "Role", "filters": [["role_name", "like", "cconto_system"]]},
+	{"dt": "Role Profile", "filters": [["role_profile", "like", "cconto_system_user_profile"]]},
+	{"dt": "Module Profile", "filters": [["name", "like", "cconto_system_user_profile"]]},
+]
+
+
 # Generators
 # ----------
 
@@ -86,8 +96,8 @@ app_license = "agpl-3.0"
 # ------------
 
 # before_install = "vir_conto.install.before_install"
-# after_install = "vir_conto.install.after_install"
-
+after_install = "vir_conto.install.after_install"
+after_sync = "vir_conto.install.after_sync"
 # Uninstallation
 # ------------
 
@@ -236,4 +246,3 @@ export_python_type_annotations = True
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
