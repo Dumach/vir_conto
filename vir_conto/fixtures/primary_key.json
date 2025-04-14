@@ -1,0 +1,74 @@
+[
+ {
+  "cconto_name": "tfocsop",
+  "cconto_pkey": "kod",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "tfocsop",
+  "handles_changes": 0,
+  "is_enabled": 1,
+  "modified": "2025-04-14 12:46:07.118923",
+  "name": "tfocsop",
+  "type": null
+ },
+ {
+  "cconto_name": "tcsop",
+  "cconto_pkey": "kod",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "tcsop",
+  "handles_changes": 0,
+  "is_enabled": 1,
+  "modified": "2025-04-14 12:46:29.877360",
+  "name": "tcsop",
+  "type": null
+ },
+ {
+  "cconto_name": "raktnev",
+  "cconto_pkey": "rkod",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "raktnev",
+  "handles_changes": 1,
+  "is_enabled": 1,
+  "modified": "2025-04-14 12:46:48.984703",
+  "name": "raktnev",
+  "type": null
+ },
+ {
+  "cconto_name": "torzs",
+  "cconto_pkey": "f_kod",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "torzs",
+  "handles_changes": 1,
+  "is_enabled": 1,
+  "modified": "2025-04-14 12:47:01.029580",
+  "name": "torzs",
+  "type": null
+ },
+ {
+  "cconto_name": "vir_csop",
+  "cconto_pkey": "tipus,csop,rkod,datum",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "vir_csop",
+  "handles_changes": 1,
+  "is_enabled": 1,
+  "modified": "2025-04-14 12:47:24.686618",
+  "name": "vir_csop",
+  "type": null
+ },
+ {
+  "cconto_name": "vir_bolt",
+  "cconto_pkey": "rkod,datum",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "vir_bolt",
+  "handles_changes": 1,
+  "is_enabled": 1,
+  "modified": "2025-04-14 12:47:41.795288",
+  "name": "vir_bolt",
+  "type": null
+ }
+]

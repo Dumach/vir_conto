@@ -1,0 +1,98 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:cconto_name",
+ "creation": "2025-04-14 12:30:55.370162",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ylyu",
+  "is_enabled",
+  "handles_changes",
+  "section_break_flzu",
+  "cconto_name",
+  "frappe_name",
+  "column_break_bhuf",
+  "cconto_pkey",
+  "type"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "is_enabled",
+   "fieldtype": "Check",
+   "label": "is_enabled"
+  },
+  {
+   "fieldname": "cconto_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "cconto_name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "frappe_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "frappe_name",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "handles_changes",
+   "fieldtype": "Check",
+   "label": "handle_changes"
+  },
+  {
+   "fieldname": "column_break_bhuf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cconto_pkey",
+   "fieldtype": "Data",
+   "label": "cconto_pkey",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_ylyu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_flzu",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "label": "type"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-04-14 12:49:48.017146",
+ "modified_by": "Administrator",
+ "module": "Vir Conto",
+ "name": "primary-key",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
