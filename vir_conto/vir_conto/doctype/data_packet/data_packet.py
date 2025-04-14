@@ -25,7 +25,8 @@ class datapacket(Document):
 
 	def after_insert(self):
 		# TODO:
-		#  - change naming setting on: vir_csop, vir_bolt
+		#  - handle torolt.dbf before importing
+		#  - torolt: tip + kod -> what needs to be removed from db
 
 		file_url = os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
 		extraction_dir = os.path.join(
@@ -43,9 +44,7 @@ class datapacket(Document):
 
 		# Process dbf files
 		encoding = "cp1250"
-		doctypes = frappe.get_all(
-			"DocType", filters={"Module": "Vir Conto", "name": ["!=", "data-packet"]}, pluck="name"
-		)
+		doctypes = PRIMARY_KEYS.keys()
 		for doctype in doctypes:
 			dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
 			process_dbf(dbf_file, doctype, encoding)
@@ -58,8 +57,8 @@ PRIMARY_KEYS = {
 	"tcsop": "kod",
 	"raktnev": "rkod",
 	"torzs": "f_kod",
-	"vir_csop": "kod",
-	"vir_bolt": "kod",
+	"vir_csop": ["tipus", "csop", "rkod", "datum"],
+	"vir_bolt": ["rkod", "datum"],
 }
 
 
@@ -89,13 +88,21 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str):
 def insert_into_db(doctype: str, row):
 	# Selects the primary key for the appropriate doctype
 	pkey = PRIMARY_KEYS[doctype]
+	pkey_value = ""
 
-	if not frappe.db.exists(doctype, row[pkey]):
+	if isinstance(pkey, list):
+		for key in pkey:
+			pkey_value += row[key] + "/"
+		pkey_value = pkey_value.rstrip("/")
+	else:
+		pkey_value = row[pkey]
+
+	if not frappe.db.exists(doctype, pkey_value):
 		# create new
 		new_doc = frappe.get_doc(row)
 		new_doc.insert()
 	else:
 		# update
-		_doc = frappe.get_doc(doctype, row[pkey])
+		_doc = frappe.get_doc(doctype, pkey_value)
 		_doc.update(row)
 		_doc.save()

@@ -18,7 +18,6 @@ class vir_csop(Document):
 		csop: DF.Link
 		datum: DF.Date
 		ho: DF.Data
-		name: DF.Int | None
 		nert: DF.Int
 		rkod: DF.Link
 		tipus: DF.Data

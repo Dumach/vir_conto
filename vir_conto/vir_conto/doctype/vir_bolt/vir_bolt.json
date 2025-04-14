@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "autoincrement",
+ "autoname": "format:{rkod}/{datum}",
  "creation": "2025-03-24 23:14:55.793127",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -169,11 +169,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-05 16:34:05.439356",
+ "modified": "2025-04-11 13:36:21.083521",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",
- "naming_rule": "Autoincrement",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

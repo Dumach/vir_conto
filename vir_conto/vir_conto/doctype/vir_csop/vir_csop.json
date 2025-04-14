@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "autoincrement",
+ "autoname": "format:{tipus}/{csop}/{rkod}/{datum}",
  "creation": "2025-03-24 23:21:00.482581",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -71,11 +71,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-05 16:33:55.790611",
+ "modified": "2025-04-11 13:35:56.943729",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_csop",
- "naming_rule": "Autoincrement",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
