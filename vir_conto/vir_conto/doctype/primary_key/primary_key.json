@@ -2,11 +2,10 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "field:frappe_name",
- "creation": "2025-04-14 12:30:55.370162",
+ "creation": "2025-04-15 13:17:01.490071",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_ylyu",
   "is_enabled",
   "is_updateable",
   "cconto_name",
@@ -16,12 +15,6 @@
   "import_order"
  ],
  "fields": [
-  {
-   "default": "1",
-   "fieldname": "is_enabled",
-   "fieldtype": "Check",
-   "label": "is_enabled"
-  },
   {
    "fieldname": "cconto_name",
    "fieldtype": "Data",
@@ -45,10 +38,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "section_break_ylyu",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "type",
    "fieldtype": "Data",
    "label": "type"
@@ -64,12 +53,18 @@
    "fieldname": "import_order",
    "fieldtype": "Int",
    "label": "import_order"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_enabled",
+   "fieldtype": "Check",
+   "label": "is_enabled"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-15 11:50:10.540636",
+ "modified": "2025-04-15 13:19:15.954306",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "primary-key",
