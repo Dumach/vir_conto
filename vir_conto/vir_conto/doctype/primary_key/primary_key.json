@@ -1,20 +1,19 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:cconto_name",
+ "autoname": "field:frappe_name",
  "creation": "2025-04-14 12:30:55.370162",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "section_break_ylyu",
   "is_enabled",
-  "handles_changes",
-  "section_break_flzu",
+  "is_updateable",
   "cconto_name",
   "frappe_name",
-  "column_break_bhuf",
   "cconto_pkey",
-  "type"
+  "type",
+  "import_order"
  ],
  "fields": [
   {
@@ -36,17 +35,8 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "frappe_name",
-   "reqd": 1
-  },
-  {
-   "default": "1",
-   "fieldname": "handles_changes",
-   "fieldtype": "Check",
-   "label": "handle_changes"
-  },
-  {
-   "fieldname": "column_break_bhuf",
-   "fieldtype": "Column Break"
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fieldname": "cconto_pkey",
@@ -59,19 +49,27 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "section_break_flzu",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "type",
    "fieldtype": "Data",
    "label": "type"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_updateable",
+   "fieldtype": "Check",
+   "label": "is_updateable"
+  },
+  {
+   "default": "10",
+   "fieldname": "import_order",
+   "fieldtype": "Int",
+   "label": "import_order"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-14 12:49:48.017146",
+ "modified": "2025-04-15 11:50:10.540636",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "primary-key",
@@ -87,6 +85,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "cconto_system",
    "share": 1,
    "write": 1
   }

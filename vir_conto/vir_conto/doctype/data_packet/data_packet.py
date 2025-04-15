@@ -8,6 +8,8 @@ import dbf
 import frappe
 from frappe.model.document import Document
 
+from vir_conto.vir_conto.doctype.primary_key.primary_key import primarykey
+
 
 class datapacket(Document):
 	# begin: auto-generated types
@@ -24,10 +26,9 @@ class datapacket(Document):
 	# end: auto-generated types
 
 	def after_insert(self):
-		# TODO:
-		#  - handle torolt.dbf before importing
-		#  - torolt: tip + kod -> what needs to be removed from db
+		self.import_data()
 
+	def import_data(self):
 		file_url = os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
 		extraction_dir = os.path.join(
 			frappe.get_site_path("private", "files", "storage"), str(self.file_name)
@@ -44,22 +45,24 @@ class datapacket(Document):
 
 		# Process dbf files
 		encoding = "cp1250"
-		doctypes = PRIMARY_KEYS.keys()
+		doctypes = frappe.db.get_all(
+			"primary-key",
+			fields=["name", "is_updateable", "import_order"],
+			filters={"is_enabled": True},
+			order_by="import_order",
+		)
+
 		for doctype in doctypes:
-			dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
-			process_dbf(dbf_file, doctype, encoding)
+			dbf_file = os.path.join(extraction_dir, doctype.name + ".dbf")
 
+			if not doctype.is_updateable:
+				# clean all entries because the whole dataset is sent
+				frappe.db.delete(doctype.name)
+
+				process_dbf(dbf_file, doctype.name, encoding)
+
+		frappe.db.commit()
 		self.is_processed = True
-
-
-PRIMARY_KEYS = {
-	"tfocsop": "kod",
-	"tcsop": "kod",
-	"raktnev": "rkod",
-	"torzs": "f_kod",
-	"vir_csop": ["tipus", "csop", "rkod", "datum"],
-	"vir_bolt": ["rkod", "datum"],
-}
 
 
 def process_dbf(dbf_file: str, doctype: str, encoding: str):
@@ -79,30 +82,59 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str):
 					value = record[field_name]
 				row[field_name.lower()] = value
 			row["doctype"] = doctype
-			insert_into_db(doctype, row)
+
+			if doctype == "torolt":
+				remove_from_db(row)
+			else:
+				insert_into_db(row)
 
 	except dbf.exceptions.DbfError as e:
 		print(e.message)
 
 
-def insert_into_db(doctype: str, row):
+def remove_from_db(row):
+	pass
+	# frappe.db.get_all("primary-key", filters={'type': ['=', 'TERM']})
+	# TODO:
+	# - may need to implement composite keys
+	# frappe.delete_doc(doctype, row["kod"])
+	# 	 if tip='TERM' then
+	#     if findkij(dmf.tblTermek,kod) then abl_term.termek_torol(True);
+	#    if tip='PARTN' then
+	#     if findkij(dmf.tblPartner,kod) then db_muv('D',dmf.tblPartner);
+	#    if tip='TELEP' then
+	#     if findkij(dmf.tblTelep,kod) then db_muv('D',dmf.tblTelep);
+	#    if tip='GVKOD' then
+	#     if findkij(dmf.tblGyujtvk,kod) then db_muv('D',dmf.tblGyujtvk);
+	#    if tip='ARAK' then
+
+
+def get_name(row: dict) -> str:
 	# Selects the primary key for the appropriate doctype
-	pkey = PRIMARY_KEYS[doctype]
-	pkey_value = ""
+	pkey: primarykey = frappe.get_doc("primary-key", row["doctype"]).cconto_pkey
+	pkey_list = pkey.split(",")
+	name = ""
 
-	if isinstance(pkey, list):
-		for key in pkey:
-			pkey_value += row[key] + "/"
-		pkey_value = pkey_value.rstrip("/")
+	if isinstance(pkey_list, list) and len(pkey_list) > 1:
+		for key in pkey_list:
+			name += row[key] + "/"
+		name = name.rstrip("/")
 	else:
-		pkey_value = row[pkey]
+		name = row[pkey]
 
-	if not frappe.db.exists(doctype, pkey_value):
+	return name
+
+
+def insert_into_db(row: dict) -> None:
+	pkey = get_name(row)
+	doctype = row["doctype"]
+
+	if not frappe.db.exists(doctype, pkey):
 		# create new
 		new_doc = frappe.get_doc(row)
 		new_doc.insert()
 	else:
 		# update
-		_doc = frappe.get_doc(doctype, pkey_value)
-		_doc.update(row)
-		_doc.save()
+		old_doc = frappe.get_doc(doctype, pkey)
+		old_doc.update(row)
+		old_doc.save()
