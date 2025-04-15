@@ -6,6 +6,13 @@ from vir_conto.vir_conto.doctype.primary_key.primary_key import primarykey
 
 
 def process_dbf(dbf_file: str, doctype: str, encoding: str):
+	"""Holds the logic for accessing a debase table.
+
+	Args:
+	        dbf_file (str): Source path of debase file.
+	        doctype (str): What doctype it needs to create.
+	        encoding (str): Debase file encoded in.
+	"""
 	try:
 		table = dbf.Table(dbf_file, codepage=encoding, on_disk=True)
 		field_names = table.field_names
@@ -50,6 +57,14 @@ def remove_from_db(row):
 
 
 def get_name(row: dict) -> str:
+	"""Creates the name aka. primary key for a Frappe document.
+
+	Args:
+	        row (dict):
+
+	Returns:
+	        str: _description_
+	"""
 	# Selects the primary key for the appropriate doctype
 	pkey: primarykey = frappe.get_doc("primary-key", row["doctype"]).cconto_pkey
 	pkey_list = pkey.split(",")
@@ -66,6 +81,11 @@ def get_name(row: dict) -> str:
 
 
 def insert_into_db(row: dict) -> None:
+	"""Inserts a key:value pair row into Frappe DB
+
+	Args:
+	        row (dict): Needs 'doctype' field in order to create new document by Frapee
+	"""
 	pkey = get_name(row)
 	doctype = row["doctype"]
 
