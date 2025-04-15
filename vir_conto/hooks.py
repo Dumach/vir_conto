@@ -154,23 +154,24 @@ after_sync = "vir_conto.install.after_sync"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"vir_conto.tasks.all"
-# 	],
-# 	"daily": [
-# 		"vir_conto.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"vir_conto.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"vir_conto.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"vir_conto.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	# 	"all": [
+	# 		"vir_conto.tasks.all"
+	# 	],
+	# 	"daily": [
+	# 		"vir_conto.tasks.daily"
+	# 	],
+	# 	"hourly": [
+	# 		"vir_conto.tasks.hourly"
+	# 	],
+	"weekly": [
+		# 		"vir_conto.tasks.weekly"
+		"vir_conto.vir_conto.doctype.data_packet.data_packet.clear_month_older_packets"
+	],
+	# 	"monthly": [
+	# 		"vir_conto.tasks.monthly"
+	# 	],
+}
 
 # Testing
 # -------
