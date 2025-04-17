@@ -1,0 +1,93 @@
+[
+ {
+  "cconto_name": "tfocsop",
+  "cconto_pkey": "kod",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "tfocsop",
+  "import_order": 1,
+  "is_enabled": 1,
+  "is_updateable": 0,
+  "modified": "2025-04-15 11:51:45.291358",
+  "name": "tfocsop",
+  "type": null
+ },
+ {
+  "cconto_name": "tcsop",
+  "cconto_pkey": "kod",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "tcsop",
+  "import_order": 10,
+  "is_enabled": 1,
+  "is_updateable": 0,
+  "modified": "2025-04-15 11:48:45.374269",
+  "name": "tcsop",
+  "type": null
+ },
+ {
+  "cconto_name": "raktnev",
+  "cconto_pkey": "rkod",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "raktnev",
+  "import_order": 10,
+  "is_enabled": 1,
+  "is_updateable": 0,
+  "modified": "2025-04-15 11:06:44.357475",
+  "name": "raktnev",
+  "type": null
+ },
+ {
+  "cconto_name": "torzs",
+  "cconto_pkey": "f_kod",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "torzs",
+  "import_order": 10,
+  "is_enabled": 1,
+  "is_updateable": 0,
+  "modified": "2025-04-15 11:07:10.141689",
+  "name": "torzs",
+  "type": null
+ },
+ {
+  "cconto_name": "vir_csop",
+  "cconto_pkey": "tipus,csop,rkod,datum",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "vir_csop",
+  "import_order": 10,
+  "is_enabled": 1,
+  "is_updateable": 1,
+  "modified": "2025-04-14 12:47:24.686618",
+  "name": "vir_csop",
+  "type": null
+ },
+ {
+  "cconto_name": "vir_bolt",
+  "cconto_pkey": "rkod,datum",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "vir_bolt",
+  "import_order": 10,
+  "is_enabled": 1,
+  "is_updateable": 1,
+  "modified": "2025-04-14 12:47:41.795288",
+  "name": "vir_bolt",
+  "type": null
+ },
+ {
+  "cconto_name": "termek",
+  "cconto_pkey": "kod",
+  "docstatus": 0,
+  "doctype": "primary-key",
+  "frappe_name": "termek",
+  "import_order": 10,
+  "is_enabled": 0,
+  "is_updateable": 1,
+  "modified": "2025-04-15 10:54:18.027702",
+  "name": "termek",
+  "type": "TERM"
+ }
+]

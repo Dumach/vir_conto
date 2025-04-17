@@ -4,9 +4,12 @@
 import os
 import zipfile
 
-import dbf
 import frappe
+import frappe.utils
+import frappe.utils.logger
 from frappe.model.document import Document
+
+from vir_conto.util import process_dbf
 
 
 class datapacket(Document):
@@ -23,11 +26,10 @@ class datapacket(Document):
 		is_processed: DF.Check
 	# end: auto-generated types
 
-	def after_insert(self):
-		# TODO:
-		#  - handle torolt.dbf before importing
-		#  - torolt: tip + kod -> what needs to be removed from db
-
+	def import_data(self):
+		"""
+		Import logic for CConto export files. It extracts than processes the debase files.
+		"""
 		file_url = os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
 		extraction_dir = os.path.join(
 			frappe.get_site_path("private", "files", "storage"), str(self.file_name)
@@ -44,65 +46,65 @@ class datapacket(Document):
 
 		# Process dbf files
 		encoding = "cp1250"
-		doctypes = PRIMARY_KEYS.keys()
+		doctypes = frappe.db.get_list(
+			"primary-key",
+			fields=["name", "is_updateable", "import_order"],
+			filters={"is_enabled": True},
+			order_by="import_order",
+		)
+
 		for doctype in doctypes:
-			dbf_file = os.path.join(extraction_dir, doctype + ".dbf")
-			process_dbf(dbf_file, doctype, encoding)
+			dbf_file = os.path.join(extraction_dir, doctype.name + ".dbf")
+
+			if not doctype.is_updateable:
+				# clean all entries because the whole dataset is sent
+				frappe.db.delete(doctype.name)
+
+				process_dbf(dbf_file, doctype.name, encoding)
 
 		self.is_processed = True
+		self.save()
+		frappe.db.commit()
 
 
-PRIMARY_KEYS = {
-	"tfocsop": "kod",
-	"tcsop": "kod",
-	"raktnev": "rkod",
-	"torzs": "f_kod",
-	"vir_csop": ["tipus", "csop", "rkod", "datum"],
-	"vir_bolt": ["rkod", "datum"],
-}
+def import_new_packets():
+	logger = frappe.logger("import", allow_site=True)
+	packets = frappe.db.get_list(
+		"data-packet", filters={"is_processed": False}, order_by="creation", pluck="name"
+	)
 
-
-def process_dbf(dbf_file: str, doctype: str, encoding: str):
+	logger.info("Beginning to import new packets")
 	try:
-		table = dbf.Table(dbf_file, codepage=encoding, on_disk=True)
-		field_names = table.field_names
-		table.open()
-
-		for record in table:
-			row = {}
-			for field_name in field_names:
-				field_info = table.field_info(field_name)
-				if field_info.py_type is str:
-					# Strings are not trimmed by default
-					value = str(record[field_name]).strip()
-				else:
-					value = record[field_name]
-				row[field_name.lower()] = value
-			row["doctype"] = doctype
-			insert_into_db(doctype, row)
-
-	except dbf.exceptions.DbfError as e:
-		print(e.message)
+		for p in packets:
+			packet: datapacket = frappe.get_doc("data-packet", p)
+			packet.import_data()
+	except Exception as e:
+		logger.error(e)
+	logger.info(f"{len(packets)} packet(s) imported")
 
 
-def insert_into_db(doctype: str, row):
-	# Selects the primary key for the appropriate doctype
-	pkey = PRIMARY_KEYS[doctype]
-	pkey_value = ""
+def clear_old_packets():
+	"""
+	Clearing older than a month (>30 day) packets and files.
 
-	if isinstance(pkey, list):
-		for key in pkey:
-			pkey_value += row[key] + "/"
-		pkey_value = pkey_value.rstrip("/")
-	else:
-		pkey_value = row[pkey]
+	In order to prevent exploding database sizes.
+	"""
+	logger = frappe.logger("maintain", allow_site=True)
+	logger.info("Beginning to clean old packets")
+	max_date = frappe.utils.add_days(frappe.utils.getdate(), -30)
 
-	if not frappe.db.exists(doctype, pkey_value):
-		# create new
-		new_doc = frappe.get_doc(row)
-		new_doc.insert()
-	else:
-		# update
-		_doc = frappe.get_doc(doctype, pkey_value)
-		_doc.update(row)
-		_doc.save()
+	try:
+		before_delete = frappe.db.count("data-packet")
+		frappe.db.delete("data-packet", {"creation": ["<", max_date]})
+		after_delete = frappe.db.count("data-packet")
+		logger.info(f"Removed {before_delete - after_delete} old packets")
+
+		before_delete = frappe.db.count("File")
+		frappe.db.delete(
+			"File",
+			{"creation": ["<", max_date], "file_name": ["like", "%EI%.LZH"]},
+		)
+		after_delete = frappe.db.count("File")
+		logger.info(f"Removed {before_delete - after_delete} old file(s)")
+	except Exception as e:
+		logger.error(e)

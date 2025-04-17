@@ -68,6 +68,7 @@ app_license = "agpl-3.0"
 # ----------
 fixtures = [
 	# export only those records that match the filters from the Role table
+	{"dt": "primary-key"},
 	{"dt": "Role", "filters": [["role_name", "like", "cconto_system"]]},
 	{"dt": "Role Profile", "filters": [["role_profile", "like", "cconto_system_user_profile"]]},
 	{"dt": "Module Profile", "filters": [["name", "like", "cconto_system_user_profile"]]},
@@ -153,23 +154,25 @@ after_sync = "vir_conto.install.after_sync"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"vir_conto.tasks.all"
-# 	],
-# 	"daily": [
-# 		"vir_conto.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"vir_conto.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"vir_conto.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"vir_conto.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"all": [
+		# 		"vir_conto.tasks.all"
+		"vir_conto.vir_conto.doctype.data_packet.data_packet.import_new_packets"
+	],
+	# 	"daily": [
+	# 		"vir_conto.tasks.daily"
+	# 	],
+	# 	"hourly": [
+	# 		"vir_conto.tasks.hourly"
+	# 	],
+	"weekly": [
+		# 		"vir_conto.tasks.weekly"
+		"vir_conto.vir_conto.doctype.data_packet.data_packet.clear_old_packets"
+	],
+	# 	"monthly": [
+	# 		"vir_conto.tasks.monthly"
+	# 	],
+}
 
 # Testing
 # -------

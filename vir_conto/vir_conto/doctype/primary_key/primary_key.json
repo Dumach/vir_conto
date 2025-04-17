@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:frappe_name",
+ "creation": "2025-04-15 13:17:01.490071",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "is_enabled",
+  "is_updateable",
+  "cconto_name",
+  "frappe_name",
+  "cconto_pkey",
+  "type",
+  "import_order"
+ ],
+ "fields": [
+  {
+   "fieldname": "cconto_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "cconto_name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "frappe_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "frappe_name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "cconto_pkey",
+   "fieldtype": "Data",
+   "label": "cconto_pkey",
+   "reqd": 1
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Data",
+   "label": "type"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_updateable",
+   "fieldtype": "Check",
+   "label": "is_updateable"
+  },
+  {
+   "default": "10",
+   "fieldname": "import_order",
+   "fieldtype": "Int",
+   "label": "import_order"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_enabled",
+   "fieldtype": "Check",
+   "label": "is_enabled"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-04-15 13:19:15.954306",
+ "modified_by": "Administrator",
+ "module": "Vir Conto",
+ "name": "primary-key",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "cconto_system",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
