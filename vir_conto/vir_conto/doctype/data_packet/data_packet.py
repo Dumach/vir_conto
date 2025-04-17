@@ -26,12 +26,9 @@ class datapacket(Document):
 		is_processed: DF.Check
 	# end: auto-generated types
 
-	def after_insert(self):
-		self.import_data()
-
 	def import_data(self):
 		"""
-		Holding the import logic for CConto export files. It extracts than processes the debase files.
+		Import logic for CConto export files. It extracts than processes the debase files.
 		"""
 		file_url = os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
 		extraction_dir = os.path.join(
@@ -49,7 +46,7 @@ class datapacket(Document):
 
 		# Process dbf files
 		encoding = "cp1250"
-		doctypes = frappe.db.get_all(
+		doctypes = frappe.db.get_list(
 			"primary-key",
 			fields=["name", "is_updateable", "import_order"],
 			filters={"is_enabled": True},
@@ -70,28 +67,44 @@ class datapacket(Document):
 		frappe.db.commit()
 
 
-logger = frappe.logger("maintain")
+def import_new_packets():
+	logger = frappe.logger("import", allow_site=True)
+	packets = frappe.db.get_list(
+		"data-packet", filters={"is_processed": False}, order_by="creation", pluck="name"
+	)
+
+	logger.info("Beginning to import new packets")
+	try:
+		for p in packets:
+			packet: datapacket = frappe.get_doc("data-packet", p)
+			packet.import_data()
+	except Exception as e:
+		logger.error(e)
+	logger.info(f"{len(packets)} packet(s) imported")
 
 
-def clear_month_older_packets():
+def clear_old_packets():
 	"""
 	Clearing older than a month (>30 day) packets and files.
 
 	In order to prevent exploding database sizes.
 	"""
-
+	logger = frappe.logger("maintain", allow_site=True)
 	logger.info("Beginning to clean old packets")
 	max_date = frappe.utils.add_days(frappe.utils.getdate(), -30)
 
-	before_delete = frappe.db.count("data-packet")
-	frappe.db.delete("data-packet", {"creation": ["<", max_date]})
-	after_delete = frappe.db.count("data-packet")
-	logger.info(f"Removed {before_delete - after_delete} old packets")
+	try:
+		before_delete = frappe.db.count("data-packet")
+		frappe.db.delete("data-packet", {"creation": ["<", max_date]})
+		after_delete = frappe.db.count("data-packet")
+		logger.info(f"Removed {before_delete - after_delete} old packets")
 
-	before_delete = frappe.db.count("File")
-	frappe.db.delete(
-		"File",
-		{"creation": ["<", max_date], "file_name": ["like", "%EI%.LZH"]},
-	)
-	after_delete = frappe.db.count("File")
-	logger.info(f"Removed {before_delete - after_delete} old files")
+		before_delete = frappe.db.count("File")
+		frappe.db.delete(
+			"File",
+			{"creation": ["<", max_date], "file_name": ["like", "%EI%.LZH"]},
+		)
+		after_delete = frappe.db.count("File")
+		logger.info(f"Removed {before_delete - after_delete} old file(s)")
+	except Exception as e:
+		logger.error(e)
