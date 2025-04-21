@@ -103,7 +103,7 @@ after_sync = "vir_conto.install.after_sync"
 # ------------
 
 # before_uninstall = "vir_conto.uninstall.before_uninstall"
-# after_uninstall = "vir_conto.uninstall.after_uninstall"
+after_uninstall = "vir_conto.uninstall.after_uninstall"
 
 # Integration Setup
 # ------------------

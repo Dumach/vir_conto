@@ -30,8 +30,10 @@ def create_system_user():
 	new_user.first_name = os.environ.get("CCONTO_SYS_USR_USERNAME")
 	new_user.language = "en"
 	new_user.time_zone = "Europe/Budapest"
-	new_user.append("role_profiles", {"role_profile": "cconto_system_user_profile"})
-	new_user.module_profile = "cconto_system_user_profile"
+
+	# Working with devel but not with ver.: 15.65.2
+	# new_user.append("role_profiles", {"role_profile": "cconto_system_user_profile"})
+	# new_user.module_profile = "cconto_system_user_profile"
 
 	new_user.insert()
 	update_password(new_user.name, os.environ.get("CCONTO_SYS_USR_PASSWORD"))
