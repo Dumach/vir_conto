@@ -5,7 +5,7 @@ from frappe.model.document import Document
 from vir_conto.vir_conto.doctype.primary_key.primary_key import primarykey
 
 
-def process_dbf(dbf_file: str, doctype: str, encoding: str):
+def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 	"""Holds the logic for accessing a debase table.
 
 	Args:
@@ -98,3 +98,19 @@ def insert_into_db(row: dict) -> None:
 		old_doc = frappe.get_doc(doctype, pkey)
 		old_doc.update(row)
 		old_doc.save()
+
+
+def get_frappe_version() -> str:
+	"""Returns Frappe version from environment variable
+
+	Returns:
+		str: Frappe version number in string
+	"""
+	import os
+
+	from dotenv import load_dotenv
+
+	path = os.path.join(os.getcwd(), ".env")
+	load_dotenv(dotenv_path=path)
+
+	return os.environ.get("FRAPPE_VERSION")

@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 from frappe.core.doctype.user.user import User
 from frappe.utils.password import update_password
 
+from vir_conto.vir_conto.util import get_frappe_version
+
 
 def after_install():
 	# TODO:
@@ -20,7 +22,9 @@ def after_sync():
 	create_system_user()
 
 
-def create_system_user():
+def create_system_user() -> None:
+	import util
+
 	print("Creating System User")
 	new_user: User = frappe.new_doc("User")
 
@@ -31,9 +35,13 @@ def create_system_user():
 	new_user.language = "en"
 	new_user.time_zone = "Europe/Budapest"
 
-	# Working with devel but not with ver.: 15.65.2
-	# new_user.append("role_profiles", {"role_profile": "cconto_system_user_profile"})
-	# new_user.module_profile = "cconto_system_user_profile"
+	# Working with devel but not with ver.: 15
+	if int(get_frappe_version().split('.')[0]) <= 15:
+		new_user.role_profile_name = "cconto_system_user_profile"
+		new_user.module_profile = "cconto_system_user_profile"
+	else:
+		new_user.append("role_profiles", {"role_profile": "cconto_system_user_profile"})
+		new_user.module_profile = "cconto_system_user_profile"
 
 	new_user.insert()
 	update_password(new_user.name, os.environ.get("CCONTO_SYS_USR_PASSWORD"))
