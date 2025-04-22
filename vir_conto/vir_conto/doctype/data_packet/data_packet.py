@@ -26,14 +26,18 @@ class datapacket(Document):
 		is_processed: DF.Check
 	# end: auto-generated types
 
-	def import_data(self):
+	def get_file_url(self) -> str:
+		return os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
+
+	def get_extraction_dir(self) -> str:
+		return os.path.join(frappe.get_site_path("private", "files", "storage"), str(self.file_name))
+
+	def import_data(self) -> None:
 		"""
 		Import logic for CConto export files. It extracts than processes the debase files.
 		"""
-		file_url = os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
-		extraction_dir = os.path.join(
-			frappe.get_site_path("private", "files", "storage"), str(self.file_name)
-		)
+		file_url = self.get_file_url()
+		extraction_dir = self.get_extraction_dir()
 
 		# Create the extraction directory if it doesn't exist
 		if not os.path.exists(extraction_dir):
@@ -67,8 +71,11 @@ class datapacket(Document):
 		frappe.db.commit()
 
 
-def import_new_packets():
-	logger = frappe.logger("import", allow_site=True)
+def import_new_packets() -> None:
+	"""Job to import new packets that is not processed, coming from Cconto"""
+	frappe.utils.logger.set_log_level("INFO")
+	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
+
 	packets = frappe.db.get_list(
 		"data-packet", filters={"is_processed": False}, order_by="creation", pluck="name"
 	)
@@ -83,22 +90,35 @@ def import_new_packets():
 	logger.info(f"{len(packets)} packet(s) imported")
 
 
-def clear_old_packets():
+def clear_old_packets() -> None:
 	"""
 	Clearing older than a month (>30 day) packets and files.
 
 	In order to prevent exploding database sizes.
 	"""
-	logger = frappe.logger("maintain", allow_site=True)
+	import shutil
+
+	frappe.utils.logger.set_log_level("INFO")
+	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 	logger.info("Beginning to clean old packets")
+
 	max_date = frappe.utils.add_days(frappe.utils.getdate(), -30)
 
 	try:
 		before_delete = frappe.db.count("data-packet")
-		frappe.db.delete("data-packet", {"creation": ["<", max_date]})
+
+		# Removing extracted packets from Storage
+		old_packets = frappe.db.get_all("data-packet", {"creation": ["<", max_date]}, pluck="name")
+		for p in old_packets:
+			packet: datapacket = frappe.get_doc("datapacket", p)
+			shutil.rmtree(packet.get_extraction_dir())
+
+		# Removing data packet entries
 		after_delete = frappe.db.count("data-packet")
+		frappe.db.delete("data-packet", {"creation": ["<", max_date]})
 		logger.info(f"Removed {before_delete - after_delete} old packets")
 
+		# Removing files from site/private
 		before_delete = frappe.db.count("File")
 		frappe.db.delete(
 			"File",
