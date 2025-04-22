@@ -7,6 +7,9 @@
   "role_profile": "cconto_system_user_profile",
   "roles": [
    {
+    "parent": "cconto_system_user_profile",
+    "parentfield": "roles",
+    "parenttype": "Role Profile",
     "role": "cconto_system"
    }
   ]

@@ -2,40 +2,76 @@
  {
   "block_modules": [
    {
-    "module": "Automation"
+    "module": "Automation",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Contacts"
+    "module": "Contacts",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Core"
+    "module": "Core",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Custom"
+    "module": "Custom",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Desk"
+    "module": "Desk",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Email"
+    "module": "Email",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Geo"
+    "module": "Geo",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Integrations"
+    "module": "Integrations",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Printing"
+    "module": "Printing",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Social"
+    "module": "Social",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Website"
+    "module": "Website",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    },
    {
-    "module": "Workflow"
+    "module": "Workflow",
+    "parent": "cconto_system_user_profile",
+    "parentfield": "block_modules",
+    "parenttype": "Module Profile"
    }
   ],
   "docstatus": 0,
