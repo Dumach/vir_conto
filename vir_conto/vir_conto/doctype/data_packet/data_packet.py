@@ -64,7 +64,7 @@ class datapacket(Document):
 				# clean all entries because the whole dataset is sent
 				frappe.db.delete(doctype.name)
 
-				process_dbf(dbf_file, doctype.name, encoding)
+			process_dbf(dbf_file, doctype.name, encoding)
 
 		self.is_processed = True
 		self.save()
@@ -77,11 +77,10 @@ def import_new_packets() -> None:
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 
 	# Health check midnight every day
-	hour = int(frappe.utils.nowtime().split(':')[0])
-	minute = int(frappe.utils.nowtime().split(':')[1])
+	hour = int(frappe.utils.nowtime().split(":")[0])
+	minute = int(frappe.utils.nowtime().split(":")[1])
 	if hour == 0 and minute > 0 and minute < 5:
 		logger.info("Background job is alive")
-
 
 	packets = frappe.db.get_list(
 		"data-packet", filters={"is_processed": False}, order_by="creation", pluck="name"
