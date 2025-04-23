@@ -76,9 +76,19 @@ def import_new_packets() -> None:
 	frappe.utils.logger.set_log_level("INFO")
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 
+	# Health check midnight every day
+	hour = int(frappe.utils.nowtime().split(':')[0])
+	minute = int(frappe.utils.nowtime().split(':')[1])
+	if hour == 0 and minute > 0 and minute < 5:
+		logger.info("Background job is alive")
+
+
 	packets = frappe.db.get_list(
 		"data-packet", filters={"is_processed": False}, order_by="creation", pluck="name"
 	)
+
+	if len(packets) < 1:
+		return
 
 	logger.info("Beginning to import new packets")
 	try:
@@ -116,7 +126,7 @@ def clear_old_packets() -> None:
 		# Removing data packet entries
 		after_delete = frappe.db.count("data-packet")
 		frappe.db.delete("data-packet", {"creation": ["<", max_date]})
-		logger.info(f"Removed {before_delete - after_delete} old packets")
+		logger.info(f"Removed {before_delete - after_delete} old packet(s)")
 
 		# Removing files from site/private
 		before_delete = frappe.db.count("File")
