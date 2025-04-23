@@ -159,16 +159,16 @@ scheduler_events = {
 		# 		"vir_conto.tasks.all"
 		"vir_conto.vir_conto.doctype.data_packet.data_packet.import_new_packets"
 	],
-	# 	"daily": [
-	# 		"vir_conto.tasks.daily"
-	# 	],
-	"hourly": [
-		# 		"vir_conto.tasks.hourly"
+	"daily": [
+		# 		"vir_conto.tasks.daily"
 		"vir_conto.vir_conto.doctype.data_packet.data_packet.clear_old_packets"
 	],
+	#"hourly": [
+	# 		"vir_conto.tasks.hourly"
+	#	],
 	# "weekly": [
 	# 		"vir_conto.tasks.weekly"
-	# ],
+	#	],
 	# 	"monthly": [
 	# 		"vir_conto.tasks.monthly"
 	# 	],
