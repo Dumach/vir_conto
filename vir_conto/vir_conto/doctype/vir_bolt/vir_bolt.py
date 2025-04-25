@@ -24,7 +24,7 @@ class vir_bolt(Document):
 		datum: DF.Date
 		haszon: DF.Int
 		hkulcs: DF.Float
-		ho: DF.Data
+		ho: DF.Data | None
 		keszlet: DF.Int
 		kosara: DF.Int
 		nbesz_kp: DF.Int
@@ -33,7 +33,7 @@ class vir_bolt(Document):
 		nert_ossz: DF.Int
 		nszallrend: DF.Int
 		rkod: DF.Link
-		rnev: DF.Data
+		rnev: DF.Data | None
 		vevok: DF.Int
 	# end: auto-generated types
 

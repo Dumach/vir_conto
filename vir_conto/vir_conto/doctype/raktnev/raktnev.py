@@ -14,20 +14,20 @@ class raktnev(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		boltkat: DF.Data
-		cim_kod: DF.Data
-		f_kod: DF.Link
-		gyszam: DF.Data
-		keszletkez: DF.Data
-		megye: DF.Data
-		nagyker: DF.Data
-		negativk: DF.Data
-		rcim: DF.Data
-		rirsz: DF.Data
+		boltkat: DF.Data | None
+		cim_kod: DF.Data | None
+		f_kod: DF.Link | None
+		gyszam: DF.Data | None
+		keszletkez: DF.Data | None
+		megye: DF.Data | None
+		nagyker: DF.Data | None
+		negativk: DF.Data | None
+		rcim: DF.Data | None
+		rirsz: DF.Data | None
 		rkod: DF.Data
 		rnev: DF.Data
-		rtel: DF.Data
-		rvaros: DF.Data
+		rtel: DF.Data | None
+		rvaros: DF.Data | None
 		sorrend: DF.Int
 	# end: auto-generated types
 

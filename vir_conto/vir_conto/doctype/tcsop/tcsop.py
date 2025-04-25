@@ -14,11 +14,11 @@ class tcsop(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		focsop: DF.Link
+		focsop: DF.Link | None
 		kod: DF.Data
-		nev: DF.Data
+		nev: DF.Data | None
 		rend: DF.Int
-		tarhely: DF.Data
+		tarhely: DF.Data | None
 	# end: auto-generated types
 
 	pass

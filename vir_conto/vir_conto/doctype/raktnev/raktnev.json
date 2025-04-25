@@ -28,72 +28,62 @@
    "fieldtype": "Data",
    "label": "rnev",
    "length": 30,
-   "not_nullable": 1,
    "reqd": 1
   },
   {
    "fieldname": "rirsz",
    "fieldtype": "Data",
    "label": "rirsz",
-   "length": 10,
-   "not_nullable": 1
+   "length": 10
   },
   {
    "fieldname": "rvaros",
    "fieldtype": "Data",
    "label": "rvaros",
-   "length": 30,
-   "not_nullable": 1
+   "length": 30
   },
   {
    "fieldname": "rcim",
    "fieldtype": "Data",
    "label": "rcim",
-   "length": 50,
-   "not_nullable": 1
+   "length": 50
   },
   {
    "fieldname": "rtel",
    "fieldtype": "Data",
    "label": "rtel",
-   "length": 16,
-   "not_nullable": 1
+   "length": 16
   },
   {
    "fieldname": "megye",
    "fieldtype": "Data",
    "label": "megye",
-   "length": 2,
-   "not_nullable": 1
+   "length": 2
   },
   {
    "fieldname": "f_kod",
    "fieldtype": "Link",
    "label": "f_kod",
    "length": 5,
-   "not_nullable": 1,
    "options": "torzs"
   },
   {
    "fieldname": "nagyker",
    "fieldtype": "Data",
    "label": "nagyker",
-   "length": 1,
-   "not_nullable": 1
+   "length": 1
   },
   {
    "fieldname": "negativk",
    "fieldtype": "Data",
    "label": "negativk",
-   "length": 1,
-   "not_nullable": 1
+   "length": 1
   },
   {
    "fieldname": "boltkat",
    "fieldtype": "Data",
    "label": "boltkat",
-   "length": 1,
-   "not_nullable": 1
+   "length": 1
   },
   {
    "default": "0",
@@ -105,22 +95,19 @@
    "fieldname": "keszletkez",
    "fieldtype": "Data",
    "label": "keszletkez",
-   "length": 1,
-   "not_nullable": 1
+   "length": 1
   },
   {
    "fieldname": "cim_kod",
    "fieldtype": "Data",
    "label": "cim_kod",
-   "length": 10,
-   "not_nullable": 1
+   "length": 10
   },
   {
    "fieldname": "gyszam",
    "fieldtype": "Data",
    "label": "gyszam",
-   "length": 1,
-   "not_nullable": 1
+   "length": 1
   },
   {
    "fieldname": "rkod",
@@ -128,7 +115,6 @@
    "in_list_view": 1,
    "label": "rkod",
    "length": 5,
-   "not_nullable": 1,
    "reqd": 1,
    "unique": 1
   }
@@ -136,7 +122,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-05 16:34:12.686613",
+ "modified": "2025-04-25 16:52:23.801651",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "raktnev",

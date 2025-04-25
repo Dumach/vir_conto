@@ -7,16 +7,9 @@
  "engine": "InnoDB",
  "field_order": [
   "file_name",
-  "file",
   "is_processed"
  ],
  "fields": [
-  {
-   "fieldname": "file",
-   "fieldtype": "Attach",
-   "in_list_view": 1,
-   "label": "file"
-  },
   {
    "fieldname": "file_name",
    "fieldtype": "Data",
@@ -33,7 +26,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-10 09:22:33.368320",
+ "modified": "2025-04-25 16:52:41.672910",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "data-packet",

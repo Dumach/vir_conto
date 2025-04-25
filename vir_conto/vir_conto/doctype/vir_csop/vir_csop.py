@@ -15,9 +15,9 @@ class vir_csop(Document):
 		from frappe.types import DF
 
 		bert: DF.Int
-		csop: DF.Link
+		csop: DF.Link | None
 		datum: DF.Date
-		ho: DF.Data
+		ho: DF.Data | None
 		nert: DF.Int
 		rkod: DF.Link
 		tipus: DF.Data

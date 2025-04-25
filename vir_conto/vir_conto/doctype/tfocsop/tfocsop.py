@@ -15,7 +15,7 @@ class tfocsop(Document):
 		from frappe.types import DF
 
 		kod: DF.Data
-		nev: DF.Data
+		nev: DF.Data | None
 	# end: auto-generated types
 
 	pass

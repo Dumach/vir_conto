@@ -21,7 +21,6 @@ class datapacket(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		file: DF.Attach | None
 		file_name: DF.Data | None
 		is_processed: DF.Check
 	# end: auto-generated types

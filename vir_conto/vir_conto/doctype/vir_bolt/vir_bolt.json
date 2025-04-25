@@ -43,8 +43,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "rnev",
-   "length": 15,
-   "not_nullable": 1
+   "length": 15
   },
   {
    "fieldname": "datum",
@@ -59,8 +58,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "ho",
-   "length": 2,
-   "not_nullable": 1
+   "length": 2
   },
   {
    "default": "0",
@@ -169,7 +167,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-11 13:36:21.083521",
+ "modified": "2025-04-25 16:51:26.224471",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",

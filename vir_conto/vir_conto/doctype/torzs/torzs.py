@@ -15,7 +15,7 @@ class torzs(Document):
 		from frappe.types import DF
 
 		f_kod: DF.Data
-		f_nev2: DF.Data
+		f_nev2: DF.Data | None
 		f_nev: DF.Data
 	# end: auto-generated types
 
