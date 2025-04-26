@@ -117,8 +117,9 @@ def clear_old_packets() -> None:
 
 		# Removing extracted packets from Storage
 		old_packets = frappe.db.get_all("data-packet", {"creation": ["<", max_date]}, pluck="name")
+
 		for p in old_packets:
-			packet: datapacket = frappe.get_doc("datapacket", p)
+			packet: datapacket = frappe.get_doc("data-packet", p)
 			shutil.rmtree(packet.get_extraction_dir())
 
 		# Removing data packet entries
@@ -130,7 +131,7 @@ def clear_old_packets() -> None:
 		before_delete = frappe.db.count("File")
 		frappe.db.delete(
 			"File",
-			{"creation": ["<", max_date], "file_name": ["like", "%EI%.LZH"]},
+			{"creation": ["<", max_date], "file_name": ["like", "%.LZH"]},
 		)
 		after_delete = frappe.db.count("File")
 		logger.info(f"Removed {before_delete - after_delete} old file(s)")
