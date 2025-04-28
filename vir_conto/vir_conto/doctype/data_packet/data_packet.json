@@ -7,29 +7,29 @@
  "engine": "InnoDB",
  "field_order": [
   "file_name",
-  "is_processed"
+  "processed"
  ],
  "fields": [
   {
    "fieldname": "file_name",
    "fieldtype": "Data",
-   "label": "file_name",
+   "label": "File Name",
    "unique": 1
   },
   {
    "default": "0",
-   "fieldname": "is_processed",
+   "fieldname": "processed",
    "fieldtype": "Check",
-   "label": "is_processed"
+   "label": "Processed"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-25 16:52:41.672910",
+ "modified": "2025-04-28 08:59:17.728951",
  "modified_by": "Administrator",
  "module": "Vir Conto",
- "name": "data-packet",
+ "name": "Data Packet",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

@@ -6,31 +6,31 @@ import shutil
 from pathlib import Path
 
 import frappe
-from frappe.tests.utils import FrappeTestCase
 import frappe.utils
+from frappe.tests.utils import FrappeTestCase
 
-from .data_packet import clear_old_packets, datapacket
+from .data_packet import DataPacket, clear_old_packets
 
 
 def create_datapacket(file_name: str):
 	doc = frappe.get_doc(
 		{
-			"doctype": "data-packet",
+			"doctype": "Data Packet",
 			"file_name": file_name,
 		}
 	)
 
-	if not frappe.db.exists("data-packet", file_name):
+	if not frappe.db.exists("Data Packet", file_name):
 		doc.insert()
 
 
-class Testdatapacket(FrappeTestCase):
+class TestDataPacket(FrappeTestCase):
 	def test_datapacket_return_correct_paths(self):
 		# Mock data
 		file_name = "TEST-0001"
 		create_datapacket(file_name)
 
-		doc: datapacket = frappe.get_doc("data-packet", file_name)
+		doc: DataPacket = frappe.get_doc("Data Packet", file_name)
 
 		self.assertEqual(doc.get_file_url(), f"{frappe.get_site_path()}/private/files/{file_name}.LZH")
 		self.assertEqual(
@@ -40,13 +40,13 @@ class Testdatapacket(FrappeTestCase):
 	def test_clear_old_packets(self):
 		frappe.set_user("Administrator")
 
-		# Create mock data-packet
+		# Create mock DataPacket
 		file_name = "TEST-0001"
 		create_datapacket(file_name)
 
-		doc: datapacket = frappe.get_doc("data-packet", file_name)
+		doc: DataPacket = frappe.get_doc("Data Packet", file_name)
 		frappe.db.set_value(
-			"data-packet", file_name, "creation", frappe.utils.nowdate(), update_modified=False
+			"Data Packet", file_name, "creation", frappe.utils.nowdate(), update_modified=False
 		)
 		frappe.db.commit()
 		extraction_dir = doc.get_extraction_dir()
@@ -63,15 +63,15 @@ class Testdatapacket(FrappeTestCase):
 
 		# Call cleanup to check if deletes younger than 30 day
 		clear_old_packets()
-		# Check if data-packet and file exist
-		self.assertIsNotNone(frappe.db.exists("data-packet", file_name))
+		# Check if Data Packet and file exist
+		self.assertIsNotNone(frappe.db.exists("Data Packet", file_name))
 		self.assertTrue(file.exists())
 
 		# Change creation_date
-		frappe.db.set_value("data-packet", file_name, "creation", "2025.03.25", update_modified=False)
+		frappe.db.set_value("Data Packet", file_name, "creation", "2025.03.25", update_modified=False)
 		frappe.db.commit()
 		# Call cleanup function
 		clear_old_packets()
-		# Check if data-packet and file successfully deleted
-		self.assertIsNone(frappe.db.exists("data-packet", file_name))
+		# Check if Data Packet and file successfully deleted
+		self.assertIsNone(frappe.db.exists("Data Packet", file_name))
 		self.assertFalse(file.exists())

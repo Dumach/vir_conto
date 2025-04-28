@@ -5,7 +5,7 @@ import frappe
 from frappe.model.document import Document
 
 
-class primarykey(Document):
+class PrimaryKey(Document):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -14,14 +14,11 @@ class primarykey(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		cconto_name: DF.Data
-		cconto_pkey: DF.Data
+		conto_name: DF.Data
+		conto_primary_key: DF.Data
+		enabled: DF.Check
 		frappe_name: DF.Data
 		import_order: DF.Int
-		is_enabled: DF.Check
-		is_updateable: DF.Check
 		type: DF.Data | None
+		updateable: DF.Check
 	# end: auto-generated types
-
-	def validate(self):
-		pass

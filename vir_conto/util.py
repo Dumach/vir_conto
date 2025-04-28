@@ -2,7 +2,7 @@ import dbf
 import frappe
 from frappe.model.document import Document
 
-from vir_conto.vir_conto.doctype.primary_key.primary_key import primarykey
+from vir_conto.vir_conto.doctype.primary_key.primary_key import PrimaryKey
 
 
 def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
@@ -41,7 +41,7 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 
 def remove_from_db(row):
 	pass
-	# frappe.db.get_all("primary-key", filters={'type': ['=', 'TERM']})
+	# frappe.db.get_all("Primary Key", filters={'type': ['=', 'TERM']})
 	# TODO:
 	# - may need to implement composite keys
 	# frappe.delete_doc(doctype, row["kod"])
@@ -66,7 +66,7 @@ def get_name(row: dict) -> str:
 	        str: _description_
 	"""
 	# Selects the primary key for the appropriate doctype
-	pkey: primarykey = frappe.get_doc("primary-key", row["doctype"]).cconto_pkey
+	pkey: PrimaryKey = frappe.get_doc("Primary Key", row["doctype"]).conto_pkey
 	pkey_list = pkey.split(",")
 	name = ""
 

@@ -1,73 +1,73 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:frappe_name",
+ "autoname": "field:conto_name",
  "creation": "2025-04-15 13:17:01.490071",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "is_enabled",
-  "is_updateable",
-  "cconto_name",
+  "enabled",
+  "updateable",
+  "conto_name",
   "frappe_name",
-  "cconto_pkey",
+  "conto_primary_key",
   "type",
   "import_order"
  ],
  "fields": [
   {
-   "fieldname": "cconto_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "cconto_name",
-   "reqd": 1,
-   "unique": 1
-  },
-  {
    "fieldname": "frappe_name",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "frappe_name",
+   "label": "Frappe Name",
    "reqd": 1,
    "unique": 1
-  },
-  {
-   "fieldname": "cconto_pkey",
-   "fieldtype": "Data",
-   "label": "cconto_pkey",
-   "reqd": 1
   },
   {
    "fieldname": "type",
    "fieldtype": "Data",
-   "label": "type"
-  },
-  {
-   "default": "1",
-   "fieldname": "is_updateable",
-   "fieldtype": "Check",
-   "label": "is_updateable"
+   "label": "Type"
   },
   {
    "default": "10",
    "fieldname": "import_order",
    "fieldtype": "Int",
-   "label": "import_order"
+   "label": "Import Order"
+  },
+  {
+   "fieldname": "conto_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Conto Name",
+   "reqd": 1,
+   "unique": 1
   },
   {
    "default": "1",
-   "fieldname": "is_enabled",
+   "fieldname": "enabled",
    "fieldtype": "Check",
-   "label": "is_enabled"
+   "label": "Enabled"
+  },
+  {
+   "default": "1",
+   "fieldname": "updateable",
+   "fieldtype": "Check",
+   "label": "Updateable"
+  },
+  {
+   "fieldname": "conto_primary_key",
+   "fieldtype": "Data",
+   "label": "Conto Primary Key",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-25 16:52:33.105402",
+ "modified": "2025-04-28 08:58:18.140314",
  "modified_by": "Administrator",
  "module": "Vir Conto",
- "name": "primary-key",
+ "name": "Primary Key",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

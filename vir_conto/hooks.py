@@ -68,10 +68,10 @@ app_license = "agpl-3.0"
 # ----------
 fixtures = [
 	# export only those records that match the filters from the Role table
-	{"dt": "primary-key"},
-	{"dt": "Role", "filters": [["role_name", "like", "cconto_system"]]},
-	{"dt": "Role Profile", "filters": [["role_profile", "like", "cconto_system_user_profile"]]},
-	{"dt": "Module Profile", "filters": [["name", "like", "cconto_system_user_profile"]]},
+	{"dt": "Primary Key"},
+	{"dt": "Role", "filters": [["role_name", "like", "conto_system"]]},
+	{"dt": "Role Profile", "filters": [["role_profile", "like", "conto_system_user_profile"]]},
+	{"dt": "Module Profile", "filters": [["name", "like", "conto_system_user_profile"]]},
 ]
 
 
