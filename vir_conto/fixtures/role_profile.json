@@ -3,14 +3,14 @@
   "docstatus": 0,
   "doctype": "Role Profile",
   "modified": "2025-04-09 20:27:38.540866",
-  "name": "cconto_system_user_profile",
-  "role_profile": "cconto_system_user_profile",
+  "name": "conto_system_user_profile",
+  "role_profile": "conto_system_user_profile",
   "roles": [
    {
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "roles",
     "parenttype": "Role Profile",
-    "role": "cconto_system"
+    "role": "conto_system"
    }
   ]
  }

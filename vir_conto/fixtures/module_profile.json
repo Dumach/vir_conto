@@ -3,73 +3,73 @@
   "block_modules": [
    {
     "module": "Automation",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Contacts",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Core",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Custom",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Desk",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Email",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Geo",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Integrations",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Printing",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Social",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Website",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Workflow",
-    "parent": "cconto_system_user_profile",
+    "parent": "conto_system_user_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    }
@@ -77,7 +77,7 @@
   "docstatus": 0,
   "doctype": "Module Profile",
   "modified": "2025-04-09 20:28:36.125031",
-  "module_profile_name": "cconto_system_user_profile",
-  "name": "cconto_system_user_profile"
+  "module_profile_name": "conto_system_user_profile",
+  "name": "conto_system_user_profile"
  }
 ]

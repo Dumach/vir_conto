@@ -6,10 +6,10 @@
   "doctype": "Role",
   "home_page": null,
   "is_custom": 0,
-  "modified": "2025-04-09 12:53:47.093576",
-  "name": "cconto_system",
+  "modified": "2025-04-28 08:56:23.396937",
+  "name": "conto_system",
   "restrict_to_domain": null,
-  "role_name": "cconto_system",
+  "role_name": "conto_system",
   "two_factor_auth": 0
  }
 ]

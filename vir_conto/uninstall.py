@@ -12,5 +12,5 @@ def after_uninstall():
 
 
 def remove_system_user():
-	print("Removing System User", os.environ.get("CCONTO_SYS_USR_USERNAME"))
-	frappe.delete_doc_if_exists("User", os.environ.get("CCONTO_SYS_USR_USERNAME"))
+	print("Removing System User", os.environ.get("CONTO_SYS_USR_USERNAME"))
+	frappe.delete_doc_if_exists("User", os.environ.get("CONTO_SYS_USR_USERNAME"))

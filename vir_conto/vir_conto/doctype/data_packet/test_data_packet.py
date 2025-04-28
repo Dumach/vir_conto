@@ -75,3 +75,4 @@ class TestDataPacket(FrappeTestCase):
 		# Check if Data Packet and file successfully deleted
 		self.assertIsNone(frappe.db.exists("Data Packet", file_name))
 		self.assertFalse(file.exists())
+		frappe.db.commit()
