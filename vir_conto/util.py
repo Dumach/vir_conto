@@ -66,7 +66,7 @@ def get_name(row: dict) -> str:
 	        str: _description_
 	"""
 	# Selects the primary key for the appropriate doctype
-	pkey: PrimaryKey = frappe.get_doc("Primary Key", row["doctype"]).conto_pkey
+	pkey: PrimaryKey = frappe.get_doc("Primary Key", row["doctype"]).conto_primary_key
 	pkey_list = pkey.split(",")
 	name = ""
 

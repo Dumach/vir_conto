@@ -60,7 +60,7 @@ Válasz:
     "idx": 0,
     "file_name": "EI100-00003",
     "file": "http://vir-dev.home:8001/app/file/89e50bf8f3",
-    "is_processed": 0,
+    "processed": 0,
     "doctype": "Data Packet"
   }
 }

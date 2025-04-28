@@ -22,7 +22,7 @@ class DataPacket(Document):
 		from frappe.types import DF
 
 		file_name: DF.Data | None
-		is_processed: DF.Check
+		processed: DF.Check
 	# end: auto-generated types
 
 	def get_file_url(self) -> str:
@@ -51,21 +51,21 @@ class DataPacket(Document):
 		encoding = "cp1250"
 		doctypes = frappe.db.get_list(
 			"Primary Key",
-			fields=["name", "is_updateable", "import_order"],
-			filters={"is_enabled": True},
+			fields=["name", "updateable", "import_order"],
+			filters={"enabled": True},
 			order_by="import_order",
 		)
 
 		for doctype in doctypes:
 			dbf_file = os.path.join(extraction_dir, doctype.name + ".dbf")
 
-			if not doctype.is_updateable:
+			if not doctype.updateable:
 				# clean all entries because the whole dataset is sent
 				frappe.db.delete(doctype.name)
 
 			process_dbf(dbf_file, doctype.name, encoding)
 
-		self.is_processed = True
+		self.processed = True
 		self.save()
 		frappe.db.commit()
 
@@ -82,7 +82,7 @@ def import_new_packets() -> None:
 		logger.info("Background job is alive")
 
 	packets = frappe.db.get_list(
-		"Data Packet", filters={"is_processed": False}, order_by="creation", pluck="name"
+		"Data Packet", filters={"processed": False}, order_by="creation", pluck="name"
 	)
 
 	if len(packets) < 1:
