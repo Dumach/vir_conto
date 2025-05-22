@@ -3,81 +3,81 @@
   "block_modules": [
    {
     "module": "Automation",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Contacts",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Core",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Custom",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Desk",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Email",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Geo",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Integrations",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Printing",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Social",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Website",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    },
    {
     "module": "Workflow",
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_module_profile",
     "parentfield": "block_modules",
     "parenttype": "Module Profile"
    }
   ],
   "docstatus": 0,
   "doctype": "Module Profile",
-  "modified": "2025-04-09 20:28:36.125031",
-  "module_profile_name": "conto_system_user_profile",
-  "name": "conto_system_user_profile"
+  "modified": "2025-05-22 10:24:20.651799",
+  "module_profile_name": "conto_system_module_profile",
+  "name": "conto_system_module_profile"
  }
 ]

@@ -70,8 +70,8 @@ fixtures = [
 	# export only those records that match the filters from the Role table
 	{"dt": "Primary Key"},
 	{"dt": "Role", "filters": [["role_name", "like", "conto_system"]]},
-	{"dt": "Role Profile", "filters": [["role_profile", "like", "conto_system_user_profile"]]},
-	{"dt": "Module Profile", "filters": [["name", "like", "conto_system_user_profile"]]},
+	{"dt": "Role Profile", "filters": [["role_profile", "like", "conto_system_role_profile"]]},
+	{"dt": "Module Profile", "filters": [["name", "like", "conto_system_module_profile"]]},
 ]
 
 
@@ -163,12 +163,12 @@ scheduler_events = {
 		# 		"vir_conto.tasks.daily"
 		"vir_conto.vir_conto.doctype.data_packet.data_packet.clear_old_packets"
 	],
-	#"hourly": [
+	# "hourly": [
 	# 		"vir_conto.tasks.hourly"
-	#	],
+	# ],
 	# "weekly": [
 	# 		"vir_conto.tasks.weekly"
-	#	],
+	# ],
 	# 	"monthly": [
 	# 		"vir_conto.tasks.monthly"
 	# 	],

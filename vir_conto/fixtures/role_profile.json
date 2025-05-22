@@ -2,12 +2,12 @@
  {
   "docstatus": 0,
   "doctype": "Role Profile",
-  "modified": "2025-04-09 20:27:38.540866",
-  "name": "conto_system_user_profile",
-  "role_profile": "conto_system_user_profile",
+  "modified": "2025-05-22 10:23:57.614984",
+  "name": "conto_system_role_profile",
+  "role_profile": "conto_system_role_profile",
   "roles": [
    {
-    "parent": "conto_system_user_profile",
+    "parent": "conto_system_role_profile",
     "parentfield": "roles",
     "parenttype": "Role Profile",
     "role": "conto_system"

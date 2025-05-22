@@ -122,7 +122,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-04-25 16:52:23.801651",
+ "modified": "2025-05-22 10:17:32.503998",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "raktnev",
@@ -149,7 +149,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "cconto_system",
+   "role": "conto_system",
    "share": 1,
    "write": 1
   }
