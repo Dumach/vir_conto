@@ -37,12 +37,12 @@ def create_system_user() -> None:
 	new_user.time_zone = "Europe/Budapest"
 
 	# Working with devel but not with ver.: 15
-	# if int(get_frappe_version().split(".")[0]) <= 15:
-	new_user.role_profile_name = "conto_system_role_profile"
-	new_user.module_profile = "conto_system_module_profile"
-	# else:
-	# new_user.append("role_profiles", {"role_profile": "conto_system_role_profile"})
-	# new_user.module_profile = "conto_system_module_profile"
+	if int(get_frappe_version().split(".")[0]) <= 15:
+		new_user.role_profile_name = "conto_system_role_profile"
+		new_user.module_profile = "conto_system_module_profile"
+	else:
+		new_user.append("role_profiles", {"role_profile": "conto_system_role_profile"})
+		new_user.module_profile = "conto_system_module_profile"
 
 	new_user.insert()
 	update_password(new_user.name, os.environ.get("CONTO_SYS_USR_PASSWORD"))

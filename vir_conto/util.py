@@ -6,13 +6,14 @@ from vir_conto.vir_conto.doctype.primary_key.primary_key import PrimaryKey
 
 
 def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
-	"""Holds the logic for accessing a debase table.
-
-	Args:
-	        dbf_file (str): Source path of debase file.
-	        doctype (str): What doctype it needs to create.
-	        encoding (str): Debase file encoded in.
 	"""
+	Method for processing a Dbase file
+
+	:param dbf_file: Source path of debase file.
+	:param doctype: What doctype it needs to create.
+	:param encoding: Debase file encoded in.
+	"""
+
 	try:
 		table = dbf.Table(dbf_file, codepage=encoding, on_disk=True)
 		field_names = table.field_names
@@ -57,13 +58,12 @@ def remove_from_db(row):
 
 
 def get_name(row: dict) -> str:
-	"""Creates the name aka. primary key for a Frappe document.
+	"""
+	Method for creating / accessing a primary key for Conto doctypes
 
-	Args:
-	        row (dict):
+	:param row: Data row must contain a 'doctype' field in order to create the key
 
-	Returns:
-	        str: _description_
+	:return str: Returns the correct primary key
 	"""
 	# Selects the primary key for the appropriate doctype
 	pkey: PrimaryKey = frappe.get_doc("Primary Key", row["doctype"]).conto_primary_key
@@ -81,10 +81,10 @@ def get_name(row: dict) -> str:
 
 
 def insert_into_db(row: dict) -> None:
-	"""Inserts a key:value pair row into Frappe DB
+	"""
+	Inserts a key:value pair row into Frappe DB
 
-	Args:
-	        row (dict): Needs 'doctype' field in order to create new document by Frapee
+	:param row: Data row must contain a 'doctype' field in order to create a new Frappe document
 	"""
 	pkey = get_name(row)
 	doctype = row["doctype"]
@@ -101,16 +101,11 @@ def insert_into_db(row: dict) -> None:
 
 
 def get_frappe_version() -> str:
-	"""Returns Frappe version from environment variable
-
-	Returns:
-		str: Frappe version number in string
 	"""
-	import os
+	Returns Frappe version from environment variable
 
-	from dotenv import load_dotenv
+	:return	str: Frappe version number in string
+	"""
+	from frappe import hooks
 
-	path = os.path.join(os.getcwd(), ".env")
-	load_dotenv(dotenv_path=path)
-
-	return os.environ.get("FRAPPE_VERSION")
+	return frappe.hooks.app_version
