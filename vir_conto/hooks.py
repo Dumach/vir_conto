@@ -8,7 +8,7 @@ app_license = "agpl-3.0"
 # Apps
 # ------------------
 
-# required_apps = []
+# required_apps = ["insights"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -66,12 +66,30 @@ app_license = "agpl-3.0"
 
 # Fixtures
 # ----------
+import frappe
+from frappe import hooks
+
 fixtures = [
-	# export only those records that match the filters from the Role table
+	# Keylookup Table
 	{"dt": "Primary Key"},
+	# User Permission
 	{"dt": "Role", "filters": [["role_name", "like", "conto_system"]]},
 	{"dt": "Role Profile", "filters": [["role_profile", "like", "conto_system_role_profile"]]},
 	{"dt": "Module Profile", "filters": [["name", "like", "conto_system_module_profile"]]},
+	# Queries, Charts, Dashboards
+	{"dt": "Insights Workbook", "filters": [["title", "like", "__%"]]},
+	{
+		"dt": "Insights Query v3",
+		"filters": [
+			[
+				"workbook",
+				"in",
+				frappe.db.get_all("Insights Workbook", filters=[["title", "like", "__%"]], pluck="name"),
+			]
+		],
+	},
+	{"dt": "Insights Chart v3", "filters": [["title", "like", "__%"]]},
+	{"dt": "Insights Dashboard v3", "filters": [["title", "like", "__%"]]},
 ]
 
 
