@@ -106,6 +106,5 @@ def get_frappe_version() -> str:
 
 	:return	str: Frappe version number in string
 	"""
-	from frappe import hooks
 
 	return frappe.hooks.app_version
