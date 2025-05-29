@@ -63,43 +63,43 @@
   {
    "default": "0",
    "fieldname": "keszlet",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "keszlet"
   },
   {
    "default": "0",
    "fieldname": "nbesz_kp",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "nbesz_kp"
   },
   {
    "default": "0",
    "fieldname": "bbesz_kp",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "bbesz_kp"
   },
   {
    "default": "0",
    "fieldname": "nbesz_nkp",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "nbesz_nkp"
   },
   {
    "default": "0",
    "fieldname": "bbesz_nkp",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "bbesz_nkp"
   },
   {
    "default": "0",
    "fieldname": "nert_ossz",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "nert_ossz"
   },
   {
    "default": "0",
    "fieldname": "bert_ossz",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "bert_ossz"
   },
   {
@@ -111,25 +111,25 @@
   {
    "default": "0",
    "fieldname": "kosara",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "kosara"
   },
   {
    "default": "0",
    "fieldname": "nszallrend",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "nszallrend"
   },
   {
    "default": "0",
    "fieldname": "bszallrend",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "bszallrend"
   },
   {
    "default": "0",
    "fieldname": "haszon",
-   "fieldtype": "Int",
+   "fieldtype": "Float",
    "label": "haszon"
   },
   {
@@ -142,32 +142,32 @@
   {
    "default": "0",
    "fieldname": "neg_keszlm",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "neg_keszlm"
   },
   {
    "default": "0",
    "fieldname": "bert_eng",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "bert_eng"
   },
   {
    "default": "0",
    "fieldname": "bsaj_felh",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "bsaj_felh"
   },
   {
    "default": "0",
    "fieldname": "bselejt",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "bselejt"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-22 10:18:51.298265",
+ "modified": "2025-05-28 13:25:49.304442",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",

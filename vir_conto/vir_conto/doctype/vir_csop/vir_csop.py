@@ -14,11 +14,11 @@ class vir_csop(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
-		bert: DF.Int
+		bert: DF.Currency
 		csop: DF.Link | None
 		datum: DF.Date
 		ho: DF.Data | None
-		nert: DF.Int
+		nert: DF.Currency
 		rkod: DF.Link
 		tipus: DF.Data
 	# end: auto-generated types

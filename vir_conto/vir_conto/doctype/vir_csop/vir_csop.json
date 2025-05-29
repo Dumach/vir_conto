@@ -54,20 +54,20 @@
   {
    "default": "0",
    "fieldname": "nert",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "nert"
   },
   {
    "default": "0",
    "fieldname": "bert",
-   "fieldtype": "Int",
+   "fieldtype": "Currency",
    "label": "bert"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-22 10:19:08.650260",
+ "modified": "2025-05-28 13:26:18.276907",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_csop",
