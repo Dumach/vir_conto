@@ -66,9 +66,6 @@ app_license = "agpl-3.0"
 
 # Fixtures
 # ----------
-import frappe
-from frappe import hooks
-
 fixtures = [
 	# Keylookup Table
 	{"dt": "Primary Key"},
@@ -77,19 +74,7 @@ fixtures = [
 	{"dt": "Role Profile", "filters": [["role_profile", "like", "conto_system_role_profile"]]},
 	{"dt": "Module Profile", "filters": [["name", "like", "conto_system_module_profile"]]},
 	# Queries, Charts, Dashboards
-	{"dt": "Insights Workbook", "filters": [["title", "like", "_%"]]},
-	{
-		"dt": "Insights Query v3",
-		"filters": [
-			[
-				"workbook",
-				"in",
-				frappe.db.get_all("Insights Workbook", filters=[["title", "like", "_%"]], pluck="name"),
-			]
-		],
-	},
-	{"dt": "Insights Chart v3", "filters": [["title", "like", "_%"]]},
-	{"dt": "Insights Dashboard v3", "filters": [["title", "like", "_%"]]},
+	# use export-insights in commands.py
 ]
 
 
