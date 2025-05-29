@@ -88,10 +88,13 @@ def run_setup_wizard():
 		"language": "English",
 		"country": "Hungary",
 		"currency": "HUF",
+		"float_precision": 4,
+		"first_day_of_the_week": "Monday",
 		"timezone": "Europe/Budapest",
 		# "full_name": "Administrator",
 		# "email": "admin@example.com",
 		# "password": os.environ.get("ADMIN_PASSWORD"),
+		"session_expiry": "24:00",
 		"setup_demo": 0,
 		"disable_telemetry": 0,
 	}

@@ -1,0 +1,18 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Insights Query v3",
+  "is_builder_query": 1,
+  "is_native_query": 0,
+  "is_script_query": 0,
+  "linked_queries": "[]",
+  "modified": "2025-05-29 09:23:16.604615",
+  "name": "qrknh9odkf",
+  "old_name": null,
+  "operations": "[\n {\n  \"table\": {\n   \"data_source\": \"Site DB\",\n   \"table_name\": \"tabvir_bolt\",\n   \"type\": \"table\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"data_type\": \"String\",\n  \"expression\": {\n   \"expression\": \"year(datum)\",\n   \"type\": \"expression\"\n  },\n  \"new_name\": \"ev\",\n  \"type\": \"mutate\"\n },\n {\n  \"column_names\": [\n   \"name\",\n   \"rkod\",\n   \"rnev\",\n   \"datum\",\n   \"ev\",\n   \"ho\",\n   \"keszlet\",\n   \"nbesz_kp\",\n   \"bbesz_kp\",\n   \"nbesz_nkp\",\n   \"bbesz_nkp\",\n   \"nert_ossz\",\n   \"bert_ossz\",\n   \"vevok\",\n   \"kosara\",\n   \"nszallrend\",\n   \"bszallrend\",\n   \"haszon\",\n   \"hkulcs\",\n   \"neg_keszlm\",\n   \"bert_eng\",\n   \"bsaj_felh\",\n   \"bselejt\"\n  ],\n  \"type\": \"select\"\n }\n]",
+  "read_only": false,
+  "title": "_Forgalom Összesítő Adatok",
+  "use_live_connection": 1,
+  "workbook": "2"
+ }
+]

@@ -1,0 +1,14 @@
+[
+ {
+  "charts": "[]",
+  "dashboards": "[]",
+  "data_backup": null,
+  "docstatus": 0,
+  "doctype": "Insights Workbook",
+  "modified": "2025-05-29 09:21:11.298588",
+  "name": 2,
+  "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"qrknh9odkf\",\n  \"title\": \"_Forgalom \\u00d6sszes\\u00edt\\u0151 Adatok\"\n }\n]",
+  "read_only": false,
+  "title": "_VIR"
+ }
+]

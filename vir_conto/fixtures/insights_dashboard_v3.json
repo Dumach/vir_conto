@@ -1,0 +1,26 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Insights Dashboard v3",
+  "is_public": 0,
+  "is_shared_with_organization": false,
+  "items": "[\n {\n  \"chart\": \"sppgchigom\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"60it81jd\",\n   \"moved\": false,\n   \"w\": 10,\n   \"x\": 0,\n   \"y\": 1\n  },\n  \"type\": \"chart\"\n },\n {\n  \"layout\": {\n   \"h\": 1,\n   \"i\": \"3lv0bioe\",\n   \"moved\": false,\n   \"w\": 10,\n   \"x\": 0,\n   \"y\": 9\n  },\n  \"text\": \"Enter text here\",\n  \"type\": \"text\"\n },\n {\n  \"filter_name\": \"D\\u00e1tum\",\n  \"filter_type\": \"Date\",\n  \"layout\": {\n   \"h\": 1,\n   \"i\": \"al5db2to\",\n   \"moved\": false,\n   \"w\": 7,\n   \"x\": 0,\n   \"y\": 0\n  },\n  \"links\": {\n   \"sppgchigom\": \"`3b8hkgchr5`.`datum`\"\n  },\n  \"type\": \"filter\"\n }\n]",
+  "linked_charts": [
+   {
+    "chart": "sppgchigom",
+    "parent": "t6ddn64vk9",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   }
+  ],
+  "modified": "2025-05-26 13:21:57.862499",
+  "name": "t6ddn64vk9",
+  "old_name": null,
+  "people_with_access": [],
+  "preview_image": null,
+  "read_only": false,
+  "share_link": null,
+  "title": "__Dashboard 1",
+  "workbook": "1"
+ }
+]
