@@ -1,13 +1,13 @@
 [
  {
-  "charts": "[]",
+  "charts": "[\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"96d0t6hpk7\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Haszon Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"a338jq8f0b\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Haszon Diagram\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"b7u7v4kjrk\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Vev\\u0151k Sz\\u00e1ma Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"bvd9cvftqi\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Vev\\u0151k Sz\\u00e1ma Diagram\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"d4a0gi22vm\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"l0im5njjll\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k \\u00c1tlag Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Row\",\n  \"name\": \"p55s2d3jc8\",\n  \"query\": \"n30oaj7dgh\",\n  \"title\": \"_\\u00c9rt\\u00e9kes\\u00edt\\u00e9s F\\u0151csoport Nett\\u00f3\"\n }\n]",
   "dashboards": "[]",
   "data_backup": null,
   "docstatus": 0,
   "doctype": "Insights Workbook",
-  "modified": "2025-05-29 09:21:11.298588",
-  "name": 2,
-  "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"qrknh9odkf\",\n  \"title\": \"_Forgalom \\u00d6sszes\\u00edt\\u0151 Adatok\"\n }\n]",
+  "modified": "2025-05-30 11:16:24.995330",
+  "name": 3,
+  "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"6v6acq7fu8\",\n  \"title\": \"_Forgalom \\u00d6sszes\\u00edt\\u0151 Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"n30oaj7dgh\",\n  \"title\": \"_\\u00c9rt\\u00e9kes\\u00edt\\u00e9s \\u00d6sszes\\u00edt\\u0151 Adatok\"\n }\n]",
   "read_only": false,
   "title": "_VIR"
  }
