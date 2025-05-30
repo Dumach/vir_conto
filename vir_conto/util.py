@@ -41,11 +41,10 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 
 
 def remove_from_db(row):
-	pass
-	# frappe.db.get_all("Primary Key", filters={'type': ['=', 'TERM']})
-	# TODO:
-	# - may need to implement composite keys
-	# frappe.delete_doc(doctype, row["kod"])
+	pkey_info = frappe.get_list("Primary Key", fields=["*"], filters={"type": row["tipus"]})
+	row["doctype"] = pkey_info["frappe_name"]
+
+	frappe.delete_doc_if_exists(row["doctype"], get_name(row))
 	# 	 if tip='TERM' then
 	#     if findkij(dmf.tblTermek,kod) then abl_term.termek_torol(True);
 	#    if tip='PARTN' then
