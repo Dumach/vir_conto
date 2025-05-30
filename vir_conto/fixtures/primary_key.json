@@ -89,5 +89,44 @@
   "name": "vir_csop",
   "type": null,
   "updateable": 1
+ },
+ {
+  "conto_name": "partner",
+  "conto_primary_key": "kod",
+  "docstatus": 0,
+  "doctype": "Primary Key",
+  "enabled": 0,
+  "frappe_name": "partner",
+  "import_order": 10,
+  "modified": "2025-05-30 12:47:49.206975",
+  "name": "partner",
+  "type": "PARTN",
+  "updateable": 1
+ },
+ {
+  "conto_name": "telep",
+  "conto_primary_key": "kod",
+  "docstatus": 0,
+  "doctype": "Primary Key",
+  "enabled": 0,
+  "frappe_name": "telep",
+  "import_order": 10,
+  "modified": "2025-05-30 12:48:08.826762",
+  "name": "telep",
+  "type": "TELEP",
+  "updateable": 1
+ },
+ {
+  "conto_name": "gyujtvk",
+  "conto_primary_key": "kod",
+  "docstatus": 0,
+  "doctype": "Primary Key",
+  "enabled": 0,
+  "frappe_name": "gyujtvk",
+  "import_order": 10,
+  "modified": "2025-05-30 12:48:43.035251",
+  "name": "gyujtvk",
+  "type": "GVKOD",
+  "updateable": 1
  }
 ]
