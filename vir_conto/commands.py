@@ -41,7 +41,7 @@ def export():
 	for fixture in fixtures:
 		export_json(
 			fixture.get("dt"),
-			frappe.get_app_path(app, "fixtures", frappe.scrub(fixture.get("dt")) + ".json"),
+			frappe.get_app_path(app, "charts", frappe.scrub(fixture.get("dt")) + ".json"),
 			filters=fixture.get("filters"),
 			or_filters=fixture.get("or_filters"),
 			order_by="idx asc, creation asc",

@@ -6,14 +6,14 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[\n \"6v6acq7fu8\"\n]",
-  "modified": "2025-05-30 10:38:14.903079",
+  "modified": "2025-06-02 15:44:03.636790",
   "name": "e199lomf7t",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"query_name\": \"6v6acq7fu8\",\n   \"type\": \"query\",\n   \"workbook\": 3\n  },\n  \"type\": \"source\"\n },\n {\n  \"data_type\": \"Integer\",\n  \"expression\": {\n   \"expression\": \"avg(keszlet, group_by=rnev)\",\n   \"type\": \"expression\"\n  },\n  \"new_name\": \"atlag_raktarok_szerint\",\n  \"type\": \"mutate\"\n },\n {\n  \"data_type\": \"Integer\",\n  \"expression\": {\n   \"expression\": \"avg(keszlet, group_by=datum)\",\n   \"type\": \"expression\"\n  },\n  \"new_name\": \"atlag_datum_szerint\",\n  \"type\": \"mutate\"\n },\n {\n  \"data_type\": \"Integer\",\n  \"expression\": {\n   \"expression\": \"sum(keszlet, group_by=datum)\",\n   \"type\": \"expression\"\n  },\n  \"new_name\": \"osszeg_datum_szerint\",\n  \"type\": \"mutate\"\n }\n]",
   "read_only": false,
   "title": "_Készletérték Adatok",
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  },
  {
   "docstatus": 0,
@@ -22,14 +22,14 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[\n \"e199lomf7t\"\n]",
-  "modified": "2025-05-30 11:14:24.192336",
+  "modified": "2025-06-02 15:44:03.644955",
   "name": "l0ia9eg8qo",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"query_name\": \"e199lomf7t\",\n   \"type\": \"query\",\n   \"workbook\": \"\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"dimensions\": [\n   {\n    \"column_name\": \"rnev\",\n    \"data_type\": \"String\",\n    \"dimension_name\": \"rnev\",\n    \"label\": \"rnev\",\n    \"value\": \"rnev\"\n   },\n   {\n    \"column_name\": \"atlag_raktarok_szerint\",\n    \"data_type\": \"Integer\",\n    \"dimension_name\": \"atlag_raktarok_szerint\",\n    \"label\": \"atlag_raktarok_szerint\",\n    \"value\": \"atlag_raktarok_szerint\"\n   }\n  ],\n  \"measures\": [],\n  \"type\": \"summarize\"\n },\n {\n  \"limit\": 100,\n  \"type\": \"limit\"\n }\n]",
   "read_only": false,
   "title": null,
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  },
  {
   "docstatus": 0,
@@ -38,14 +38,14 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[]",
-  "modified": "2025-05-30 10:53:10.837194",
+  "modified": "2025-06-02 15:44:03.651825",
   "name": "n30oaj7dgh",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"data_source\": \"Site DB\",\n   \"table_name\": \"tabvir_csop\",\n   \"type\": \"table\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"column_names\": [\n   \"rkod\",\n   \"datum\",\n   \"ho\",\n   \"tipus\",\n   \"csop\",\n   \"nert\",\n   \"bert\"\n  ],\n  \"type\": \"select\"\n },\n {\n  \"join_condition\": {\n   \"left_column\": {\n    \"column_name\": \"csop\",\n    \"type\": \"column\"\n   },\n   \"right_column\": {\n    \"column_name\": \"kod\",\n    \"type\": \"column\"\n   }\n  },\n  \"join_type\": \"inner\",\n  \"select_columns\": [\n   {\n    \"column_name\": \"nev\",\n    \"type\": \"column\"\n   }\n  ],\n  \"table\": {\n   \"data_source\": \"Site DB\",\n   \"table_name\": \"tabtfocsop\",\n   \"type\": \"table\"\n  },\n  \"type\": \"join\"\n }\n]",
   "read_only": false,
   "title": "_Értékesítés Összesítő Adatok",
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  },
  {
   "docstatus": 0,
@@ -54,14 +54,14 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[\n \"n30oaj7dgh\"\n]",
-  "modified": "2025-05-30 10:53:57.304386",
+  "modified": "2025-06-02 15:44:03.658696",
   "name": "p554fgkadf",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"query_name\": \"n30oaj7dgh\",\n   \"type\": \"query\",\n   \"workbook\": \"\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"filters\": [\n   {\n    \"column\": {\n     \"column_name\": \"tipus\",\n     \"type\": \"column\"\n    },\n    \"operator\": \"in\",\n    \"value\": [\n     \"ERT\"\n    ]\n   }\n  ],\n  \"logical_operator\": \"And\",\n  \"type\": \"filter_group\"\n },\n {\n  \"dimensions\": [\n   {\n    \"column_name\": \"nev\",\n    \"data_type\": \"String\",\n    \"dimension_name\": \"nev\",\n    \"label\": \"nev\",\n    \"value\": \"nev\"\n   }\n  ],\n  \"measures\": [\n   {\n    \"aggregation\": \"sum\",\n    \"column_name\": \"nert\",\n    \"data_type\": \"Decimal\",\n    \"measure_name\": \"sum_of_nert\"\n   }\n  ],\n  \"type\": \"summarize\"\n },\n {\n  \"limit\": 100,\n  \"type\": \"limit\"\n }\n]",
   "read_only": false,
   "title": null,
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  },
  {
   "docstatus": 0,
@@ -70,14 +70,14 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[\n \"6v6acq7fu8\"\n]",
-  "modified": "2025-05-30 11:11:54.962427",
+  "modified": "2025-06-02 15:44:03.666014",
   "name": "96d6s12vrk",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"query_name\": \"6v6acq7fu8\",\n   \"type\": \"query\",\n   \"workbook\": \"\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"columns\": [\n   {\n    \"column_name\": \"rnev\",\n    \"data_type\": \"String\",\n    \"dimension_name\": \"rnev\",\n    \"label\": \"rnev\",\n    \"value\": \"rnev\"\n   },\n   {\n    \"column_name\": \"rkod\",\n    \"data_type\": \"String\",\n    \"dimension_name\": \"rkod\",\n    \"label\": \"rkod\",\n    \"value\": \"rkod\"\n   }\n  ],\n  \"max_column_values\": 10,\n  \"rows\": [\n   {\n    \"column_name\": \"datum\",\n    \"data_type\": \"Date\",\n    \"dimension_name\": \"datum\",\n    \"granularity\": \"day\",\n    \"label\": \"datum\",\n    \"value\": \"datum\"\n   }\n  ],\n  \"type\": \"pivot_wider\",\n  \"values\": [\n   {\n    \"aggregation\": \"sum\",\n    \"column_name\": \"haszon\",\n    \"data_type\": \"Decimal\",\n    \"measure_name\": \"sum_of_haszon\"\n   },\n   {\n    \"aggregation\": \"\",\n    \"column_name\": \"\",\n    \"data_type\": \"Integer\",\n    \"expression\": {\n     \"expression\": \"sum(haszon)\",\n     \"type\": \"expression\"\n    },\n    \"measure_name\": \"bazis\"\n   }\n  ]\n },\n {\n  \"limit\": 100,\n  \"type\": \"limit\"\n }\n]",
   "read_only": false,
   "title": null,
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  },
  {
   "docstatus": 0,
@@ -86,14 +86,14 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[\n \"6v6acq7fu8\"\n]",
-  "modified": "2025-05-30 11:15:04.903025",
+  "modified": "2025-06-02 15:44:03.673913",
   "name": "a339nat45d",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"query_name\": \"6v6acq7fu8\",\n   \"type\": \"query\",\n   \"workbook\": \"\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"columns\": [\n   {\n    \"column_name\": \"rnev\",\n    \"data_type\": \"String\",\n    \"dimension_name\": \"rnev\",\n    \"label\": \"rnev\",\n    \"value\": \"rnev\"\n   }\n  ],\n  \"max_column_values\": 10,\n  \"rows\": [\n   {\n    \"column_name\": \"datum\",\n    \"data_type\": \"Date\",\n    \"dimension_name\": \"datum\",\n    \"granularity\": \"month\",\n    \"label\": \"datum\",\n    \"value\": \"datum\"\n   }\n  ],\n  \"type\": \"pivot_wider\",\n  \"values\": [\n   {\n    \"aggregation\": \"sum\",\n    \"column_name\": \"haszon\",\n    \"data_type\": \"Decimal\",\n    \"measure_name\": \"sum_of_haszon\"\n   }\n  ]\n },\n {\n  \"limit\": 100,\n  \"type\": \"limit\"\n }\n]",
   "read_only": false,
   "title": null,
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  },
  {
   "docstatus": 0,
@@ -102,14 +102,14 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[\n \"6v6acq7fu8\"\n]",
-  "modified": "2025-05-30 10:23:56.016810",
+  "modified": "2025-06-02 15:44:03.683376",
   "name": "b7ujdgro0a",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"query_name\": \"6v6acq7fu8\",\n   \"type\": \"query\",\n   \"workbook\": \"\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"columns\": [\n   {\n    \"column_name\": \"rnev\",\n    \"data_type\": \"String\",\n    \"dimension_name\": \"rnev\",\n    \"label\": \"rnev\",\n    \"value\": \"rnev\"\n   }\n  ],\n  \"max_column_values\": 10,\n  \"rows\": [\n   {\n    \"column_name\": \"datum\",\n    \"data_type\": \"Date\",\n    \"dimension_name\": \"datum\",\n    \"granularity\": \"day\",\n    \"label\": \"datum\",\n    \"value\": \"datum\"\n   }\n  ],\n  \"type\": \"pivot_wider\",\n  \"values\": [\n   {\n    \"aggregation\": \"sum\",\n    \"column_name\": \"vevok\",\n    \"data_type\": \"Integer\",\n    \"measure_name\": \"sum_of_vevok\"\n   }\n  ]\n },\n {\n  \"limit\": 100,\n  \"type\": \"limit\"\n }\n]",
   "read_only": false,
   "title": null,
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  },
  {
   "docstatus": 0,
@@ -118,14 +118,14 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[\n \"e199lomf7t\"\n]",
-  "modified": "2025-05-30 11:12:42.341909",
+  "modified": "2025-06-02 15:44:03.690855",
   "name": "d4arcl2d8r",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"query_name\": \"e199lomf7t\",\n   \"type\": \"query\",\n   \"workbook\": \"\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"columns\": [\n   {\n    \"column_name\": \"rnev\",\n    \"data_type\": \"String\",\n    \"dimension_name\": \"rnev\",\n    \"label\": \"rnev\",\n    \"value\": \"rnev\"\n   }\n  ],\n  \"max_column_values\": 10,\n  \"rows\": [\n   {\n    \"column_name\": \"datum\",\n    \"data_type\": \"Date\",\n    \"dimension_name\": \"datum\",\n    \"granularity\": \"day\",\n    \"label\": \"datum\",\n    \"value\": \"datum\"\n   },\n   {\n    \"column_name\": \"atlag_datum_szerint\",\n    \"data_type\": \"Integer\",\n    \"dimension_name\": \"atlag_datum_szerint\",\n    \"label\": \"atlag_datum_szerint\",\n    \"value\": \"atlag_datum_szerint\"\n   },\n   {\n    \"column_name\": \"osszeg_datum_szerint\",\n    \"data_type\": \"Integer\",\n    \"dimension_name\": \"osszeg_datum_szerint\",\n    \"label\": \"osszeg_datum_szerint\",\n    \"value\": \"osszeg_datum_szerint\"\n   }\n  ],\n  \"type\": \"pivot_wider\",\n  \"values\": [\n   {\n    \"aggregation\": \"sum\",\n    \"column_name\": \"keszlet\",\n    \"data_type\": \"Decimal\",\n    \"measure_name\": \"sum_of_keszlet\"\n   }\n  ]\n },\n {\n  \"limit\": 100,\n  \"type\": \"limit\"\n }\n]",
   "read_only": false,
   "title": null,
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  },
  {
   "docstatus": 0,
@@ -134,14 +134,14 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[\n \"6v6acq7fu8\"\n]",
-  "modified": "2025-05-30 11:16:43.118765",
+  "modified": "2025-06-02 15:44:03.698143",
   "name": "bvd0etl6kj",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"query_name\": \"6v6acq7fu8\",\n   \"type\": \"query\",\n   \"workbook\": \"\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"columns\": [\n   {\n    \"column_name\": \"rnev\",\n    \"data_type\": \"String\",\n    \"dimension_name\": \"rnev\",\n    \"label\": \"rnev\",\n    \"value\": \"rnev\"\n   }\n  ],\n  \"max_column_values\": 10,\n  \"rows\": [\n   {\n    \"column_name\": \"datum\",\n    \"data_type\": \"Date\",\n    \"dimension_name\": \"datum\",\n    \"granularity\": \"month\",\n    \"label\": \"datum\",\n    \"value\": \"datum\"\n   }\n  ],\n  \"type\": \"pivot_wider\",\n  \"values\": [\n   {\n    \"aggregation\": \"sum\",\n    \"column_name\": \"vevok\",\n    \"data_type\": \"Integer\",\n    \"measure_name\": \"sum_of_vevok\"\n   }\n  ]\n },\n {\n  \"limit\": 100,\n  \"type\": \"limit\"\n }\n]",
   "read_only": false,
   "title": null,
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  },
  {
   "docstatus": 0,
@@ -150,13 +150,13 @@
   "is_native_query": 0,
   "is_script_query": 0,
   "linked_queries": "[]",
-  "modified": "2025-05-30 10:19:31.104910",
+  "modified": "2025-06-02 15:44:03.705415",
   "name": "6v6acq7fu8",
   "old_name": null,
   "operations": "[\n {\n  \"table\": {\n   \"data_source\": \"Site DB\",\n   \"table_name\": \"tabvir_bolt\",\n   \"type\": \"table\"\n  },\n  \"type\": \"source\"\n },\n {\n  \"column_names\": [\n   \"name\",\n   \"rkod\",\n   \"rnev\",\n   \"datum\",\n   \"ho\",\n   \"keszlet\",\n   \"nbesz_kp\",\n   \"bbesz_kp\",\n   \"nbesz_nkp\",\n   \"bbesz_nkp\",\n   \"nert_ossz\",\n   \"bert_ossz\",\n   \"vevok\",\n   \"kosara\",\n   \"nszallrend\",\n   \"bszallrend\",\n   \"haszon\",\n   \"hkulcs\",\n   \"neg_keszlm\",\n   \"bert_eng\",\n   \"bsaj_felh\",\n   \"bselejt\"\n  ],\n  \"type\": \"select\"\n }\n]",
   "read_only": false,
   "title": "_Forgalom Összesítő Adatok",
   "use_live_connection": 1,
-  "workbook": "3"
+  "workbook": "8"
  }
 ]

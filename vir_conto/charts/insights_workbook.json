@@ -5,9 +5,9 @@
   "data_backup": null,
   "docstatus": 0,
   "doctype": "Insights Workbook",
-  "modified": "2025-05-30 11:16:24.995330",
-  "name": 3,
-  "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"6v6acq7fu8\",\n  \"title\": \"_Forgalom \\u00d6sszes\\u00edt\\u0151 Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"n30oaj7dgh\",\n  \"title\": \"_\\u00c9rt\\u00e9kes\\u00edt\\u00e9s \\u00d6sszes\\u00edt\\u0151 Adatok\"\n }\n]",
+  "modified": "2025-06-02 15:51:59.954006",
+  "name": 8,
+  "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"n30oaj7dgh\",\n  \"title\": \"_\\u00c9rt\\u00e9kes\\u00edt\\u00e9s \\u00d6sszes\\u00edt\\u0151 Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"6v6acq7fu8\",\n  \"title\": \"_Forgalom \\u00d6sszes\\u00edt\\u0151 Adatok\"\n }\n]",
   "read_only": false,
   "title": "_VIR"
  }
