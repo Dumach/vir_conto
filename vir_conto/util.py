@@ -107,3 +107,74 @@ def get_frappe_version() -> str:
 	"""
 
 	return frappe.hooks.app_version
+
+
+from frappe.modules.import_file import delete_old_doc, import_file_by_path, read_doc_from_file
+from insights.insights.doctype.insights_workbook.insights_workbook import InsightsWorkbook
+
+
+def sync_default_charts():
+	path = frappe.get_app_path("vir_conto", "charts", "insights_workbook.json")
+	# 1. (OLD) Import old title and name of workbook from JSON
+	try:
+		docs = read_doc_from_file(path)
+	except OSError:
+		print(f"{path} missing")
+		return
+
+	if docs:
+		if not isinstance(docs, list):
+			docs = [docs]
+		import_workbooks: list[InsightsWorkbook] = [frappe.get_doc(doc) for doc in docs]
+
+	# 2. Check if a default workbook exists
+	for import_workbook in import_workbooks:
+		if not frappe.db.exists("Insights Workbook", {"title": import_workbook.title}):
+			# If not creates a new
+			import_workbook.insert()
+
+	# 3. (NEW) Get all workbooks title and name
+	new_workbooks: list[InsightsWorkbook] = frappe.get_all(
+		"Insights Workbook", fields=["*"], filters=[["title", "like", "_%"]]
+	)
+
+	# 4. Create lookup table for migrating queries, charts, dashboards
+	workbook_dict = {}
+	for new_workbook in new_workbooks:
+		new_title = new_workbook.title
+		new_id = new_workbook.name
+		match_name = next(
+			import_workbook.name for import_workbook in import_workbooks if import_workbook.title == new_title
+		)
+
+		workbook_dict[match_name] = {"new_id": new_id, "new_title": new_title}
+
+	# 5. Import the rest (queries, charts, dashboards)
+	doctypes = ["insights_query_v3", "insights_chart_v3", "insights_dashboard_v3"]
+	for doctype in doctypes:
+		path = frappe.get_app_path("vir_conto", "charts", doctype + ".json")
+		try:
+			docs = read_doc_from_file(path)
+		except OSError:
+			print(f"{path} missing")
+			return
+
+		if docs:
+			if not isinstance(docs, list):
+				docs = [docs]
+			for doc in docs:
+				import_doc = frappe.get_doc(doc)
+
+				# 6. update workbook name accordingly
+				old_id = import_doc.workbook
+
+				new_id = workbook_dict.get(int(old_id))["new_id"]
+				import_doc.workbook = new_id
+
+				if frappe.db.exists(import_doc.doctype, import_doc.name):
+					old_name = import_doc.name
+					delete_old_doc(import_doc, reset_permissions=False)
+					import_doc.insert(ignore_links=True, set_name=old_name)
+				else:
+					import_doc.insert(ignore_links=True)
+			frappe.db.commit()

@@ -8,7 +8,7 @@ app_license = "agpl-3.0"
 # Apps
 # ------------------
 
-# required_apps = ["insights"]
+required_apps = ["insights"]
 
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -107,6 +107,10 @@ after_sync = "vir_conto.install.after_sync"
 
 # before_uninstall = "vir_conto.uninstall.before_uninstall"
 after_uninstall = "vir_conto.uninstall.after_uninstall"
+
+# Migration
+# ------------
+after_migrate = "vir_conto.migrate.after_migrate"
 
 # Integration Setup
 # ------------------

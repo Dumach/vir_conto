@@ -7,7 +7,7 @@ from frappe.core.doctype.user.user import User
 from frappe.desk.page.setup_wizard.setup_wizard import setup_complete
 from frappe.utils.password import update_password
 
-from vir_conto.util import get_frappe_version
+from vir_conto.util import get_frappe_version, sync_default_charts
 
 
 def load_environment():
@@ -29,6 +29,10 @@ def after_install() -> None:
 def after_sync() -> None:
 	load_environment()
 	create_system_user()
+
+	# First time import of default charts
+	import_charts()
+	sync_default_charts()
 
 
 def create_system_user() -> None:
@@ -106,3 +110,25 @@ def run_setup_wizard():
 
 	if setup_status.get("status") != "ok":
 		frappe.throw("Frappe setup failed")
+
+
+def import_charts() -> None:
+	from frappe.utils.fixtures import import_doc
+
+	# Code from frappe.utils.fixtures.import_fixtures
+	fixtures_path = frappe.get_app_path("vir_conto", "charts")
+	if not os.path.exists(fixtures_path):
+		return
+
+	fixture_files = os.listdir(fixtures_path)
+
+	for fname in fixture_files:
+		if not fname.endswith(".json"):
+			continue
+
+		file_path = frappe.get_app_path("vir_conto", "charts", fname)
+		try:
+			import_doc(file_path)
+		except (ImportError, frappe.DoesNotExistError) as e:
+			# fixture syncing for missing doctypes
+			print(f"Skipping fixture syncing from the file {fname}. Reason: {e}")
