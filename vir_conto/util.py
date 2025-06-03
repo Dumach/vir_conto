@@ -156,9 +156,9 @@ def sync_default_charts():
 			import_workbook.insert()
 
 	# 3. (NEW) Get all workbooks title and name
-	new_workbooks: list[InsightsWorkbook] = frappe.get_all(
-		"Insights Workbook", fields=["*"], filters=[["title", "like", "_%"]]
-	)
+	new_workbooks = [
+		wb for wb in frappe.get_all("Insights Workbook", fields=["*"]) if wb["title"].startswith("_")
+	]
 
 	# 4. Create lookup table for migrating queries, charts, dashboards
 	workbook_dict = {}
