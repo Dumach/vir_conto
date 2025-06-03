@@ -3,6 +3,7 @@ import os
 
 import frappe
 from dotenv import load_dotenv
+from frappe import _
 from frappe.core.doctype.user.user import User
 from frappe.desk.page.setup_wizard.setup_wizard import setup_complete
 from frappe.utils.password import update_password
@@ -11,6 +12,11 @@ from vir_conto.util import get_frappe_version, sync_default_charts
 
 
 def load_environment():
+	"""Method for loading environment file from bench/sites folder.
+
+	Raises:
+	        FileNotFoundError: if the file is not found, therefore the installation should not continue in this way.
+	"""
 	path = os.path.join(os.getcwd(), ".env")
 	if not load_dotenv(dotenv_path=path):
 		raise FileNotFoundError(
@@ -21,7 +27,7 @@ def load_environment():
 def after_install() -> None:
 	# TODO:
 	# - set system settings to hungarian
-	# pass
+
 	load_environment()
 	run_setup_wizard()
 
@@ -30,12 +36,17 @@ def after_sync() -> None:
 	load_environment()
 	create_system_user()
 
-	# First time import of default charts
+	# Importing default charts manually instead of relying on fixtures to handle
 	import_charts()
 	sync_default_charts()
 
 
 def create_system_user() -> None:
+	"""Method for creating a system user that will handle the synchronization of Data Packet from Conto.
+
+	Raises:
+	        Exception: If email or username or password is missing.
+	"""
 	print("Creating System User")
 
 	email = os.environ.get("CONTO_SYS_USR_EMAIL")
@@ -45,7 +56,7 @@ def create_system_user() -> None:
 	if not (email and username and password):
 		raise Exception("Missing required environment variables for system user.")
 
-		# Check if the user already exists
+	# Check if user already exists
 	if frappe.db.exists("User", {"email": email}):
 		print(f"User with email {email} already exists.")
 		return
@@ -59,7 +70,7 @@ def create_system_user() -> None:
 	new_user.language = "en"
 	new_user.time_zone = "Europe/Budapest"
 
-	# Working with devel but not with ver.: 15
+	# Version 16 handles Role Profiles differently
 	if int(get_frappe_version().split(".")[0]) <= 15:
 		new_user.role_profile_name = "conto_system_role_profile"
 		new_user.module_profile = "conto_system_module_profile"
@@ -84,6 +95,7 @@ def create_system_user() -> None:
 
 
 def run_setup_wizard():
+	"""Method for completing the setup wizard."""
 	if frappe.db.get_single_value("System Settings", "setup_complete"):
 		print("Setup already completed.")
 		return
@@ -109,10 +121,11 @@ def run_setup_wizard():
 	setup_status = setup_complete(args=args)
 
 	if setup_status.get("status") != "ok":
-		frappe.throw("Frappe setup failed")
+		frappe.throw(frappe._("Frappe setup failed"))
 
 
 def import_charts() -> None:
+	"""Method for importing Insights charts from 'bench/apps/myapp/charts' folder."""
 	from frappe.utils.fixtures import import_doc
 
 	# Code from frappe.utils.fixtures.import_fixtures

@@ -67,11 +67,11 @@ class DataPacket(Document):
 
 		self.processed = True
 		self.save()
-		frappe.db.commit()
+		frappe.db.commit()  # nosemgrep
 
 
 def import_new_packets() -> None:
-	"""Job to import new packets that is not processed, coming from Conto"""
+	"""Job to import new packets that is not processed, coming from Conto."""
 	frappe.utils.logger.set_log_level("INFO")
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 

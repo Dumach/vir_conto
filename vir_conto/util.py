@@ -6,8 +6,7 @@ from vir_conto.vir_conto.doctype.primary_key.primary_key import PrimaryKey
 
 
 def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
-	"""
-	Method for processing a Dbase file
+	"""Method for processing a Dbase file.
 
 	:param dbf_file: Source path of debase file.
 	:param doctype: What doctype it needs to create.
@@ -58,17 +57,18 @@ def remove_from_db(row):
 
 def get_name(row: dict) -> str:
 	"""
-	Method for creating / accessing a primary key for Conto doctypes
+	Method for creating / accessing a primary key for Conto doctypes.
 
-	:param row: Data row must contain a 'doctype' field in order to create the key
+	:param row: Data row must contain a 'doctype' field in order to create the key.
 
-	:return str: Returns the correct primary key
+	:return str: Returns the correct primary key.
 	"""
 	# Selects the primary key for the appropriate doctype
 	pkey: PrimaryKey = frappe.get_doc("Primary Key", row["doctype"]).conto_primary_key
 	pkey_list = pkey.split(",")
 	name = ""
 
+	# Handling composite (multiple field) key creation
 	if isinstance(pkey_list, list) and len(pkey_list) > 1:
 		for key in pkey_list:
 			name += row[key] + "/"
@@ -81,9 +81,9 @@ def get_name(row: dict) -> str:
 
 def insert_into_db(row: dict) -> None:
 	"""
-	Inserts a key:value pair row into Frappe DB
+	Inserts a key:value pair row into Frappe DB.
 
-	:param row: Data row must contain a 'doctype' field in order to create a new Frappe document
+	:param row: Data row must contain a 'doctype' field in order to create a new Frappe document.
 	"""
 	pkey = get_name(row)
 	doctype = row["doctype"]
@@ -101,9 +101,9 @@ def insert_into_db(row: dict) -> None:
 
 def get_frappe_version() -> str:
 	"""
-	Returns Frappe version from environment variable
+	Returns Frappe version from environment variable.
 
-	:return	str: Frappe version number in string
+	:return	str: Frappe version number in string.
 	"""
 
 	return frappe.hooks.app_version
@@ -114,6 +114,25 @@ from insights.insights.doctype.insights_workbook.insights_workbook import Insigh
 
 
 def sync_default_charts():
+	"""Method for synchronizing default charts with the ones in the database.
+
+	Steps:
+	        1. Import old workbooks from JSON (insights_workbook.json).
+	        2. Insert any missing workbooks into the database.
+	        3. Retrieve all new workbooks from the database whose title starts with '_'.
+	        4. Create a lookup table to map old workbook names to new workbook IDs and titles.
+	        5. For each of the following doctypes: insights_query_v3, insights_chart_v3, insights_dashboard_v3:
+	         - Import documents from their respective JSON files.
+	         - Update the workbook reference in each document to the new workbook ID.
+	         - If the document already exists, delete and re-insert it; otherwise, insert it.
+	        6. Commit the changes to the database.
+
+	Notes:
+	- This function expects the presence of JSON files for workbooks, queries, charts, and dashboards
+	  in the 'charts' directory of the 'vir_conto' app.
+	- The function assumes that workbook titles are unique identifiers for mapping.
+	- If a required JSON file is missing, the function will print a message and return early.
+	"""
 	path = frappe.get_app_path("vir_conto", "charts", "insights_workbook.json")
 	# 1. (OLD) Import old title and name of workbook from JSON
 	try:
@@ -177,4 +196,4 @@ def sync_default_charts():
 					import_doc.insert(ignore_links=True, set_name=old_name)
 				else:
 					import_doc.insert(ignore_links=True)
-			frappe.db.commit()
+			frappe.db.commit()  # nosemgrep

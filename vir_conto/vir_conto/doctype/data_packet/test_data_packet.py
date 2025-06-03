@@ -48,7 +48,7 @@ class TestDataPacket(FrappeTestCase):
 		frappe.db.set_value(
 			"Data Packet", file_name, "creation", frappe.utils.nowdate(), update_modified=False
 		)
-		frappe.db.commit()
+		frappe.db.commit()  # nosemgrep
 		extraction_dir = doc.get_extraction_dir()
 
 		# Copy mock file
@@ -69,10 +69,10 @@ class TestDataPacket(FrappeTestCase):
 
 		# Change creation_date
 		frappe.db.set_value("Data Packet", file_name, "creation", "2025.03.25", update_modified=False)
-		frappe.db.commit()
+		frappe.db.commit()  # nosemgrep
 		# Call cleanup function
 		clear_old_packets()
 		# Check if Data Packet and file successfully deleted
 		self.assertIsNone(frappe.db.exists("Data Packet", file_name))
 		self.assertFalse(file.exists())
-		frappe.db.commit()
+		frappe.db.commit()  # nosemgrep

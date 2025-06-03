@@ -67,7 +67,7 @@ required_apps = ["insights"]
 # Fixtures
 # ----------
 fixtures = [
-	# Keylookup Table
+	# Conto Migration
 	{"dt": "Primary Key"},
 	# User Permission
 	{"dt": "Role", "filters": [["role_name", "like", "conto_system"]]},

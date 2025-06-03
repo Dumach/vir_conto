@@ -8,7 +8,15 @@ from frappe.utils.fixtures import export_json
 @click.command("export-insights")
 @pass_context
 def export_insights(context):
-	# Queries, Charts, Dashboards
+	"""Command wrapper for export().
+
+	Args:
+	        context (_type_): Frappe site context.
+
+	Raises:
+	        SiteNotSpecifiedError: If site is not provided or can not connect to.
+	"""
+
 	for site in context.sites:
 		try:
 			frappe.init(site=site)
@@ -21,6 +29,7 @@ def export_insights(context):
 
 
 def export():
+	"""Method for exporting Insights Queries, Charts, Dashboards."""
 	app = "vir_conto"
 	fixtures = [
 		{"dt": "Insights Workbook", "filters": [["title", "like", "_%"]]},
