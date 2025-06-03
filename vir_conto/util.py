@@ -114,24 +114,27 @@ from insights.insights.doctype.insights_workbook.insights_workbook import Insigh
 
 
 def sync_default_charts():
-	"""Method for synchronizing default charts with the ones in the database.
+	"""
+	Synchronize default Insights charts, queries, and dashboards with the database.
 
-	Steps:
-	        1. Import old workbooks from JSON (insights_workbook.json).
-	        2. Insert any missing workbooks into the database.
-	        3. Retrieve all new workbooks from the database whose title starts with '_'.
-	        4. Create a lookup table to map old workbook names to new workbook IDs and titles.
-	        5. For each of the following doctypes: insights_query_v3, insights_chart_v3, insights_dashboard_v3:
-	         - Import documents from their respective JSON files.
-	         - Update the workbook reference in each document to the new workbook ID.
-	         - If the document already exists, delete and re-insert it; otherwise, insert it.
-	        6. Commit the changes to the database.
+	This function ensures that the default Insights workbooks, queries, charts, and dashboards
+	are up-to-date in the database by performing the following steps:
+
+	1. Import old workbooks from the JSON file 'insights_workbook.json' located in the 'charts' directory.
+	2. Insert any missing workbooks into the database based on their title.
+	3. Retrieve all workbooks from the database whose title starts with '_'.
+	4. Build a lookup table to map old workbook names to their new IDs and titles.
+	5. For each of the following doctypes: 'insights_query_v3', 'insights_chart_v3', 'insights_dashboard_v3':
+	   - Delete existing records in the database that reference the new workbook IDs (to remove outdated defaults).
+	   - Import documents from their respective JSON files.
+	   - Update the workbook reference in each imported document to the new workbook ID.
+	   - Insert the document into the database, overwriting if it already exists.
+	6. Commit all changes to the database.
 
 	Notes:
-	- This function expects the presence of JSON files for workbooks, queries, charts, and dashboards
-	  in the 'charts' directory of the 'vir_conto' app.
-	- The function assumes that workbook titles are unique identifiers for mapping.
-	- If a required JSON file is missing, the function will print a message and return early.
+	- All required JSON files must be present in the 'charts' directory of the 'vir_conto' app.
+	- Workbook titles are assumed to be unique and are used for mapping.
+	- If any required JSON file is missing, the function prints a message and exits early.
 	"""
 	path = frappe.get_app_path("vir_conto", "charts", "insights_workbook.json")
 	# 1. (OLD) Import old title and name of workbook from JSON
@@ -168,7 +171,14 @@ def sync_default_charts():
 
 		workbook_dict[match_name] = {"new_id": new_id, "new_title": new_title}
 
-	# 5. Import the rest (queries, charts, dashboards)
+	# 5. Clearing tables, in case if a default chart no longer needed
+	# This ensures that removed default charts won't remain in client database
+	doctypes = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
+	for doctype in doctypes:
+		for _, value in workbook_dict.items():
+			frappe.db.delete(doctype, filters={"workbook": value["new_id"]})
+
+	# 6. Import the rest (queries, charts, dashboards)
 	doctypes = ["insights_query_v3", "insights_chart_v3", "insights_dashboard_v3"]
 	for doctype in doctypes:
 		path = frappe.get_app_path("vir_conto", "charts", doctype + ".json")
@@ -184,16 +194,12 @@ def sync_default_charts():
 			for doc in docs:
 				import_doc = frappe.get_doc(doc)
 
-				# 6. update workbook name accordingly
+				# 7. update workbook name accordingly
 				old_id = import_doc.workbook
 
 				new_id = workbook_dict.get(int(old_id))["new_id"]
 				import_doc.workbook = new_id
 
-				if frappe.db.exists(import_doc.doctype, import_doc.name):
-					old_name = import_doc.name
-					delete_old_doc(import_doc, reset_permissions=False)
-					import_doc.insert(ignore_links=True, set_name=old_name)
-				else:
-					import_doc.insert(ignore_links=True)
+				import_doc.insert(ignore_links=True, set_name=import_doc.name)
+
 			frappe.db.commit()  # nosemgrep
