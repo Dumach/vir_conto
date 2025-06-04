@@ -31,6 +31,9 @@ class DataPacket(Document):
 	def get_extraction_dir(self) -> str:
 		return os.path.join(frappe.get_site_path("private", "files", "storage"), str(self.file_name))
 
+	def after_insert(self):
+		frappe.enqueue_doc("Data Packet", self.name, method="import_data")
+
 	def import_data(self) -> None:
 		"""
 		Import logic for Conto export files. It extracts than processes the debase files.
@@ -77,8 +80,7 @@ def import_new_packets() -> None:
 
 	# Health check midnight every day
 	hour = int(frappe.utils.nowtime().split(":")[0])
-	minute = int(frappe.utils.nowtime().split(":")[1])
-	if hour == 0 and minute > 0 and minute < 5:
+	if hour == 0:
 		logger.info("Background job is alive")
 
 	packets = frappe.db.get_list(
@@ -91,8 +93,7 @@ def import_new_packets() -> None:
 	logger.info("Beginning to import new packets")
 	try:
 		for p in packets:
-			packet: DataPacket = frappe.get_doc("Data Packet", p)
-			packet.import_data()
+			frappe.enqueue_doc("Data Packet", p, method="import_data")
 	except Exception as e:
 		logger.error(e)
 	logger.info(f"{len(packets)} packet(s) imported")
