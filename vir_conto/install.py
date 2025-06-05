@@ -24,6 +24,7 @@ def load_environment():
 		)
 
 
+# will run after app is installed on site
 def after_install() -> None:
 	# TODO:
 	# - set system settings to hungarian
@@ -32,13 +33,16 @@ def after_install() -> None:
 	run_setup_wizard()
 
 
+# will run after app fixtures are synced
 def after_sync() -> None:
 	load_environment()
 	create_system_user()
 
-	# Importing default charts manually instead of relying on fixtures to handle
+	# Import default charts manually instead of relying on fixtures to handle
 	import_charts()
 	sync_default_charts()
+
+	create_insights_teams()
 
 
 def create_system_user() -> None:
@@ -145,3 +149,14 @@ def import_charts() -> None:
 		except (ImportError, frappe.DoesNotExistError) as e:
 			# fixture syncing for missing doctypes
 			print(f"Skipping fixture syncing from the file {fname}. Reason: {e}")
+
+
+def create_insights_teams():
+	try:
+		team_tulaj = frappe.new_doc("Insights Team")
+		team_tulaj.team_name = "Tulajdonos"
+		team_tulaj.append("team_members", {"user": "Administrator"})
+
+		team_tulaj.insert()
+	except ImportError as error:
+		print(error)
