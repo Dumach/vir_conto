@@ -11,6 +11,7 @@ frappe/docs/current
 frappe/public/dist
 .vscode
 .vs
+.ruff_cache
 node_modules
 .kdev4/
 *.kdev4
