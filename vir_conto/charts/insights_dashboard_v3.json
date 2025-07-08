@@ -1,1 +1,44 @@
-[]
+[
+ {
+  "docstatus": 0,
+  "doctype": "Insights Dashboard v3",
+  "is_public": 0,
+  "is_shared_with_organization": false,
+  "items": "[\n {\n  \"chart\": \"8m1rvla5qd\",\n  \"layout\": {\n   \"h\": 3,\n   \"i\": \"8wtwr6v3\",\n   \"moved\": false,\n   \"w\": 8,\n   \"x\": 0,\n   \"y\": 0\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"2t4r84ssfc\",\n  \"layout\": {\n   \"h\": 10,\n   \"i\": \"jvuerci9\",\n   \"moved\": false,\n   \"w\": 14,\n   \"x\": 0,\n   \"y\": 3\n  },\n  \"type\": \"chart\"\n }\n]",
+  "linked_charts": [
+   {
+    "chart": "8m1rvla5qd",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "8m1rvla5qd",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "2t4r84ssfc",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "2t4r84ssfc",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   }
+  ],
+  "modified": "2025-07-08 11:04:17.273875",
+  "name": "8l21k4vh8h",
+  "old_name": null,
+  "people_with_access": [],
+  "preview_image": null,
+  "read_only": false,
+  "share_link": null,
+  "title": "Dashboard 1",
+  "workbook": "8"
+ }
+]

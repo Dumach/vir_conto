@@ -1,5 +1,9 @@
 import frappe
+import frappe.hooks
 from frappe.modules.import_file import read_doc_from_file
+from insights.insights.doctype.insights_chart_v3.insights_chart_v3 import InsightsChartv3
+from insights.insights.doctype.insights_dashboard_v3.insights_dashboard_v3 import InsightsDashboardv3
+from insights.insights.doctype.insights_query_v3.insights_query_v3 import InsightsQueryv3
 from insights.insights.doctype.insights_workbook.insights_workbook import InsightsWorkbook
 
 
@@ -9,7 +13,6 @@ def get_frappe_version() -> str:
 
 	:return	str: Frappe version number in string.
 	"""
-
 	return frappe.hooks.app_version
 
 
@@ -70,7 +73,6 @@ def sync_default_charts():
 		match_name = next(
 			import_workbook.name for import_workbook in import_workbooks if import_workbook.title == new_title
 		)
-
 		workbook_dict[match_name] = {"new_id": new_id, "new_title": new_title}
 
 	# 5. Clearing tables, in case if a default chart no longer needed
@@ -94,7 +96,7 @@ def sync_default_charts():
 			if not isinstance(docs, list):
 				docs = [docs]
 			for doc in docs:
-				import_doc = frappe.get_doc(doc)
+				import_doc: InsightsQueryv3 | InsightsChartv3 | InsightsDashboardv3 = frappe.get_doc(doc)
 
 				# 7. update workbook name accordingly
 				old_id = import_doc.workbook
