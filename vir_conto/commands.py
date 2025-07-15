@@ -38,6 +38,10 @@ def export_default_charts():
 		if wb["title"].startswith("_")
 	]
 
+	if len(default_workbooks) < 1:
+		print("No default workbook found")
+		return
+
 	fixtures = [
 		{"dt": "Insights Workbook", "filters": [["name", "in", default_workbooks]]},
 		{"dt": "Insights Query v3", "filters": [["workbook", "in", default_workbooks]]},
@@ -53,6 +57,8 @@ def export_default_charts():
 			or_filters=fixture.get("or_filters"),
 			order_by="idx asc, creation asc",
 		)
+
+	print(f"{len(default_workbooks)} default workbook(s) found")
 
 
 commands = [export_insights]
