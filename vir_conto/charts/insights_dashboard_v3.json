@@ -19,6 +19,42 @@
     "parenttype": "Insights Dashboard v3"
    },
    {
+    "chart": "8m1rvla5qd",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "8m1rvla5qd",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "8m1rvla5qd",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "2t4r84ssfc",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "2t4r84ssfc",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "2t4r84ssfc",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
     "chart": "2t4r84ssfc",
     "parent": "8l21k4vh8h",
     "parentfield": "linked_charts",
@@ -31,7 +67,7 @@
     "parenttype": "Insights Dashboard v3"
    }
   ],
-  "modified": "2025-07-08 11:04:17.273875",
+  "modified": "2025-07-08 11:30:53.664228",
   "name": "8l21k4vh8h",
   "old_name": null,
   "people_with_access": [],

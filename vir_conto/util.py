@@ -52,13 +52,13 @@ def sync_default_charts():
 	if docs:
 		if not isinstance(docs, list):
 			docs = [docs]
-		import_workbooks: list[InsightsWorkbook] = [frappe.get_doc(doc) for doc in docs]
+		old_workbooks: list[InsightsWorkbook] = [frappe.get_doc(doc) for doc in docs]
 
 	# 2. Check if a default workbook exists
-	for import_workbook in import_workbooks:
-		if not frappe.db.exists("Insights Workbook", {"title": import_workbook.title}):
+	for old_workbook in old_workbooks:
+		if not frappe.db.exists("Insights Workbook", {"title": old_workbook.title}):
 			# If not creates a new
-			import_workbook.insert()
+			old_workbook.insert()
 
 	# 3. (NEW) Get all workbooks title and name
 	new_workbooks = [
@@ -66,20 +66,21 @@ def sync_default_charts():
 	]
 
 	# 4. Create lookup table for migrating queries, charts, dashboards
-	workbook_dict = {}
+	workbook_lookup = {}
 	for new_workbook in new_workbooks:
-		new_title = new_workbook.title
-		new_id = new_workbook.name
-		match_name = next(
-			import_workbook.name for import_workbook in import_workbooks if import_workbook.title == new_title
-		)
-		workbook_dict[match_name] = {"new_id": new_id, "new_title": new_title}
+		for old_workbook in old_workbooks:
+			if old_workbook.title == new_workbook.title:
+				workbook_lookup[old_workbook.name] = {
+					"new_id": new_workbook.name,
+					"title": old_workbook.title,
+				}
+				break
 
 	# 5. Clearing tables, in case if a default chart no longer needed
 	# This ensures that removed default charts won't remain in client database
 	doctypes = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
 	for doctype in doctypes:
-		for _, value in workbook_dict.items():
+		for _, value in workbook_lookup.items():
 			frappe.db.delete(doctype, filters={"workbook": value["new_id"]})
 
 	# 6. Import the rest (queries, charts, dashboards)
@@ -96,14 +97,22 @@ def sync_default_charts():
 			if not isinstance(docs, list):
 				docs = [docs]
 			for doc in docs:
-				import_doc: InsightsQueryv3 | InsightsChartv3 | InsightsDashboardv3 = frappe.get_doc(doc)
+				old_doc: InsightsQueryv3 | InsightsChartv3 | InsightsDashboardv3 = frappe.get_doc(doc)
 
 				# 7. update workbook name accordingly
-				old_id = import_doc.workbook
+				workbook_id = old_doc.workbook
 
-				new_id = workbook_dict.get(int(old_id))["new_id"]
-				import_doc.workbook = new_id
+				# must be parsed to int otherwise fails to get key
+				lookup = workbook_lookup.get(int(workbook_id))
+				if not lookup:
+					logger.warning(
+						f"No workbook mapping found for title: {workbook_id}, skipping old_doc: {old_doc.name}"
+					)
+					continue
 
-				import_doc.insert(ignore_links=True, set_name=import_doc.name)
+				new_id = lookup["new_id"]
+				old_doc.workbook = new_id
+
+				old_doc.insert(ignore_links=True, set_name=old_doc.name)
 
 			frappe.db.commit()  # nosemgrep
