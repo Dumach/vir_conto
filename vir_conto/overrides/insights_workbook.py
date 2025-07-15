@@ -1,5 +1,6 @@
 import frappe
 from frappe import _
+from frappe.core.doctype.user.user import User
 from insights.insights.doctype.insights_workbook.insights_workbook import InsightsWorkbook
 
 
@@ -10,7 +11,11 @@ class CustomInsightsWorkbook(InsightsWorkbook):
 
 	def check_default_title_schema(self):
 		"""Informs user and modifies the title if similar to the default Workbook title schema"""
-		if self.title.startswith("_"):
+		user_roles = set(frappe.get_roles(frappe.session.user))
+		admin_roles = {"conto_system", "Insights Admin"}
+
+		# Only change title if user has none of the admin roles
+		if self.title.startswith("_") and user_roles.isdisjoint(admin_roles):
 			self.title = self.title.lstrip("_")
 			frappe.msgprint(
 				_(
