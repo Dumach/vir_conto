@@ -68,6 +68,20 @@ def sync_default_charts():
 	# 4. Create lookup table for migrating queries, charts, dashboards
 	workbook_lookup = {}
 	for new_workbook in new_workbooks:
+		# Configure Organization Access
+		from insights.utils import DocShare
+
+		public_docshare = DocShare.get_or_create_doc(
+			share_doctype="Insights Workbook",
+			share_name=new_workbook.name,
+			everyone=1,
+		)
+		public_docshare.read = 1
+		public_docshare.write = 0
+		public_docshare.notify_by_email = 0
+		public_docshare.save(ignore_permissions=True)
+
+		# Create lookup Table
 		for old_workbook in old_workbooks:
 			if old_workbook.title == new_workbook.title:
 				workbook_lookup[old_workbook.name] = {
