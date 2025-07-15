@@ -201,6 +201,9 @@ scheduler_events = {
 # 	"Task": "vir_conto.task.get_dashboard_data"
 # }
 
+override_doctype_class = {"Insights Workbook": "vir_conto.overrides.insights_workbook.CustomInsightsWorkbook"}
+
+
 # exempt linked doctypes from being automatically cancelled
 #
 # auto_cancel_exempted_doctypes = ["Auto Repeat"]
