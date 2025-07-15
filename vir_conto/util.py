@@ -40,6 +40,7 @@ def sync_default_charts():
 	- If any required JSON file is missing, the function prints a message and exits early.
 	"""
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
+	frappe.utils.logger.set_log_level("DEBUG")
 	path = frappe.get_app_path("vir_conto", "charts", "insights_workbook.json")
 
 	# 1. (OLD) Import old title and name of workbook from JSON
@@ -49,10 +50,13 @@ def sync_default_charts():
 		logger.exception(f"{path} missing")
 		return
 
-	if docs:
-		if not isinstance(docs, list):
-			docs = [docs]
-		old_workbooks: list[InsightsWorkbook] = [frappe.get_doc(doc) for doc in docs]
+	if not docs or len(docs) < 1:
+		logger.info("No workbooks found")
+		return
+
+	if not isinstance(docs, list):
+		docs = [docs]
+	old_workbooks: list[InsightsWorkbook] = [frappe.get_doc(doc) for doc in docs]
 
 	# 2. Check if a default workbook exists
 	for old_workbook in old_workbooks:
@@ -62,7 +66,9 @@ def sync_default_charts():
 
 	# 3. (NEW) Get all workbooks title and name
 	new_workbooks = [
-		wb for wb in frappe.get_all("Insights Workbook", fields=["*"]) if wb["title"].startswith("_")
+		wb
+		for wb in frappe.get_all("Insights Workbook", fields=["name", "title"])
+		if wb["title"].startswith("_")
 	]
 
 	# 4. Create lookup table for migrating queries, charts, dashboards
@@ -93,40 +99,39 @@ def sync_default_charts():
 	# 5. Clearing tables, in case if a default chart no longer needed
 	# This ensures that removed default charts won't remain in client database
 	doctypes = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
-	for doctype in doctypes:
+	for dt in doctypes:
 		for _, value in workbook_lookup.items():
-			frappe.db.delete(doctype, filters={"workbook": value["new_id"]})
+			frappe.db.delete(dt, filters={"workbook": value["new_id"]})
 
 	# 6. Import the rest (queries, charts, dashboards)
-	doctypes = ["insights_query_v3", "insights_chart_v3", "insights_dashboard_v3"]
-	for doctype in doctypes:
-		path = frappe.get_app_path("vir_conto", "charts", doctype + ".json")
+	for dt in doctypes:
+		path = frappe.get_app_path("vir_conto", "charts", frappe.scrub(dt) + ".json")
+		docs = []
 		try:
 			docs = read_doc_from_file(path)
 		except OSError:
 			logger.exception(f"{path} missing")
-			return
+			break
 
-		if docs:
-			if not isinstance(docs, list):
-				docs = [docs]
-			for doc in docs:
-				old_doc: InsightsQueryv3 | InsightsChartv3 | InsightsDashboardv3 = frappe.get_doc(doc)
+		if not docs or len(docs) < 1:
+			logger.info("No charts found")
+			break
 
-				# 7. update workbook name accordingly
-				workbook_id = old_doc.workbook
+		if not isinstance(docs, list):
+			docs = [docs]
+		for doc in docs:
+			old_doc: InsightsQueryv3 | InsightsChartv3 | InsightsDashboardv3 = frappe.get_doc(doc)
 
-				# must be parsed to int otherwise fails to get key
-				lookup = workbook_lookup.get(int(workbook_id))
-				if not lookup:
-					logger.warning(
-						f"No workbook mapping found for title: {workbook_id}, skipping old_doc: {old_doc.name}"
-					)
-					continue
+			# 7. Update workbook name accordingly
+			workbook_id = old_doc.workbook
 
-				new_id = lookup["new_id"]
-				old_doc.workbook = new_id
+			# Must be parsed to int otherwise fails to get key
+			lookup = workbook_lookup.get(int(workbook_id))
+			if not lookup:
+				logger.warning(
+					f"No workbook mapping found for title: {workbook_id}, skipping old_doc: {old_doc.name}"
+				)
+				continue
 
-				old_doc.insert(ignore_links=True, set_name=old_doc.name)
-
-			frappe.db.commit()  # nosemgrep
+			old_doc.workbook = lookup["new_id"]
+			old_doc.insert(ignore_links=True, set_name=old_doc.name)
