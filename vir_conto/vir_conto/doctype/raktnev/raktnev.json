@@ -27,63 +27,53 @@
    "fieldname": "rnev",
    "fieldtype": "Data",
    "label": "rnev",
-   "length": 30,
    "reqd": 1
   },
   {
    "fieldname": "rirsz",
    "fieldtype": "Data",
-   "label": "rirsz",
-   "length": 10
+   "label": "rirsz"
   },
   {
    "fieldname": "rvaros",
    "fieldtype": "Data",
-   "label": "rvaros",
-   "length": 30
+   "label": "rvaros"
   },
   {
    "fieldname": "rcim",
    "fieldtype": "Data",
-   "label": "rcim",
-   "length": 50
+   "label": "rcim"
   },
   {
    "fieldname": "rtel",
    "fieldtype": "Data",
-   "label": "rtel",
-   "length": 16
+   "label": "rtel"
   },
   {
    "fieldname": "megye",
    "fieldtype": "Data",
-   "label": "megye",
-   "length": 2
+   "label": "megye"
   },
   {
    "fieldname": "f_kod",
    "fieldtype": "Link",
    "label": "f_kod",
-   "length": 5,
    "options": "torzs"
   },
   {
    "fieldname": "nagyker",
    "fieldtype": "Data",
-   "label": "nagyker",
-   "length": 1
+   "label": "nagyker"
   },
   {
    "fieldname": "negativk",
    "fieldtype": "Data",
-   "label": "negativk",
-   "length": 1
+   "label": "negativk"
   },
   {
    "fieldname": "boltkat",
    "fieldtype": "Data",
-   "label": "boltkat",
-   "length": 1
+   "label": "boltkat"
   },
   {
    "default": "0",
@@ -94,27 +84,23 @@
   {
    "fieldname": "keszletkez",
    "fieldtype": "Data",
-   "label": "keszletkez",
-   "length": 1
+   "label": "keszletkez"
   },
   {
    "fieldname": "cim_kod",
    "fieldtype": "Data",
-   "label": "cim_kod",
-   "length": 10
+   "label": "cim_kod"
   },
   {
    "fieldname": "gyszam",
    "fieldtype": "Data",
-   "label": "gyszam",
-   "length": 1
+   "label": "gyszam"
   },
   {
    "fieldname": "rkod",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "rkod",
-   "length": 5,
    "reqd": 1,
    "unique": 1
   }
@@ -122,7 +108,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-22 10:17:32.503998",
+ "modified": "2025-08-03 14:38:42.073776",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "raktnev",
