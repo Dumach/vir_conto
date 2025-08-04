@@ -32,21 +32,32 @@ def export_default_charts():
 	"""Method for exporting Insights Queries, Charts, Dashboards."""
 	app = "vir_conto"
 
-	default_workbooks = [
-		wb["name"]
-		for wb in frappe.get_all("Insights Workbook", fields=["name", "title"])
-		if wb["title"].startswith("_")
-	]
+	# Find workbooks by title pattern (starting with "_") or already marked as default
+	default_workbooks = frappe.get_all(
+		"Insights Workbook",
+		fields=[
+			"name",
+			"title",
+		],
+		filters={"is_default": True},
+	)
 
 	if len(default_workbooks) < 1:
 		print("No default workbook found")
 		return
 
+	# Generate vir_id and set is_default for workbooks that don't have them
+	for wb in default_workbooks:
+		workbook = frappe.get_doc("Insights Workbook", wb)
+		workbook.generate_vir_id()
+
+	default_workbook_names = [wb["name"] for wb in default_workbooks]
+
 	fixtures = [
-		{"dt": "Insights Workbook", "filters": [["name", "in", default_workbooks]]},
-		{"dt": "Insights Query v3", "filters": [["workbook", "in", default_workbooks]]},
-		{"dt": "Insights Chart v3", "filters": [["workbook", "in", default_workbooks]]},
-		{"dt": "Insights Dashboard v3", "filters": [["workbook", "in", default_workbooks]]},
+		{"dt": "Insights Workbook", "filters": [["name", "in", default_workbook_names]]},
+		{"dt": "Insights Query v3", "filters": [["workbook", "in", default_workbook_names]]},
+		{"dt": "Insights Chart v3", "filters": [["workbook", "in", default_workbook_names]]},
+		{"dt": "Insights Dashboard v3", "filters": [["workbook", "in", default_workbook_names]]},
 	]
 
 	for fixture in fixtures:
