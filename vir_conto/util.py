@@ -1,5 +1,5 @@
 import os
-from typing import Any, Optional
+from typing import Any
 
 import frappe
 import frappe.hooks
@@ -100,6 +100,8 @@ def sync_default_charts():
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 	logger.setLevel("INFO")
 
+	doctypes = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
+
 	try:
 		# frappe.db.begin()
 
@@ -112,7 +114,17 @@ def sync_default_charts():
 				print(msg)
 			return False
 
-		# Step 2: Create new workbooks if not exist already
+		# Step 2: Remove unwanted workbooks
+		old_workbooks = frappe.db.get_all(
+			"Insights Workbook", fields=["name", "vir_id"], filters={"is_default": True}
+		)
+		for owb in old_workbooks:
+			if owb["vir_id"] not in [wb.vir_id for wb in import_workbooks]:
+				# Deleting connections
+				clean_existing_records([owb["name"]], doctypes, logger)
+				frappe.get_doc("Insights Workbook", owb["name"]).delete()
+
+		# Step 3: Create new workbooks if not exist already
 		for import_workbook in import_workbooks:
 			if not frappe.db.exists("Insights Workbook", {"vir_id": import_workbook.vir_id}):
 				# Ensure the workbook is marked as default
@@ -120,8 +132,8 @@ def sync_default_charts():
 				# If not creates a new
 				import_workbook.insert()
 
-		# Step 3: Get existing workbooks and create lookup table
-		workbook_lookup = _create_workbook_lookup(import_workbooks, logger)
+		# Step 4: Get existing workbooks and create lookup table
+		workbook_lookup = create_workbook_lookup(import_workbooks, logger)
 		if not workbook_lookup:
 			msg = "Failed to create workbook lookup table, aborting synchronization"
 			logger.error(msg)
@@ -129,13 +141,12 @@ def sync_default_charts():
 				print(msg)
 			return False
 
-		# Step 4: Clean existing default records,
+		# Step 5: Clean existing default records,
 		#  in case if a default chart no longer needed
-		doctypes = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
-		_clean_existing_records(workbook_lookup, doctypes, logger)
+		clean_existing_records([wb["new_id"] for wb in workbook_lookup.values()], doctypes, logger)
 
-		# Step 5: Import queries, charts, dashboards for each workbook
-		_import_charts(workbook_lookup, doctypes, logger)
+		# Step 6: Import queries, charts, dashboards for each workbook
+		import_charts(workbook_lookup, doctypes, logger)
 
 	except Exception as e:
 		msg = f"Failed to sync default charts: {str(e)}"
@@ -143,13 +154,14 @@ def sync_default_charts():
 		if PRINT:
 			print(msg)
 		# frappe.db.rollback()
+		frappe.throw(msg)
 		return
 
 	# Commit all changes
 	frappe.db.commit()
 
 
-def _create_workbook_lookup(import_workbooks, logger):
+def create_workbook_lookup(import_workbooks, logger):
 	try:
 		# Step 3: Get the workbook ID's from the new system
 		new_workbooks = frappe.get_all(
@@ -179,7 +191,7 @@ def _create_workbook_lookup(import_workbooks, logger):
 		if PRINT:
 			print(msg)
 		# return None
-		frappe.throw("Failed to create workbook lookup table")
+		frappe.throw(msg)
 
 
 def configure_workbook_access(workbook, logger):
@@ -198,27 +210,28 @@ def configure_workbook_access(workbook, logger):
 		public_docshare.save(ignore_permissions=True)
 
 	except Exception as e:
-		logger.error(
-			f"Failed to configure access for workbook '{workbook.get('title', 'Unknown')}': {str(e)}"
-		)
+		msg = f"Failed to configure access for workbook '{workbook.get('title', 'Unknown')}': {str(e)}"
+		logger.error(msg)
+		frappe.throw(msg)
 		# Don't raise - this is not critical for the main functionality
 
 
-def _clean_existing_records(workbook_lookup, doctypes, logger):
+def clean_existing_records(workbooks, doctypes, logger):
 	# This ensures that removed default charts won't remain in client database
 	for dt in doctypes:
 		try:
-			for _, value in workbook_lookup.items():
-				frappe.db.delete(dt, filters={"workbook": value["new_id"]})
+			for wb in workbooks:
+				frappe.db.delete(dt, filters={"workbook": wb})
 
 		except Exception as e:
 			msg = f"Failed to clean existing records for {dt}: {str(e)}"
 			logger.error(msg)
 			if PRINT:
 				print(msg)
+			frappe.throw(msg)
 
 
-def _import_charts(workbook_lookup, doctypes, logger):
+def import_charts(workbook_lookup, doctypes, logger):
 	for dt in doctypes:
 		try:
 			# Load documents using the reusable function
@@ -253,10 +266,12 @@ def _import_charts(workbook_lookup, doctypes, logger):
 					logger.error(msg)
 					if PRINT:
 						print(msg)
+					frappe.throw(msg)
 					continue
 
 		except Exception as e:
 			msg = f"Failed to import {dt}: {str(e)}"
 			logger.exception(msg)
 			print(msg)
+			frappe.throw(msg)
 			continue

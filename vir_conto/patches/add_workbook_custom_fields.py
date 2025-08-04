@@ -10,6 +10,7 @@ def execute():
 				"fieldtype": "Check",
 				"label": "Is Default",
 				"default": 0,
+				"read_only": 1,
 				"insert_after": "title",
 				"description": "Indicates if this workbook is a default vir_conto workbook",
 				"no_copy": 1,
@@ -29,6 +30,7 @@ def execute():
 				"no_copy": 1,
 				"print_hide": 1,
 				"search_index": 1,
+				"depends_on": "is_default",
 			},
 		]
 	}
