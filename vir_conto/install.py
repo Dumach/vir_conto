@@ -3,7 +3,6 @@ import os
 
 import frappe
 from dotenv import load_dotenv
-from frappe import _
 from frappe.core.doctype.user.user import User
 from frappe.desk.page.setup_wizard.setup_wizard import setup_complete
 from frappe.utils.password import update_password
@@ -42,7 +41,12 @@ def after_sync() -> None:
 	import_charts()
 	sync_default_charts()
 
+	# Set insights app like: teams, fiscal year, etc...
 	create_insights_teams()
+	# By default is januar 1
+	current_date = frappe.utils.getdate()
+	frappe.db.set_single_value("Insights Settings", "fiscal_year_start", f"{current_date.year}-01-01")
+	frappe.db.set_single_value("Insights Settings", "week_starts_on", "Monday")
 
 
 def create_system_user() -> None:
