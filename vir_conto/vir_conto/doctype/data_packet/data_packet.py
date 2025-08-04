@@ -82,6 +82,7 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 	:param encoding: Debase file encoded in.
 	"""
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
+	logger.setLevel("INFO")
 
 	try:
 		table = dbf.Table(dbf_file, codepage=encoding, on_disk=True)
@@ -171,8 +172,8 @@ def insert_into_db(row: dict) -> None:
 
 def import_new_packets() -> int:
 	"""Job to import new packets that is not processed, coming from Conto."""
-	frappe.utils.logger.set_log_level("INFO")
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
+	logger.setLevel("INFO")
 
 	# Health check midnight every day
 	hour = int(frappe.utils.nowtime().split(":")[0])
@@ -205,10 +206,10 @@ def clear_old_packets() -> None:
 	"""
 	import shutil
 
-	frappe.utils.logger.set_log_level("INFO")
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
-	logger.info("Beginning to clean old packets")
+	logger.setLevel("INFO")
 
+	logger.info("Beginning to clean old packets")
 	max_date = frappe.utils.add_days(frappe.utils.getdate(), -30)
 
 	try:

@@ -40,18 +40,22 @@ def sync_default_charts():
 	- If any required JSON file is missing, the function prints a message and exits early.
 	"""
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
-	frappe.utils.logger.set_log_level("DEBUG")
+	logger.setLevel("INFO")
+
 	path = frappe.get_app_path("vir_conto", "charts", "insights_workbook.json")
 
 	# 1. (OLD) Import old title and name of workbook from JSON
 	try:
 		docs = read_doc_from_file(path)
 	except OSError:
-		logger.exception(f"{path} missing")
+		logger.exception(f"{path} missing", OSError)
+		return
+	except Exception as e:
+		logger.exception(f"Undefined error happened: {e}")
 		return
 
 	if not docs or len(docs) < 1:
-		logger.info("No workbooks found")
+		logger.warning("No workbooks found")
 		return
 
 	if not isinstance(docs, list):
@@ -114,7 +118,7 @@ def sync_default_charts():
 			break
 
 		if not docs or len(docs) < 1:
-			logger.info("No charts found")
+			logger.warning(f"No {dt} found")
 			break
 
 		if not isinstance(docs, list):
