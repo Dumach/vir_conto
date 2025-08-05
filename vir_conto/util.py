@@ -9,8 +9,6 @@ from insights.insights.doctype.insights_dashboard_v3.insights_dashboard_v3 impor
 from insights.insights.doctype.insights_query_v3.insights_query_v3 import InsightsQueryv3
 from insights.insights.doctype.insights_workbook.insights_workbook import InsightsWorkbook
 
-PRINT = True
-
 
 def get_frappe_version() -> str:
 	"""
@@ -39,8 +37,7 @@ def load_documents_from_json(file_name: str, doctype_name: str, logger) -> list[
 		if not os.path.exists(path):
 			msg = f"{doctype_name} file not found: {path}"
 			logger.error(msg)
-			if PRINT:
-				print(msg)
+			frappe.throw(msg, exc=FileNotFoundError)
 			return None
 
 		docs = read_doc_from_file(path)
@@ -48,8 +45,7 @@ def load_documents_from_json(file_name: str, doctype_name: str, logger) -> list[
 		if not docs:
 			msg = f"No {doctype_name} found in file"
 			logger.warning(msg)
-			if PRINT:
-				print(msg)
+			frappe.throw(msg, ValueError)
 			return None
 
 		if not isinstance(docs, list):
@@ -60,59 +56,40 @@ def load_documents_from_json(file_name: str, doctype_name: str, logger) -> list[
 
 		return frappe_docs
 
-	except OSError as e:
-		msg = f"File system error loading {doctype_name}: {str(e)}"
-		logger.error(msg)
-		if PRINT:
-			print(msg)
-		return None
 	except Exception as e:
 		msg = f"Unexpected error loading {doctype_name}: {str(e)}"
 		logger.exception(msg)
-		if PRINT:
-			print(msg)
+		frappe.throw(msg)
 		return None
 
 
 def sync_default_charts():
+	"""Synchronizes default Insights items with the database.
+
+	This function uses JSON files from the 'charts' directory to perform the following:
+
+	- **Workbooks**:
+	  - Imports workbooks from `insights_workbook.json`.
+	  - Removes default workbooks and their contents if they are no longer in the import file.
+	  - Creates new workbooks as needed.
+	- **Charts, Queries, and Dashboards**:
+	  - Clears existing default records to prevent outdated data.
+	  - Imports and links `Insights Query v3`, `Insights Chart v3`, and `Insights Dashboard v3` documents to their respective workbooks.
 	"""
-	Synchronize default Insights charts, queries, and dashboards with the database.
 
-	This function ensures that the default Insights workbooks, queries, charts, and dashboards
-	are up-to-date in the database by performing the following steps:
-
-	1. Import old workbooks from the JSON file 'insights_workbook.json' located in the 'charts' directory.
-	2. Insert any missing workbooks into the database based on their title.
-	3. Retrieve all workbooks from the database whose title starts with '_'.
-	4. Build a lookup table to map old workbook names to their new IDs and titles.
-	5. For each of the following doctypes: 'insights_query_v3', 'insights_chart_v3', 'insights_dashboard_v3':
-	   - Delete existing records in the database that reference the new workbook IDs (to remove outdated defaults).
-	   - Import documents from their respective JSON files.
-	   - Update the workbook reference in each imported document to the new workbook ID.
-	   - Insert the document into the database, overwriting if it already exists.
-	6. Commit all changes to the database.
-
-	Notes:
-	- All required JSON files must be present in the 'charts' directory of the 'vir_conto' app.
-	- Workbook titles are assumed to be unique and are used for mapping.
-	- If any required JSON file is missing, the function prints a message and exits early.
-	"""
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 	logger.setLevel("INFO")
 
 	doctypes = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
 
 	try:
-		# frappe.db.begin()
-
 		# Step 1: Load workbooks from `charts/insights_workbook.json`
 		import_workbooks = load_documents_from_json("insights_workbook.json", "workbooks", logger)
 		if not import_workbooks:
 			msg = "No workbooks found to import, aborting synchronization"
 			logger.error(msg)
-			if PRINT:
-				print(msg)
-			return False
+			frappe.throw(msg, frappe.NotFound)
+			return
 
 		# Step 2: Remove unwanted workbooks
 		old_workbooks = frappe.db.get_all(
@@ -137,9 +114,8 @@ def sync_default_charts():
 		if not workbook_lookup:
 			msg = "Failed to create workbook lookup table, aborting synchronization"
 			logger.error(msg)
-			if PRINT:
-				print(msg)
-			return False
+			frappe.throw(msg)
+			return
 
 		# Step 5: Clean existing default records,
 		#  in case if a default chart no longer needed
@@ -151,9 +127,6 @@ def sync_default_charts():
 	except Exception as e:
 		msg = f"Failed to sync default charts: {str(e)}"
 		logger.exception(msg)
-		if PRINT:
-			print(msg)
-		# frappe.db.rollback()
 		frappe.throw(msg)
 		return
 
@@ -188,9 +161,6 @@ def create_workbook_lookup(import_workbooks, logger):
 	except Exception as e:
 		msg = f"Failed to create workbook lookup table: {str(e)}"
 		logger.exception(msg)
-		if PRINT:
-			print(msg)
-		# return None
 		frappe.throw(msg)
 
 
@@ -212,8 +182,6 @@ def configure_workbook_access(workbook, logger):
 	except Exception as e:
 		msg = f"Failed to configure access for workbook '{workbook.get('title', 'Unknown')}': {str(e)}"
 		logger.error(msg)
-		frappe.throw(msg)
-		# Don't raise - this is not critical for the main functionality
 
 
 def clean_existing_records(workbooks, doctypes, logger):
@@ -226,8 +194,6 @@ def clean_existing_records(workbooks, doctypes, logger):
 		except Exception as e:
 			msg = f"Failed to clean existing records for {dt}: {str(e)}"
 			logger.error(msg)
-			if PRINT:
-				print(msg)
 			frappe.throw(msg)
 
 
@@ -239,8 +205,6 @@ def import_charts(workbook_lookup, doctypes, logger):
 			if not docs:
 				msg = f"No {dt} found, skipping"
 				logger.warning(msg)
-				if PRINT:
-					print(msg)
 				continue
 
 			for doc in docs:
@@ -255,23 +219,19 @@ def import_charts(workbook_lookup, doctypes, logger):
 					if not lookup:
 						msg = f"No workbook mapping found for workbook_id: {workbook_id}, workbook_lookup: {workbook_lookup}"
 						logger.warning(msg)
-						if PRINT:
-							print(msg)
 						continue
 
 					old_doc.workbook = lookup["new_id"]
 					old_doc.insert(ignore_links=True, set_name=old_doc.name)
+
 				except Exception as e:
 					msg = f"Failed to process {dt} document {old_doc.name}: {str(e)}"
 					logger.error(msg)
-					if PRINT:
-						print(msg)
 					frappe.throw(msg)
 					continue
 
 		except Exception as e:
 			msg = f"Failed to import {dt}: {str(e)}"
 			logger.exception(msg)
-			print(msg)
 			frappe.throw(msg)
 			continue
