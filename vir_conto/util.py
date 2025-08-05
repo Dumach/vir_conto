@@ -35,31 +35,23 @@ def load_documents_from_json(file_name: str, doctype_name: str, logger) -> list[
 		path = frappe.get_app_path("vir_conto", "charts", file_name)
 
 		if not os.path.exists(path):
-			msg = f"{doctype_name} file not found: {path}"
-			logger.error(msg)
-			frappe.throw(msg, exc=FileNotFoundError)
+			logger.error(f"{doctype_name} file not found: {path}")
 			return None
 
 		docs = read_doc_from_file(path)
 
 		if not docs:
-			msg = f"No {doctype_name} found in file"
-			logger.warning(msg)
-			frappe.throw(msg, ValueError)
+			logger.warning(f"No {doctype_name} found in file: {path}")
 			return None
 
 		if not isinstance(docs, list):
 			docs = [docs]
 
 		# Convert to Frappe documents
-		frappe_docs = [frappe.get_doc(doc) for doc in docs]
-
-		return frappe_docs
+		return [frappe.get_doc(doc) for doc in docs]
 
 	except Exception as e:
-		msg = f"Unexpected error loading {doctype_name}: {str(e)}"
-		logger.exception(msg)
-		frappe.throw(msg)
+		logger.exception(f"Unexpected error loading {doctype_name} from {file_name}: {e}")
 		return None
 
 
@@ -80,88 +72,93 @@ def sync_default_charts():
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 	logger.setLevel("INFO")
 
-	doctypes = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
-
 	try:
 		# Step 1: Load workbooks from `charts/insights_workbook.json`
 		import_workbooks = load_documents_from_json("insights_workbook.json", "workbooks", logger)
 		if not import_workbooks:
-			msg = "No workbooks found to import, aborting synchronization"
-			logger.error(msg)
-			frappe.throw(msg, frappe.NotFound)
+			logger.error("No workbooks found to import, aborting synchronization.")
 			return
+
+		doctypes_to_clean = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
 
 		# Step 2: Remove unwanted workbooks
-		old_workbooks = frappe.db.get_all(
-			"Insights Workbook", fields=["name", "vir_id"], filters={"is_default": True}
-		)
-		for owb in old_workbooks:
-			if owb["vir_id"] not in [wb.vir_id for wb in import_workbooks]:
-				# Deleting connections
-				clean_existing_records([owb["name"]], doctypes, logger)
-				frappe.get_doc("Insights Workbook", owb["name"]).delete()
+		_remove_old_workbooks(import_workbooks, doctypes_to_clean, logger)
 
 		# Step 3: Create new workbooks if not exist already
-		for import_workbook in import_workbooks:
-			if not frappe.db.exists("Insights Workbook", {"vir_id": import_workbook.vir_id}):
-				# Ensure the workbook is marked as default
-				import_workbook.is_default = 1
-				# If not creates a new
-				import_workbook.insert()
+		_create_new_workbooks(import_workbooks, logger)
 
 		# Step 4: Get existing workbooks and create lookup table
-		workbook_lookup = create_workbook_lookup(import_workbooks, logger)
+		workbook_lookup = _create_workbook_lookup(import_workbooks, logger)
 		if not workbook_lookup:
-			msg = "Failed to create workbook lookup table, aborting synchronization"
-			logger.error(msg)
-			frappe.throw(msg)
+			logger.error("Failed to create workbook lookup table, aborting synchronization.")
 			return
 
-		# Step 5: Clean existing default records,
-		#  in case if a default chart no longer needed
-		clean_existing_records([wb["new_id"] for wb in workbook_lookup.values()], doctypes, logger)
+		# Step 5: Clean existing default queries, charts, dashboards,
+		#  unwanted workbooks are already removed
+		clean_existing_records([wb["new_id"] for wb in workbook_lookup.values()], doctypes_to_clean, logger)
 
 		# Step 6: Import queries, charts, dashboards for each workbook
-		import_charts(workbook_lookup, doctypes, logger)
+		import_charts(workbook_lookup, doctypes_to_clean, logger)
 
 	except Exception as e:
-		msg = f"Failed to sync default charts: {str(e)}"
-		logger.exception(msg)
-		frappe.throw(msg)
+		logger.exception(f"Failed to sync default charts: {e}")
 		return
 
-	# Commit all changes
 	frappe.db.commit()
 
 
-def create_workbook_lookup(import_workbooks, logger):
+def _remove_old_workbooks(import_workbooks, doctypes_to_clean, logger):
+	"""Remove default workbooks that are no longer in the import file."""
+	old_workbooks = frappe.db.get_all(
+		"Insights Workbook", fields=["name", "vir_id"], filters={"is_default": True}
+	)
+	import_vir_ids = {wb.vir_id for wb in import_workbooks}
+
+	for owb in old_workbooks:
+		if owb["vir_id"] not in import_vir_ids:
+			try:
+				clean_existing_records([owb["name"]], doctypes_to_clean, logger)
+				frappe.get_doc("Insights Workbook", owb["name"]).delete()
+				logger.info(f"Removed old workbook: {owb['name']}")
+			except Exception as e:
+				logger.error(f"Failed to remove old workbook {owb['name']}: {e}")
+
+
+def _create_new_workbooks(import_workbooks, logger):
+	"""Create new workbooks from the import file if they don't exist."""
+	for import_workbook in import_workbooks:
+		if not frappe.db.exists("Insights Workbook", {"vir_id": import_workbook.vir_id}):
+			try:
+				import_workbook.is_default = 1
+				import_workbook.insert()
+				logger.info(f"Created new workbook: {import_workbook.name}")
+			except Exception as e:
+				logger.error(f"Failed to create new workbook {import_workbook.name}: {e}")
+
+
+def _create_workbook_lookup(import_workbooks, logger):
+	"""Create a lookup table for workbook IDs."""
 	try:
-		# Step 3: Get the workbook ID's from the new system
 		new_workbooks = frappe.get_all(
 			"Insights Workbook", fields=["name", "title", "vir_id"], filters={"is_default": 1}
 		)
 
-		# 4. Create lookup table for migrating queries, charts, dashboards
+		import_workbook_map = {wb.vir_id: wb for wb in import_workbooks}
 		workbook_lookup = {}
+
 		for new_workbook in new_workbooks:
-			# Configure organization access
 			configure_workbook_access(new_workbook, logger)
-
-			# Create lookup mapping using vir_id
-			for import_workbook in import_workbooks:
-				if import_workbook.vir_id == new_workbook.vir_id:
-					workbook_lookup[import_workbook.name] = {
-						"new_id": new_workbook.name,
-						"vir_id": import_workbook.vir_id,
-					}
-					break
-
+			import_workbook = import_workbook_map.get(new_workbook.vir_id)
+			if import_workbook:
+				workbook_lookup[import_workbook.name] = {
+					"new_id": new_workbook.name,
+					"vir_id": import_workbook.vir_id,
+				}
 		return workbook_lookup
 
 	except Exception as e:
-		msg = f"Failed to create workbook lookup table: {str(e)}"
-		logger.exception(msg)
-		frappe.throw(msg)
+		logger.exception(f"Failed to create workbook lookup table: {e}")
+		return None
 
 
 def configure_workbook_access(workbook, logger):
@@ -180,58 +177,45 @@ def configure_workbook_access(workbook, logger):
 		public_docshare.save(ignore_permissions=True)
 
 	except Exception as e:
-		msg = f"Failed to configure access for workbook '{workbook.get('title', 'Unknown')}': {str(e)}"
-		logger.error(msg)
+		logger.error(f"Failed to configure access for workbook '{workbook.get('title', 'Unknown')}': {e}")
 
 
 def clean_existing_records(workbooks, doctypes, logger):
-	# This ensures that removed default charts won't remain in client database
+	"""This ensures that removed default charts won't remain in client database."""
 	for dt in doctypes:
 		try:
-			for wb in workbooks:
-				frappe.db.delete(dt, filters={"workbook": wb})
-
+			frappe.db.delete(dt, filters={"workbook": ["in", workbooks]})
 		except Exception as e:
-			msg = f"Failed to clean existing records for {dt}: {str(e)}"
-			logger.error(msg)
-			frappe.throw(msg)
+			logger.error(f"Failed to clean existing records for {dt}: {e}")
 
 
 def import_charts(workbook_lookup, doctypes, logger):
 	for dt in doctypes:
 		try:
-			# Load documents using the reusable function
 			docs = load_documents_from_json(frappe.scrub(dt) + ".json", dt, logger)
 			if not docs:
-				msg = f"No {dt} found, skipping"
-				logger.warning(msg)
+				logger.warning(f"No {dt} found, skipping")
 				continue
 
 			for doc in docs:
-				old_doc: InsightsQueryv3 | InsightsChartv3 | InsightsDashboardv3 = doc
-
-				# Update workbook name accordingly
-				workbook_id = old_doc.workbook
-
-				# Must be parsed to int otherwise fails to get key
 				try:
+					old_doc: InsightsQueryv3 | InsightsChartv3 | InsightsDashboardv3 = doc
+					workbook_id = old_doc.workbook
+
 					lookup = workbook_lookup.get(int(workbook_id))
 					if not lookup:
-						msg = f"No workbook mapping found for workbook_id: {workbook_id}, workbook_lookup: {workbook_lookup}"
-						logger.warning(msg)
+						logger.warning(
+							f"No workbook mapping found for workbook_id: {workbook_id} in {dt} {doc.name}"
+						)
 						continue
 
 					old_doc.workbook = lookup["new_id"]
 					old_doc.insert(ignore_links=True, set_name=old_doc.name)
 
 				except Exception as e:
-					msg = f"Failed to process {dt} document {old_doc.name}: {str(e)}"
-					logger.error(msg)
-					frappe.throw(msg)
+					logger.error(f"Failed to process {dt} document {doc.name}: {e}")
 					continue
 
 		except Exception as e:
-			msg = f"Failed to import {dt}: {str(e)}"
-			logger.exception(msg)
-			frappe.throw(msg)
+			logger.exception(f"Failed to import {dt}: {e}")
 			continue
