@@ -1,6 +1,8 @@
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
+from vir_conto.overrides.insights_workbook import CustomInsightsWorkbook
+
 
 def execute():
 	custom_fields = {
@@ -37,11 +39,11 @@ def execute():
 
 	create_custom_fields(custom_fields)
 
-	# Generate vir_id for workbooks
+	# Generate vir_id for default workbooks
 	frappe.reload_doctype("Insights Workbook")
 	workbooks = frappe.db.get_list("Insights Workbook")
 	for wb in workbooks:
-		workbook = frappe.get_doc("Insights Workbook", wb)
+		workbook: CustomInsightsWorkbook = frappe.get_doc("Insights Workbook", wb)
 		workbook.generate_vir_id()
 	frappe.db.commit()
 

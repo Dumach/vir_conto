@@ -253,7 +253,7 @@ def import_charts(workbook_lookup, doctypes, logger):
 				try:
 					lookup = workbook_lookup.get(int(workbook_id))
 					if not lookup:
-						msg = f"No workbook mapping found for workbook_id: {workbook_id}, skipping old_doc: {old_doc.name}"
+						msg = f"No workbook mapping found for workbook_id: {workbook_id}, workbook_lookup: {workbook_lookup}"
 						logger.warning(msg)
 						if PRINT:
 							print(msg)
