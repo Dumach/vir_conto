@@ -50,7 +50,7 @@ def after_sync() -> None:
 
 
 def create_system_user() -> None:
-	"""Method for creating a system user that will handle the synchronization of Data Packet from Conto.
+	"""Creates a system user with API access from environment variables.
 
 	Raises:
 	        Exception: If email or username or password is missing.
@@ -151,8 +151,8 @@ def import_charts() -> None:
 		try:
 			import_doc(file_path)
 		except (ImportError, frappe.DoesNotExistError) as e:
-			# fixture syncing for missing doctypes
-			print(f"Skipping fixture syncing from the file {fname}. Reason: {e}")
+			# fixture updating for missing doctypes
+			print(f"Skipping fixture updating from the file {fname}. Reason: {e}")
 
 
 def create_insights_teams():
