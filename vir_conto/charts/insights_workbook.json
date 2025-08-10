@@ -1,30 +1,44 @@
 [
-  {
-    "charts": "[\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"j0q2n0glst\",\n  \"query\": \"h7fsijb352\",\n  \"title\": \"_Adatcsomagok Sz\\u00e1ma\"\n }\n]",
-    "dashboards": "[]",
-    "data_backup": null,
-    "docstatus": 0,
-    "doctype": "Insights Workbook",
-    "modified": "2025-07-15 11:42:31.563205",
-    "name": 16,
-    "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"h7fsijb352\",\n  \"title\": \"_tabData Packet\"\n }\n]",
-    "read_only": false,
-    "title": "_SAJAT",
-    "is_default": 1,
-    "vir_id": "vir-sajat"
-  },
-  {
-    "charts": "[\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"96d0t6hpk7\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Haszon Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"a338jq8f0b\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Haszon Diagram\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"b7u7v4kjrk\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Vev\\u0151k Sz\\u00e1ma Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"bvd9cvftqi\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Vev\\u0151k Sz\\u00e1ma Diagram\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"d4a0gi22vm\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"l0im5njjll\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k \\u00c1tlag Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Row\",\n  \"name\": \"p55s2d3jc8\",\n  \"query\": \"n30oaj7dgh\",\n  \"title\": \"_\\u00c9rt\\u00e9kes\\u00edt\\u00e9s F\\u0151csoport Nett\\u00f3\"\n },\n {\n  \"chart_type\": \"Line\",\n  \"name\": \"2t4r84ssfc\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"Chart 9\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"8m1rvla5qd\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"This is a really long number chart\"\n }\n]",
-    "dashboards": "[\n {\n  \"name\": \"8l21k4vh8h\",\n  \"title\": \"Dashboard 1\"\n }\n]",
-    "data_backup": null,
-    "docstatus": 0,
-    "doctype": "Insights Workbook",
-    "modified": "2025-06-17 23:00:35.099364",
-    "name": 8,
-    "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"n30oaj7dgh\",\n  \"title\": \"_\\u00c9rt\\u00e9kes\\u00edt\\u00e9s \\u00d6sszes\\u00edt\\u0151 Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"6v6acq7fu8\",\n  \"title\": \"_Forgalom \\u00d6sszes\\u00edt\\u0151 Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"qgt84ma7ln\",\n  \"title\": \"tabvir_csop\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k Adatok\"\n }\n]",
-    "read_only": false,
-    "title": "_VIR",
-    "is_default": 1,
-    "vir_id": "vir-vir"
-  }
+ {
+  "charts": "[\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"j0q2n0glst\",\n  \"query\": \"h7fsijb352\",\n  \"title\": \"_Adatcsomagok Sz\\u00e1ma\"\n }\n]",
+  "dashboards": "[]",
+  "data_backup": null,
+  "docstatus": 0,
+  "doctype": "Insights Workbook",
+  "is_default": 1,
+  "modified": "2025-08-10 16:57:28.487793",
+  "name": 1,
+  "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"h7fsijb352\",\n  \"title\": \"_tabData Packet\"\n }\n]",
+  "read_only": false,
+  "title": "_SAJAT",
+  "vir_id": "vir-sajat"
+ },
+ {
+  "charts": "[\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"96d0t6hpk7\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Haszon Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"a338jq8f0b\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Haszon Diagram\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"b7u7v4kjrk\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Vev\\u0151k Sz\\u00e1ma Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"bvd9cvftqi\",\n  \"query\": \"6v6acq7fu8\",\n  \"title\": \"_Vev\\u0151k Sz\\u00e1ma Diagram\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"d4a0gi22vm\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"l0im5njjll\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k \\u00c1tlag Kimutat\\u00e1s\"\n },\n {\n  \"chart_type\": \"Row\",\n  \"name\": \"p55s2d3jc8\",\n  \"query\": \"n30oaj7dgh\",\n  \"title\": \"_\\u00c9rt\\u00e9kes\\u00edt\\u00e9s F\\u0151csoport Nett\\u00f3\"\n },\n {\n  \"chart_type\": \"Line\",\n  \"name\": \"2t4r84ssfc\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"Chart 9\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"8m1rvla5qd\",\n  \"query\": \"e199lomf7t\",\n  \"title\": \"This is a really long number chart\"\n }\n]",
+  "dashboards": "[\n {\n  \"name\": \"8l21k4vh8h\",\n  \"title\": \"Dashboard 1\"\n }\n]",
+  "data_backup": null,
+  "docstatus": 0,
+  "doctype": "Insights Workbook",
+  "is_default": 1,
+  "modified": "2025-08-10 16:57:28.688681",
+  "name": 2,
+  "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"n30oaj7dgh\",\n  \"title\": \"_\\u00c9rt\\u00e9kes\\u00edt\\u00e9s \\u00d6sszes\\u00edt\\u0151 Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"6v6acq7fu8\",\n  \"title\": \"_Forgalom \\u00d6sszes\\u00edt\\u0151 Adatok\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"qgt84ma7ln\",\n  \"title\": \"tabvir_csop\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"e199lomf7t\",\n  \"title\": \"_K\\u00e9szlet\\u00e9rt\\u00e9k Adatok\"\n }\n]",
+  "read_only": false,
+  "title": "_VIR",
+  "vir_id": "vir-vir"
+ },
+ {
+  "charts": "[\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"1qjp2edlnv\",\n  \"query\": \"6lca2ju8nh\",\n  \"title\": \"Boltok forgalma az elm\\u00falt X napban\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"h0rm71oa7e\",\n  \"query\": \"6lca2ju8nh\",\n  \"title\": \"Boltok forgalma havonta b\\u00e1zissal\"\n },\n {\n  \"chart_type\": \"Table\",\n  \"name\": \"hvvntnv469\",\n  \"query\": \"oqnoqd63jo\",\n  \"title\": \"Boltok forgalma havonta\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"m6t4lrov1j\",\n  \"query\": \"oqnoqd63jo\",\n  \"title\": \"Forgalom\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"ihdq4bu86o\",\n  \"query\": \"cu982kim7b\",\n  \"title\": \"Forgalom term\\u00e9kcsoportonk\\u00e9nt \\u00e9ves szinten\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"a5fdp2r2o4\",\n  \"query\": \"oqnoqd63jo\",\n  \"title\": \"Haszon napi bont\\u00e1sban\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"0sj7rttig8\",\n  \"query\": \"oqnoqd63jo\",\n  \"title\": \"Beszerz\\u00e9s \\u00e9ves szinten\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"40qouvc4e4\",\n  \"query\": \"oqnoqd63jo\",\n  \"title\": \"Beszerz\\u00e9s havi szinten\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"dv9t1c79dv\",\n  \"query\": \"vqvclp2vkn\",\n  \"title\": \"\\u00c9ves forgalom mai napig\"\n }\n]",
+  "dashboards": "[\n {\n  \"name\": \"0ns61tkdaj\",\n  \"title\": \"Forgalom\"\n }\n]",
+  "data_backup": null,
+  "docstatus": 0,
+  "doctype": "Insights Workbook",
+  "is_default": 1,
+  "modified": "2025-08-10 16:55:11.537638",
+  "name": 3,
+  "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"oqnoqd63jo\",\n  \"title\": \"tabvir_bolt\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"9kd19o9obh\",\n  \"title\": \"tabvir_bolt_bazis\"\n },\n {\n  \"is_builder_query\": 0,\n  \"is_native_query\": 1,\n  \"is_script_query\": 0,\n  \"name\": \"tffq74d1ac\",\n  \"title\": \"Query 4\"\n },\n {\n  \"is_builder_query\": 0,\n  \"is_native_query\": 1,\n  \"is_script_query\": 0,\n  \"name\": \"6lca2ju8nh\",\n  \"title\": \"vir_bolt_elmult_X_napban\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"cu982kim7b\",\n  \"title\": \"tabvir_csop\"\n },\n {\n  \"is_builder_query\": 0,\n  \"is_native_query\": 1,\n  \"is_script_query\": 0,\n  \"name\": \"vqvclp2vkn\",\n  \"title\": \"vir_bolt_akt_eves_bazissal\"\n }\n]",
+  "read_only": false,
+  "title": "Zs_test",
+  "vir_id": "vir-forgalom"
+ }
 ]

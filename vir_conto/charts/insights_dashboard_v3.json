@@ -4,6 +4,48 @@
   "doctype": "Insights Dashboard v3",
   "is_public": 0,
   "is_shared_with_organization": false,
+  "items": "[\n {\n  \"chart\": \"1qjp2edlnv\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"ls18ncfw\",\n   \"moved\": false,\n   \"w\": 9,\n   \"x\": 0,\n   \"y\": 4\n  },\n  \"type\": \"chart\"\n },\n {\n  \"filter_name\": \"Napok sz\\u00e1ma\",\n  \"filter_type\": \"Number\",\n  \"layout\": {\n   \"h\": 1,\n   \"i\": \"adqf773o\",\n   \"moved\": false,\n   \"w\": 4,\n   \"x\": 0,\n   \"y\": 3\n  },\n  \"links\": {\n   \"1qjp2edlnv\": \"`6lca2ju8nh`.`nap`\"\n  },\n  \"type\": \"filter\"\n },\n {\n  \"chart\": \"hvvntnv469\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"7v9b71ch\",\n   \"moved\": false,\n   \"w\": 20,\n   \"x\": 0,\n   \"y\": 12\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"m6t4lrov1j\",\n  \"layout\": {\n   \"h\": 3,\n   \"i\": \"lqqnoq1n\",\n   \"moved\": false,\n   \"w\": 20,\n   \"x\": 0,\n   \"y\": 0\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"dv9t1c79dv\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"154x7abv\",\n   \"moved\": false,\n   \"w\": 10,\n   \"x\": 9,\n   \"y\": 4\n  },\n  \"type\": \"chart\"\n },\n {\n  \"filter_name\": \"H\\u00f3nap(ok)\",\n  \"filter_type\": \"String\",\n  \"layout\": {\n   \"h\": 1,\n   \"i\": \"dndkzvyq\",\n   \"moved\": false,\n   \"w\": 4,\n   \"x\": 9,\n   \"y\": 3\n  },\n  \"links\": {\n   \"dv9t1c79dv\": \"`vqvclp2vkn`.`ho`\"\n  },\n  \"type\": \"filter\"\n },\n {\n  \"filter_name\": \"Bolt(ok)\",\n  \"filter_type\": \"String\",\n  \"layout\": {\n   \"h\": 1,\n   \"i\": \"jaac2fo8\",\n   \"moved\": false,\n   \"w\": 4,\n   \"x\": 4,\n   \"y\": 3\n  },\n  \"links\": {\n   \"1qjp2edlnv\": \"`6lca2ju8nh`.`rnev`\",\n   \"dv9t1c79dv\": \"`vqvclp2vkn`.`rnev`\",\n   \"hvvntnv469\": \"`oqnoqd63jo`.`rnev`\",\n   \"m6t4lrov1j\": \"`oqnoqd63jo`.`rnev`\"\n  },\n  \"type\": \"filter\"\n }\n]",
+  "linked_charts": [
+   {
+    "chart": "1qjp2edlnv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "hvvntnv469",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "m6t4lrov1j",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "dv9t1c79dv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   }
+  ],
+  "modified": "2025-08-08 15:42:26.486460",
+  "name": "0ns61tkdaj",
+  "old_name": null,
+  "people_with_access": [],
+  "preview_image": null,
+  "read_only": false,
+  "share_link": null,
+  "title": "Forgalom",
+  "workbook": "3"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Insights Dashboard v3",
+  "is_public": 0,
+  "is_shared_with_organization": false,
   "items": "[\n {\n  \"chart\": \"8m1rvla5qd\",\n  \"layout\": {\n   \"h\": 3,\n   \"i\": \"8wtwr6v3\",\n   \"moved\": false,\n   \"w\": 8,\n   \"x\": 0,\n   \"y\": 0\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"2t4r84ssfc\",\n  \"layout\": {\n   \"h\": 10,\n   \"i\": \"jvuerci9\",\n   \"moved\": false,\n   \"w\": 14,\n   \"x\": 0,\n   \"y\": 3\n  },\n  \"type\": \"chart\"\n }\n]",
   "linked_charts": [
    {
@@ -20,30 +62,6 @@
    },
    {
     "chart": "8m1rvla5qd",
-    "parent": "8l21k4vh8h",
-    "parentfield": "linked_charts",
-    "parenttype": "Insights Dashboard v3"
-   },
-   {
-    "chart": "8m1rvla5qd",
-    "parent": "8l21k4vh8h",
-    "parentfield": "linked_charts",
-    "parenttype": "Insights Dashboard v3"
-   },
-   {
-    "chart": "8m1rvla5qd",
-    "parent": "8l21k4vh8h",
-    "parentfield": "linked_charts",
-    "parenttype": "Insights Dashboard v3"
-   },
-   {
-    "chart": "2t4r84ssfc",
-    "parent": "8l21k4vh8h",
-    "parentfield": "linked_charts",
-    "parenttype": "Insights Dashboard v3"
-   },
-   {
-    "chart": "2t4r84ssfc",
     "parent": "8l21k4vh8h",
     "parentfield": "linked_charts",
     "parenttype": "Insights Dashboard v3"
@@ -67,7 +85,7 @@
     "parenttype": "Insights Dashboard v3"
    }
   ],
-  "modified": "2025-07-08 11:30:53.664228",
+  "modified": "2025-08-10 16:54:33.803706",
   "name": "8l21k4vh8h",
   "old_name": null,
   "people_with_access": [],
@@ -75,6 +93,6 @@
   "read_only": false,
   "share_link": null,
   "title": "Dashboard 1",
-  "workbook": "8"
+  "workbook": "2"
  }
 ]
