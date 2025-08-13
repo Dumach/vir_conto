@@ -113,6 +113,10 @@ class TestDataPacket(unittest.TestCase):
 		# Call import_data manually
 		data_packet.import_data()
 
+		# Cleanup Data Packets
+		shutil.rmtree(data_packet.get_extraction_dir())
+		os.remove(data_packet.get_file_url())
+
 		# According to TEST-0001 has:
 		# Table		Num of Records
 		# raktnev	5
@@ -148,6 +152,14 @@ class TestDataPacket(unittest.TestCase):
 		# Call import_data manually
 		self.assertEqual(import_new_packets(), len(data_packets))
 
+		# Cleanup Data Packets
+		print(os.getcwd())
+		for data_packet in data_packets:
+			print("Removing dir: ", data_packet.get_extraction_dir())
+			shutil.rmtree(data_packet.get_extraction_dir())
+			print("Removing file: ", data_packet.get_file_url())
+			os.remove(data_packet.get_file_url())
+
 	def test_clear_old_packets(self):
 		frappe.set_user("Administrator")
 
@@ -161,29 +173,30 @@ class TestDataPacket(unittest.TestCase):
 		)
 		frappe.db.commit()  # nosemgrep
 		extraction_dir = doc.get_extraction_dir()
+		file_url = doc.get_file_url()
 
 		# Copy mock file
-		src_path = "../apps/vir_conto/vir_conto/vir_conto/doctype/data_packet/TEST-0001.LZH"
-		dest_path = os.path.join(extraction_dir, file_name + ".LZH")
+		src_path = "../apps/vir_conto/vir_conto/vir_conto/doctype/data_packet/TEST-0001"
 
+		shutil.copy(src_path + ".LZH", file_url)
 		if not os.path.exists(extraction_dir):
 			os.makedirs(extraction_dir)
+		# Track uploaded archive packet
+		file = Path(file_url)
 
-		file = Path(dest_path)
-		shutil.copy(src_path, dest_path)
-
-		# Call cleanup to check if deletes younger than 30 day
 		clear_old_packets()
-		# Check if Data Packet and file exist
+
+		# Here Data Packet SHOULD exist because its date is fresh
 		self.assertIsNotNone(frappe.db.exists("Data Packet", file_name))
 		self.assertTrue(file.exists())
 
-		# Change creation_date
+		# Change creation date
 		frappe.db.set_value("Data Packet", file_name, "creation", "2025.03.25", update_modified=False)
 		frappe.db.commit()  # nosemgrep
-		# Call cleanup function
+
 		clear_old_packets()
-		# Check if Data Packet and file successfully deleted
+
+		# SHOULD NOT exist because date is older than a month
 		self.assertIsNone(frappe.db.exists("Data Packet", file_name))
 		self.assertFalse(file.exists())
 		frappe.db.commit()  # nosemgrep

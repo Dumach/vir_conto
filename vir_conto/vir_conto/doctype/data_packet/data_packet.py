@@ -217,14 +217,14 @@ def clear_old_packets() -> None:
 
 		# Removing extracted packets from Storage
 		old_packets = frappe.db.get_all("Data Packet", {"creation": ["<", max_date]}, pluck="name")
-
 		for p in old_packets:
 			packet: DataPacket = frappe.get_doc("Data Packet", p)
 			shutil.rmtree(packet.get_extraction_dir())
+			os.remove(packet.get_file_url())
+			packet.delete()
 
 		# Removing data packet entries
 		after_delete = frappe.db.count("Data Packet")
-		frappe.db.delete("Data Packet", {"creation": ["<", max_date]})
 		logger.info(f"Removed {before_delete - after_delete} old packet(s)")
 
 		# Removing files from site/private
@@ -237,3 +237,5 @@ def clear_old_packets() -> None:
 		logger.info(f"Removed {before_delete - after_delete} old file(s)")
 	except Exception as e:
 		logger.error(e)
+
+	frappe.db.commit()
