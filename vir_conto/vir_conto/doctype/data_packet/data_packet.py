@@ -32,7 +32,7 @@ class DataPacket(Document):
 	def get_extraction_dir(self) -> str:
 		return os.path.join(frappe.get_site_path("private", "files", "storage"), str(self.file_name))
 
-	def after_insert(self):
+	def after_insert(self) -> None:
 		frappe.enqueue_doc("Data Packet", self.name, method="import_data")
 
 	def import_data(self) -> None:
@@ -134,8 +134,8 @@ def get_name(row: dict) -> str:
 
 	:return str: Returns the correct primary key.
 	"""
-	# Selects the primary key for the appropriate doctype
-	pkey: PrimaryKey = frappe.get_doc("Primary Key", row["doctype"]).conto_primary_key
+	# Selects the primary key for the correct doctype
+	pkey: str = frappe.get_doc("Primary Key", row["doctype"]).conto_primary_key
 	pkey_list = pkey.split(",")
 	name = ""
 
@@ -215,7 +215,6 @@ def clear_old_packets() -> None:
 	try:
 		before_delete = frappe.db.count("Data Packet")
 
-		# Removing extracted packets from Storage
 		old_packets = frappe.db.get_all("Data Packet", {"creation": ["<", max_date]}, pluck="name")
 		for p in old_packets:
 			packet: DataPacket = frappe.get_doc("Data Packet", p)
@@ -227,13 +226,14 @@ def clear_old_packets() -> None:
 		after_delete = frappe.db.count("Data Packet")
 		logger.info(f"Removed {before_delete - after_delete} old packet(s)")
 
-		# Removing files from site/private
-		before_delete = frappe.db.count("File")
+		# remove from `tabFile`
+		before_delete = frappe.db.count("File", filters={"file_name": ["like", "%.LZH"]})
 		frappe.db.delete(
 			"File",
-			{"creation": ["<", max_date], "file_name": ["like", "%.LZH"]},
+			filters={"creation": ["<", max_date], "file_name": ["like", "%.LZH"]},
 		)
-		after_delete = frappe.db.count("File")
+
+		after_delete = frappe.db.count("File", filters={"file_name": ["like", "%.LZH"]})
 		logger.info(f"Removed {before_delete - after_delete} old file(s)")
 	except Exception as e:
 		logger.error(e)
