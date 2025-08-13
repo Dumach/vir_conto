@@ -1,23 +1,23 @@
-## Vir Conto
+## VIR Conto
+
 
 #### Business Intelligence for Cconto
 
 ![vir-ui-wireframe](https://github.com/user-attachments/assets/72824184-b95a-4124-a412-e996f4bc23b0)
 
-## Vir Conto
 
-Vir Conto is an app which processes data from Cconto and stores it in Frappe's DB.
+## VIR Conto
 
----------------------
-### Application still in early alpha !
----------------------
+VIR Conto is an app which processes data from Cconto and stores it in Frappe's DB and utilieses Frappe Insights to create beauitful dashboards.
+
 
 ## Requirements
 
 Tested python versions are: `3.10` and `3.12`
 
 1. Install [Frappe Framework](https://github.com/frappe/frappe) - [docs](https://docs.frappe.io/framework/user/en/installation)
-2. In order to visualize data, install [Frappe Insights](https://github.com/frappe/insights) as well
+2. In order to visualize data, install [Frappe Insights](https://github.com/frappe/insights)
+3. We recommend switching to **stable** versions in all Frappe products (Framework, Insights) as well with VIR Conto
 
 
 ## Installation
@@ -41,22 +41,23 @@ After install run, in order to install extra dependencies and build JavaScript s
 bench setup requirements
 ```
 
-#### Installing on a Frappe site
 
-1. Install Vir Conto on a site
-2. Find `key.json` and store it securely
-3. Update SYS.ini in Cconto with the **API** key, secret and your domain(`http://your.site.com`)
+### Installing on a Frappe site
 
-Before installing Vir Conto, you want to provide a `.env` file **in the site folder**, that is `your/bench/path/sites`.
+1. Install VIR Conto on a site
+2. Find `key.json` inside your site folder `/your-bench-path/sites/your.site.com` which stores the API key and API secret.
+3. Update SYS.ini in C-Conto with the **API** key, secret and your domain(`http://your.site.com`)
+
+Before installing VIR Conto, you want to provide a `.env` file **in the site folder**, that is `your/bench/path/sites`.
+
 We provide an example environment variable called `example.env`, We recommend to change the VIR_CONTO system users email address to your domain.
 
-To install Vir Conto on a site:
+To install VIR Conto on a site:
 ```bash
 bench --site your.site.com install-app vir_conto
 ```
 
-When successfully installed, Vir Conto will create a system user which will be used to send data from Cconto to your site.
-Inside your site `/your/bench/path/sites/your.site.com` you will find a key.json which stores the API key and API secret.
+When successfully installed, VIR Conto will create a system user which will be used to send data from C-Conto to your site.
 
 
 ## Contributing
