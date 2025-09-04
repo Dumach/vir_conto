@@ -39,7 +39,7 @@
   "read_only": false,
   "share_link": null,
   "title": "Forgalom",
-  "workbook": "3"
+  "workbook": "6"
  },
  {
   "docstatus": 0,
@@ -67,6 +67,18 @@
     "parenttype": "Insights Dashboard v3"
    },
    {
+    "chart": "8m1rvla5qd",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "2t4r84ssfc",
+    "parent": "8l21k4vh8h",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
     "chart": "2t4r84ssfc",
     "parent": "8l21k4vh8h",
     "parentfield": "linked_charts",
@@ -85,7 +97,7 @@
     "parenttype": "Insights Dashboard v3"
    }
   ],
-  "modified": "2025-08-10 16:54:33.803706",
+  "modified": "2025-09-04 13:59:16.567167",
   "name": "8l21k4vh8h",
   "old_name": null,
   "people_with_access": [],
@@ -93,6 +105,6 @@
   "read_only": false,
   "share_link": null,
   "title": "Dashboard 1",
-  "workbook": "2"
+  "workbook": "4"
  }
 ]

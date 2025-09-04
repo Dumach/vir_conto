@@ -12,7 +12,7 @@
   "query": "6lca2ju8nh",
   "read_only": false,
   "title": "Boltok forgalma havonta bázissal",
-  "workbook": "3"
+  "workbook": "6"
  },
  {
   "chart_type": "Number",
@@ -27,7 +27,7 @@
   "query": "oqnoqd63jo",
   "read_only": false,
   "title": "Forgalom",
-  "workbook": "3"
+  "workbook": "6"
  },
  {
   "chart_type": "Bar",
@@ -42,22 +42,22 @@
   "query": "cu982kim7b",
   "read_only": false,
   "title": "Forgalom termékcsoportonként éves szinten",
-  "workbook": "3"
+  "workbook": "6"
  },
  {
   "chart_type": "Bar",
-  "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": \"365\",\n \"order_by\": [\n  {\n   \"column\": {\n    \"column_name\": \"datum\",\n    \"type\": \"column\"\n   },\n   \"direction\": \"desc\"\n  }\n ],\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"datum\",\n   \"data_type\": \"Date\",\n   \"dimension_name\": \"datum\",\n   \"granularity\": \"day\",\n   \"label\": \"datum\",\n   \"value\": \"datum\"\n  }\n },\n \"y_axis\": {\n  \"overlap\": false,\n  \"series\": [\n   {\n    \"color\": [],\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"haszon\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_haszon\"\n    },\n    \"show_data_labels\": true\n   }\n  ],\n  \"show_axis_label\": false,\n  \"show_data_labels\": true,\n  \"show_scrollbar\": true,\n  \"stack\": true\n }\n}",
+  "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": \"30\",\n \"order_by\": [\n  {\n   \"column\": {\n    \"column_name\": \"datum\",\n    \"type\": \"column\"\n   },\n   \"direction\": \"desc\"\n  }\n ],\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"datum\",\n   \"data_type\": \"Date\",\n   \"dimension_name\": \"datum\",\n   \"granularity\": \"day\",\n   \"label\": \"datum\",\n   \"value\": \"datum\"\n  }\n },\n \"y_axis\": {\n  \"overlap\": false,\n  \"series\": [\n   {\n    \"color\": [],\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"haszon\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_haszon\"\n    },\n    \"show_data_labels\": true\n   }\n  ],\n  \"show_axis_label\": false,\n  \"show_data_labels\": true,\n  \"show_scrollbar\": true,\n  \"stack\": true\n }\n}",
   "data_query": "a5fhk71gdb",
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-08 10:55:14.934275",
+  "modified": "2025-08-13 09:14:25.174246",
   "name": "a5fdp2r2o4",
   "old_name": null,
   "query": "oqnoqd63jo",
   "read_only": false,
   "title": "Haszon napi bontásban",
-  "workbook": "3"
+  "workbook": "6"
  },
  {
   "chart_type": "Bar",
@@ -72,7 +72,7 @@
   "query": "oqnoqd63jo",
   "read_only": false,
   "title": "Beszerzés éves szinten",
-  "workbook": "3"
+  "workbook": "6"
  },
  {
   "chart_type": "Bar",
@@ -87,7 +87,7 @@
   "query": "oqnoqd63jo",
   "read_only": false,
   "title": "Beszerzés havi szinten",
-  "workbook": "3"
+  "workbook": "6"
  },
  {
   "chart_type": "Table",
@@ -96,13 +96,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.745485",
+  "modified": "2025-09-04 13:59:16.507264",
   "name": "96d0t6hpk7",
   "old_name": null,
   "query": "6v6acq7fu8",
   "read_only": false,
   "title": "_Haszon Kimutatás",
-  "workbook": "2"
+  "workbook": "4"
  },
  {
   "chart_type": "Bar",
@@ -111,13 +111,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.748385",
+  "modified": "2025-09-04 13:59:16.510395",
   "name": "a338jq8f0b",
   "old_name": null,
   "query": "6v6acq7fu8",
   "read_only": false,
   "title": "_Haszon Diagram",
-  "workbook": "2"
+  "workbook": "4"
  },
  {
   "chart_type": "Table",
@@ -126,13 +126,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.750293",
+  "modified": "2025-09-04 13:59:16.512433",
   "name": "b7u7v4kjrk",
   "old_name": null,
   "query": "6v6acq7fu8",
   "read_only": false,
   "title": "_Vevők Száma Kimutatás",
-  "workbook": "2"
+  "workbook": "4"
  },
  {
   "chart_type": "Bar",
@@ -141,13 +141,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.752504",
+  "modified": "2025-09-04 13:59:16.514454",
   "name": "bvd9cvftqi",
   "old_name": null,
   "query": "6v6acq7fu8",
   "read_only": false,
   "title": "_Vevők Száma Diagram",
-  "workbook": "2"
+  "workbook": "4"
  },
  {
   "chart_type": "Table",
@@ -156,13 +156,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.754548",
+  "modified": "2025-09-04 13:59:16.516581",
   "name": "d4a0gi22vm",
   "old_name": null,
   "query": "e199lomf7t",
   "read_only": false,
   "title": "_Készletérték Kimutatás",
-  "workbook": "2"
+  "workbook": "4"
  },
  {
   "chart_type": "Table",
@@ -171,13 +171,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.756548",
+  "modified": "2025-09-04 13:59:16.518694",
   "name": "l0im5njjll",
   "old_name": null,
   "query": "e199lomf7t",
   "read_only": false,
   "title": "_Készletérték Átlag Kimutatás",
-  "workbook": "2"
+  "workbook": "4"
  },
  {
   "chart_type": "Row",
@@ -186,13 +186,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.758423",
+  "modified": "2025-09-04 13:59:16.520637",
   "name": "p55s2d3jc8",
   "old_name": null,
   "query": "n30oaj7dgh",
   "read_only": false,
   "title": "_Értékesítés Főcsoport Nettó",
-  "workbook": "2"
+  "workbook": "4"
  },
  {
   "chart_type": "Line",
@@ -201,13 +201,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.760397",
+  "modified": "2025-09-04 13:59:16.522571",
   "name": "2t4r84ssfc",
   "old_name": null,
   "query": "e199lomf7t",
   "read_only": false,
   "title": "Chart 9",
-  "workbook": "2"
+  "workbook": "4"
  },
  {
   "chart_type": "Number",
@@ -216,13 +216,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.762261",
+  "modified": "2025-09-04 13:59:16.524426",
   "name": "8m1rvla5qd",
   "old_name": null,
   "query": "e199lomf7t",
   "read_only": false,
   "title": "This is a really long number chart",
-  "workbook": "2"
+  "workbook": "4"
  },
  {
   "chart_type": "Number",
@@ -231,13 +231,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-10 16:54:33.764279",
+  "modified": "2025-09-04 13:59:16.526439",
   "name": "j0q2n0glst",
   "old_name": null,
   "query": "h7fsijb352",
   "read_only": false,
   "title": "_Adatcsomagok Száma",
-  "workbook": "1"
+  "workbook": "8"
  },
  {
   "chart_type": "Table",
@@ -252,22 +252,22 @@
   "query": "oqnoqd63jo",
   "read_only": false,
   "title": "Boltok forgalma havonta",
-  "workbook": "3"
+  "workbook": "6"
  },
  {
   "chart_type": "Bar",
-  "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"order_by\": [],\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"rnev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rnev\",\n   \"label\": \"rnev\",\n   \"value\": \"rnev\"\n  }\n },\n \"y_axis\": {\n  \"series\": [\n   {\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert_ossz_bazis\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert_ossz_bazis\"\n    }\n   },\n   {\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert_ossz\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert_ossz\"\n    }\n   }\n  ],\n  \"stack\": false\n }\n}",
+  "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"order_by\": [],\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"rnev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rnev\",\n   \"label\": \"rnev\",\n   \"value\": \"rnev\"\n  }\n },\n \"y_axis\": {\n  \"series\": [\n   {\n    \"color\": [\n     \"#e0bfbf\"\n    ],\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert_ossz_bazis\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert_ossz_bazis\"\n    }\n   },\n   {\n    \"color\": [],\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert_ossz\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert_ossz\"\n    }\n   }\n  ],\n  \"show_data_labels\": true,\n  \"stack\": false\n }\n}",
   "data_query": "dv95ri6rtg",
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-08 14:34:20.966095",
+  "modified": "2025-08-13 09:18:19.703958",
   "name": "dv9t1c79dv",
   "old_name": null,
   "query": "vqvclp2vkn",
   "read_only": false,
   "title": "Éves forgalom mai napig",
-  "workbook": "3"
+  "workbook": "6"
  },
  {
   "chart_type": "Bar",
@@ -282,6 +282,6 @@
   "query": "6lca2ju8nh",
   "read_only": false,
   "title": "Boltok forgalma az elmúlt X napban",
-  "workbook": "3"
+  "workbook": "6"
  }
 ]
