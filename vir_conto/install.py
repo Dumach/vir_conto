@@ -7,6 +7,7 @@ from frappe.core.doctype.user.user import User
 from frappe.desk.page.setup_wizard.setup_wizard import setup_complete
 from frappe.utils.password import update_password
 
+from vir_conto.patches import add_workbook_custom_fields
 from vir_conto.util import get_frappe_version, sync_default_charts
 
 
@@ -31,6 +32,11 @@ def after_install() -> None:
 	load_environment()
 	run_setup_wizard()
 
+	# Patch does not run after app install, so we need to manually call it instead,
+	# if a site is already installed the patch will run normally
+	add_workbook_custom_fields.execute()
+	print("after_install ends")
+
 
 # will run after app fixtures are synced
 def after_sync() -> None:
@@ -38,7 +44,6 @@ def after_sync() -> None:
 	create_system_user()
 
 	# Import default charts manually instead of relying on fixtures to handle
-	import_charts()
 	sync_default_charts()
 
 	# Set insights app like: teams, fiscal year, etc...
@@ -132,27 +137,19 @@ def run_setup_wizard():
 		frappe.throw(frappe._("Frappe setup failed"))
 
 
-def import_charts() -> None:
-	"""Method for importing Insights charts from 'bench/apps/myapp/charts' folder."""
+def import_df_workbooks() -> None:
 	from frappe.utils.fixtures import import_doc
 
-	# Code from frappe.utils.fixtures.import_fixtures
-	fixtures_path = frappe.get_app_path("vir_conto", "charts")
-	if not os.path.exists(fixtures_path):
-		return
-
-	fixture_files = os.listdir(fixtures_path)
-
-	for fname in fixture_files:
-		if not fname.endswith(".json"):
-			continue
-
-		file_path = frappe.get_app_path("vir_conto", "charts", fname)
+	# Inspiration from frappe.utils.fixtures.import_fixtures
+	default_doctypes = ["Insights Workbook"]
+	for dt in default_doctypes:
+		file_path = frappe.get_app_path("vir_conto", "charts", frappe.scrub(dt) + ".json")
 		try:
 			import_doc(file_path)
+
 		except (ImportError, frappe.DoesNotExistError) as e:
 			# fixture updating for missing doctypes
-			print(f"Skipping fixture updating from the file {fname}. Reason: {e}")
+			print(f"Skipping fixture updating from the file {file_path}. Reason: {e}")
 
 
 def create_insights_teams():

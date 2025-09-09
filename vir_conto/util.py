@@ -85,7 +85,7 @@ def sync_default_charts() -> None:
 	try:
 		# Step 1: Load workbooks from `charts/insights_workbook.json`
 		import_workbooks: list[CustomInsightsWorkbook] = load_documents_from_json(
-			"insights_workbook.json", "workbooks", logger
+			"insights_workbook.json", "Insights Workbook", logger
 		)  # type: ignore
 		if not import_workbooks:
 			logger.error("No workbooks found to import, aborting synchronization.")
@@ -143,11 +143,12 @@ def _create_new_workbooks(import_workbooks: list[CustomInsightsWorkbook], logger
 	for import_workbook in import_workbooks:
 		if not frappe.db.exists("Insights Workbook", {"vir_id": import_workbook.vir_id}):
 			try:
-				import_workbook.is_default = 1
-				import_workbook.insert()
-				logger.info(f"Created new workbook: {import_workbook.name}")
+				wb = frappe.get_doc(import_workbook.as_dict())
+				wb.set("is_default", 1)
+				wb.insert()
+				logger.info(f"Created new workbook: {wb.title}")
 			except Exception as e:
-				logger.error(f"Failed to create new workbook {import_workbook.name}: {e}")
+				logger.error(f"Failed to create new workbook {import_workbook.title}: {e}")
 
 
 def _create_workbook_lookup(
