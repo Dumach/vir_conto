@@ -57,6 +57,23 @@ bench --site your.site.com install-app vir_conto
 
 When successfully installed, VIR Conto will create a system user which will be used to send data from C-Conto to your site.
 
+## Using VIR Conto
+
+1. Export default charts with:
+```bash
+bench --site your.site.com export-default-charts
+```
+
+VIR Conto will place the JSON output in the `vir_conto/vir_conto/charts` folder. We use the same exporting mechanism that **Frappe** uses with **fixtures**.
+
+Content of `/charts`:
+ - `insights_chart_v3.json` - default chart documents
+ - `insights_dashboard_v3.json` - default dashboard documents
+ - `insights_query_v3.json` - default query documents
+ - `insights_workbook.json` - default workbook documents
+
+
+2. Use `bench migrate` to update the default charts. The process called `Updating Default Charts` will run after every migrate and update process, ensuring the default charts will be in sync every time.
 
 
 ## Contributing
