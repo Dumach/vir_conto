@@ -45,4 +45,4 @@ def execute():
 		workbook.generate_vir_id()
 	frappe.db.commit()
 
-	print("Successfully added is_default and vir_id custom fields to Insights Workbook")
+	print("Successfully added 'is_default' and 'vir_id' custom fields to Insights Workbook")

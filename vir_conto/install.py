@@ -35,7 +35,6 @@ def after_install() -> None:
 	# Patch does not run after app install, so we need to manually call it instead,
 	# if a site is already installed the patch will run normally
 	add_workbook_custom_fields.execute()
-	print("after_install ends")
 
 
 # will run after app fixtures are synced
