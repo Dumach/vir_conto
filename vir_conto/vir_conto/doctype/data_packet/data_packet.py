@@ -7,7 +7,6 @@ import zipfile
 import dbf
 import frappe
 import frappe.utils
-import frappe.utils.logger
 from frappe.model.document import Document
 
 from vir_conto.vir_conto.doctype.primary_key.primary_key import PrimaryKey
@@ -77,9 +76,10 @@ class DataPacket(Document):
 def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 	"""Method for processing a Dbase file.
 
-	:param dbf_file: Source path of debase file.
-	:param doctype: What doctype it needs to create.
-	:param encoding: Debase file encoded in.
+	Args:
+	        dbf_file: Source path of debase file.
+	        doctype: What doctype it needs to create.
+	        encoding: Debase file encoded in.
 	"""
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 	logger.setLevel("INFO")
@@ -112,7 +112,7 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 
 def remove_from_db(row):
 	pkey_info = frappe.get_list("Primary Key", fields=["*"], filters={"type": row["tipus"]})
-	row["doctype"] = pkey_info["frappe_name"]
+	row["doctype"] = pkey_info.get("frappe_name")
 
 	frappe.delete_doc_if_exists(row["doctype"], get_name(row))
 	# 	 if tip='TERM' then
@@ -130,9 +130,11 @@ def get_name(row: dict) -> str:
 	"""
 	Method for creating / accessing a primary key for Conto doctypes.
 
-	:param row: Data row must contain a 'doctype' field in order to create the key.
+	Args:
+	        row: Data row must contain a 'doctype' field in order to create the key.
 
-	:return str: Returns the correct primary key.
+	Returns:
+	        Returns the correct primary key as a string.
 	"""
 	# Selects the primary key for the correct doctype
 	pkey: str = frappe.get_doc("Primary Key", row["doctype"]).conto_primary_key
@@ -154,7 +156,8 @@ def insert_into_db(row: dict) -> None:
 	"""
 	Inserts a key:value pair row into Frappe DB.
 
-	:param row: Data row must contain a 'doctype' field in order to create a new Frappe document.
+	Args
+	        row: Data row must contain a 'doctype' field in order to create a new Frappe document.
 	"""
 	pkey = get_name(row)
 	doctype = row["doctype"]

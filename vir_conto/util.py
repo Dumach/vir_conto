@@ -1,5 +1,4 @@
 import os
-from collections.abc import Sequence
 from logging import Logger
 from typing import TypedDict
 
@@ -143,7 +142,7 @@ def _create_new_workbooks(import_workbooks: list[CustomInsightsWorkbook], logger
 	for import_workbook in import_workbooks:
 		if not frappe.db.exists("Insights Workbook", {"vir_id": import_workbook.vir_id}):
 			try:
-				wb = frappe.get_doc(import_workbook.as_dict())
+				wb: CustomInsightsWorkbook = frappe.get_doc(import_workbook.as_dict())
 				wb.set("is_default", 1)
 				wb.insert()
 				logger.info(f"Created new workbook: {wb.title}")
@@ -156,7 +155,7 @@ def _create_workbook_lookup(
 ) -> dict[int, WorkbookInfo] | None:
 	"""Create a lookup table for workbook IDs."""
 	try:
-		new_workbooks = frappe.get_all(
+		new_workbooks: list[CustomInsightsWorkbook] = frappe.get_all(
 			"Insights Workbook", fields=["name", "title", "vir_id"], filters={"is_default": 1}
 		)
 
