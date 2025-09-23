@@ -278,6 +278,9 @@ bench --site [site-name] run-tests --app [app-name]
 # Run specific test module
 bench --site [site-name] run-tests --app [app-name] --module [module-name]
 
+# Run specific test module with example
+bench --site vir-test.localhost run-tests --module "vir_conto.tests.test_sync_charts"
+
 # Run with coverage report
 bench --site [site-name] run-tests --app [app-name] --coverage
 
