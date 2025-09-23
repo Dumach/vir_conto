@@ -82,9 +82,7 @@ def sync_default_charts(base_path="") -> None:
 
 		# Step 1: Load workbooks from `charts/insights_workbook.json`
 		path = os.path.join(base_path, "insights_workbook.json")
-		import_workbooks: list[CustomInsightsWorkbook] = load_documents_from_json(
-			path, "Insights Workbook", logger
-		)
+		import_workbooks: list[CustomInsightsWorkbook] = load_documents_from_json(path, "Insights Workbook", logger)
 		if not import_workbooks:
 			logger.error("No workbooks found to import, aborting synchronization.")
 			return
@@ -225,9 +223,7 @@ def _import_charts(
 				lookup = workbook_lookup.get(int(workbook_id))
 
 				if not lookup:
-					logger.warning(
-						f"No workbook mapping found for workbook_id: {workbook_id} in {doctype} {doc.name}"
-					)
+					logger.warning(f"No workbook mapping found for workbook_id: {workbook_id} in {doctype} {doc.name}")
 					continue
 
 				old_doc.workbook = lookup["new_id"]

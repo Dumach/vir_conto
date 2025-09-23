@@ -19,9 +19,7 @@ def load_environment():
 	"""
 	path = os.path.join(os.getcwd(), ".env")
 	if not load_dotenv(dotenv_path=path):
-		raise FileNotFoundError(
-			"Vir Conto environment file not found, make sure to place it in bench/sites folder!"
-		)
+		raise FileNotFoundError("Vir Conto environment file not found, make sure to place it in bench/sites folder!")
 
 
 # will run after app is installed on site

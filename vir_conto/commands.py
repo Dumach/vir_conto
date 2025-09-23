@@ -1,8 +1,10 @@
 import click
 import frappe
 from frappe.commands import pass_context
+from frappe.core.doctype.data_import.data_import import export_json
 from frappe.exceptions import SiteNotSpecifiedError
-from frappe.utils.fixtures import export_json
+
+from vir_conto.overrides.insights_workbook import CustomInsightsWorkbook
 
 
 @click.command("export-default-charts")
@@ -48,7 +50,7 @@ def export_default_charts():
 
 	# Generate vir_id and set is_default for workbooks that don't have them
 	for wb in default_workbooks:
-		workbook = frappe.get_doc("Insights Workbook", wb)
+		workbook: CustomInsightsWorkbook = frappe.get_doc("Insights Workbook", wb)
 		workbook.generate_vir_id()
 
 	default_workbook_names = [wb["name"] for wb in default_workbooks]

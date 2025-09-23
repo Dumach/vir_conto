@@ -183,9 +183,7 @@ def import_new_packets() -> int:
 	if hour == 0:
 		logger.info("Background job is alive")
 
-	packets = frappe.db.get_list(
-		"Data Packet", filters={"processed": False}, order_by="creation", pluck="name"
-	)
+	packets = frappe.db.get_list("Data Packet", filters={"processed": False}, order_by="creation", pluck="name")
 
 	if len(packets) < 1:
 		return 0

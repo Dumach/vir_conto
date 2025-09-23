@@ -51,9 +51,7 @@ class TestDataPacket(unittest.TestCase):
 		doc: DataPacket = frappe.get_doc("Data Packet", file_name)
 
 		self.assertEqual(doc.get_file_url(), f"{frappe.get_site_path()}/private/files/{file_name}.LZH")
-		self.assertEqual(
-			doc.get_extraction_dir(), f"{frappe.get_site_path()}/private/files/storage/{file_name}"
-		)
+		self.assertEqual(doc.get_extraction_dir(), f"{frappe.get_site_path()}/private/files/storage/{file_name}")
 
 	def test_get_name_return_correctly(self):
 		test_row = {
@@ -168,9 +166,7 @@ class TestDataPacket(unittest.TestCase):
 		create_datapacket(file_name)
 
 		doc: DataPacket = frappe.get_doc("Data Packet", file_name)
-		frappe.db.set_value(
-			"Data Packet", file_name, "creation", frappe.utils.nowdate(), update_modified=False
-		)
+		frappe.db.set_value("Data Packet", file_name, "creation", frappe.utils.nowdate(), update_modified=False)
 		frappe.db.commit()  # nosemgrep
 		extraction_dir = doc.get_extraction_dir()
 		file_url = doc.get_file_url()

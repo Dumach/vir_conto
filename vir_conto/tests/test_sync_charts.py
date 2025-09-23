@@ -404,9 +404,7 @@ class TestSyncDefaultCharts(unittest.TestCase):
 		workbook_names = [str(wb.name) for wb in workbooks]
 
 		for qwb_name in query_workbook_names:
-			self.assertIn(
-				qwb_name, workbook_names, f"Query workbook {qwb_name} should match an existing workbook"
-			)
+			self.assertIn(qwb_name, workbook_names, f"Query workbook {qwb_name} should match an existing workbook")
 
 		# Verify charts were created and linked correctly
 		charts = frappe.get_all(
@@ -420,9 +418,7 @@ class TestSyncDefaultCharts(unittest.TestCase):
 		# Verify chart workbook linkage
 		chart_workbook_names = [c.workbook for c in charts]
 		for cwb_name in chart_workbook_names:
-			self.assertIn(
-				cwb_name, workbook_names, f"Chart workbook {cwb_name} should match an existing workbook"
-			)
+			self.assertIn(cwb_name, workbook_names, f"Chart workbook {cwb_name} should match an existing workbook")
 
 		# Verify dashboards were created and linked correctly
 		dashboards = frappe.get_all(
@@ -436,9 +432,7 @@ class TestSyncDefaultCharts(unittest.TestCase):
 		# Verify dashboard workbook linkage
 		dashboard_workbook_names = [d.workbook for d in dashboards]
 		for dwb_name in dashboard_workbook_names:
-			self.assertIn(
-				dwb_name, workbook_names, f"Dashboard workbook {dwb_name} should match an existing workbook"
-			)
+			self.assertIn(dwb_name, workbook_names, f"Dashboard workbook {dwb_name} should match an existing workbook")
 
 		# Verify workbook ID mapping worked correctly
 		# The test JSON files use workbook ID 9998, which should be mapped to actual workbook names
@@ -447,7 +441,5 @@ class TestSyncDefaultCharts(unittest.TestCase):
 
 		# All linked items should have valid workbook references (not the original ID 9998)
 		for item in test_linked_items:
-			self.assertNotEqual(
-				item.workbook, 9998, f"Item {item.name} should not reference original workbook ID 9998"
-			)
+			self.assertNotEqual(item.workbook, 9998, f"Item {item.name} should not reference original workbook ID 9998")
 			self.assertIsNotNone(item.workbook, f"Item {item.name} should have a valid workbook reference")

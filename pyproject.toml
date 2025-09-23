@@ -11,6 +11,7 @@ dependencies = [
     "dbf>=0.99.10",
     # "frappe~=15.0.0" # Installed and managed by bench.
     "dotenv>=0.9.9",
+    "click>=8.2.1",
 ]
 
 [build-system]
@@ -22,8 +23,8 @@ build-backend = "flit_core.buildapi"
 # package_name = "~=1.1.0"
 
 [tool.ruff]
-line-length = 110
-target-version = "py310"
+line-length = 120
+target-version = "py312"
 
 [tool.ruff.lint]
 select = [
@@ -55,3 +56,6 @@ typing-modules = ["frappe.types.DF"]
 quote-style = "double"
 indent-style = "tab"
 docstring-code-format = true
+
+[tool.basedpyright]
+extraPaths = ["../frappe", "../insights"]
