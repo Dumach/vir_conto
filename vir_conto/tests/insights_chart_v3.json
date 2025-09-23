@@ -1,0 +1,16 @@
+[
+  {
+    "doctype": "Insights Chart v3",
+    "name": "test-chart-1",
+    "title": "_Test Chart 1",
+    "workbook": 9998,
+    "chart_type": "Bar"
+  },
+  {
+    "doctype": "Insights Chart v3",
+    "name": "test-chart-2",
+    "title": "_Test Chart 2",
+    "workbook": 9998,
+    "chart_type": "Line"
+  }
+]

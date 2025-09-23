@@ -6,9 +6,6 @@ import frappe
 import frappe.hooks
 from frappe.model.document import Document
 from frappe.modules.import_file import read_doc_from_file
-from insights.insights.doctype.insights_chart_v3.insights_chart_v3 import InsightsChartv3
-from insights.insights.doctype.insights_dashboard_v3.insights_dashboard_v3 import InsightsDashboardv3
-from insights.insights.doctype.insights_query_v3.insights_query_v3 import InsightsQueryv3
 
 from vir_conto.overrides.insights_workbook import CustomInsightsWorkbook
 
@@ -62,7 +59,7 @@ def load_documents_from_json(path: str, dt: str, logger: Logger) -> list[Documen
 		return None
 
 
-def sync_default_charts() -> None:
+def sync_default_charts(base_path="") -> None:
 	"""Synchronizes default Insights items with the database.
 
 	This function uses JSON files from the 'charts' directory to perform the following:
@@ -80,8 +77,11 @@ def sync_default_charts() -> None:
 	logger.setLevel("INFO")
 
 	try:
+		if base_path == "":
+			base_path = os.path.join(frappe.get_app_path("vir_conto"), "charts")
+
 		# Step 1: Load workbooks from `charts/insights_workbook.json`
-		path = os.path.join(frappe.get_app_path("vir_conto"), "charts", "insights_workbook.json")
+		path = os.path.join(base_path, "insights_workbook.json")
 		import_workbooks: list[CustomInsightsWorkbook] = load_documents_from_json(
 			path, "Insights Workbook", logger
 		)
@@ -109,7 +109,6 @@ def sync_default_charts() -> None:
 		_clean_existing_records(default_wb, logger)
 
 		# Step 6: Import queries, charts, dashboards for each workbook
-		base_path = os.path.join(frappe.get_app_path("vir_conto"), "charts")
 		_import_charts(workbook_lookup, base_path, doctypes_to_clean, logger)
 
 	except Exception as e:

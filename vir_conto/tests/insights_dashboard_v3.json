@@ -1,0 +1,20 @@
+[
+  {
+    "docstatus": 0,
+    "doctype": "Insights Dashboard v3",
+    "name": "test-dashboard-1",
+    "title": "_Test Dashboard 1",
+    "workbook": 9998,
+    "is_public": 0,
+    "is_shared_with_organization": false,
+    "items": "[\n {\n  \"chart\": \"test-chart-1\",\n  \"layout\": {\n   \"h\": 3,\n   \"i\": \"8wtwr6v3\",\n   \"moved\": false,\n   \"w\": 8,\n   \"x\": 0,\n   \"y\": 0\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"2t4r84ssfc\",\n  \"layout\": {\n   \"h\": 10,\n   \"i\": \"jvuerci9\",\n   \"moved\": false,\n   \"w\": 14,\n   \"x\": 0,\n   \"y\": 3\n  },\n  \"type\": \"chart\"\n }\n]",
+    "linked_charts": [
+      {
+        "chart": "test-chart-1",
+        "parent": "test-dashboard-1",
+        "parentfield": "linked_charts",
+        "parenttype": "Insights Dashboard v3"
+      }
+    ]
+  }
+]

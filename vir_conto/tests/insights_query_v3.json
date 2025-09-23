@@ -1,0 +1,9 @@
+[
+  {
+    "doctype": "Insights Query v3",
+    "name": "test-query-1",
+    "title": "_Test Query 1",
+    "workbook": 9998,
+    "is_builder_query": 1
+  }
+]

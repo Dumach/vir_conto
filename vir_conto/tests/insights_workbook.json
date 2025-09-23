@@ -1,0 +1,22 @@
+[
+  {
+    "doctype": "Insights Workbook",
+    "name": 9998,
+    "title": "_Test Workbook 1",
+    "vir_id": "vir-test-workbook-1",
+    "is_default": 1,
+    "queries": "[]",
+    "charts": "[]",
+    "dashboards": "[]"
+  },
+  {
+    "doctype": "Insights Workbook",
+    "name": 9999,
+    "title": "_Test Workbook 2",
+    "vir_id": "vir-test-workbook-2",
+    "is_default": 1,
+    "queries": "[]",
+    "charts": "[]",
+    "dashboards": "[]"
+  }
+]
