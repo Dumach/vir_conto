@@ -27,29 +27,27 @@ def get_frappe_version() -> str:
 	return frappe.hooks.app_version
 
 
-def load_documents_from_json(file_name: str, doctype_name: str, logger: Logger) -> list[Document] | None:
+def load_documents_from_json(path: str, dt: str, logger: Logger) -> list[Document] | None:
 	"""
 	Load and validate documents from a JSON file in the charts directory.
 
 	Args:
-	        file_name: Name of the JSON file (with or without .json extension)
-	        doctype_name: Name of the doctype for logging purposes
+	        path: Absolute path of the JSON file (with or without .json extension)
+	        dt: Name of the doctype for logging purpose
 	        logger: Logger instance for error reporting
 
 	Returns:
 	        List of Frappe documents or None if loading failed
 	"""
 	try:
-		path = frappe.get_app_path("vir_conto", "charts", file_name)
-
 		if not os.path.exists(path):
-			logger.error(f"{doctype_name} file not found: {path}")
+			logger.error(f"{dt} file not found: {path}")
 			return None
 
 		docs = read_doc_from_file(path)
 
 		if not docs:
-			logger.warning(f"No {doctype_name} found in file: {path}")
+			logger.warning(f"No {dt} found in file: {path}")
 			return None
 
 		if not isinstance(docs, list):
@@ -60,7 +58,7 @@ def load_documents_from_json(file_name: str, doctype_name: str, logger: Logger) 
 		return frappe_docs
 
 	except Exception as e:
-		logger.exception(f"Unexpected error loading {doctype_name} from {file_name}: {e}")
+		logger.exception(f"Unexpected error loading {dt} from {path}: {e}")
 		return None
 
 
@@ -83,9 +81,10 @@ def sync_default_charts() -> None:
 
 	try:
 		# Step 1: Load workbooks from `charts/insights_workbook.json`
+		path = os.path.join(frappe.get_app_path("vir_conto"), "charts", "insights_workbook.json")
 		import_workbooks: list[CustomInsightsWorkbook] = load_documents_from_json(
-			"insights_workbook.json", "Insights Workbook", logger
-		)  # type: ignore
+			path, "Insights Workbook", logger
+		)
 		if not import_workbooks:
 			logger.error("No workbooks found to import, aborting synchronization.")
 			return
@@ -93,7 +92,7 @@ def sync_default_charts() -> None:
 		doctypes_to_clean = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
 
 		# Step 2: Remove unwanted workbooks
-		_remove_old_workbooks(import_workbooks, doctypes_to_clean, logger)
+		_remove_old_workbooks(import_workbooks, logger)
 
 		# Step 3: Create new workbooks if not exist already
 		_create_new_workbooks(import_workbooks, logger)
@@ -104,12 +103,14 @@ def sync_default_charts() -> None:
 			logger.error("Failed to create workbook lookup table, aborting synchronization.")
 			return
 
-		# Step 5: Clean existing default queries, charts, dashboards,
-		#  unwanted workbooks are already removed
-		_clean_existing_records([wb["new_id"] for wb in workbook_lookup.values()], doctypes_to_clean, logger)
+		# Step 5: Remove all queries, charts, dashboards from the workbooks that we keep
+		# in order to sync the content of the default workbooks
+		default_wb = [wb["new_id"] for wb in workbook_lookup.values()]
+		_clean_existing_records(default_wb, logger)
 
 		# Step 6: Import queries, charts, dashboards for each workbook
-		_import_charts(workbook_lookup, doctypes_to_clean, logger)
+		base_path = os.path.join(frappe.get_app_path("vir_conto"), "charts")
+		_import_charts(workbook_lookup, base_path, doctypes_to_clean, logger)
 
 	except Exception as e:
 		logger.exception(f"Failed to sync default charts: {e}")
@@ -118,9 +119,7 @@ def sync_default_charts() -> None:
 	frappe.db.commit()
 
 
-def _remove_old_workbooks(
-	import_workbooks: list[CustomInsightsWorkbook], doctypes_to_clean: list[str], logger: Logger
-) -> None:
+def _remove_old_workbooks(import_workbooks: list[CustomInsightsWorkbook], logger: Logger) -> None:
 	"""Remove default workbooks that are no longer in the import file."""
 	old_workbooks: list[CustomInsightsWorkbook] = frappe.db.get_all(
 		"Insights Workbook", fields=["name", "vir_id"], filters={"is_default": True}
@@ -130,8 +129,9 @@ def _remove_old_workbooks(
 	for owb in old_workbooks:
 		if owb.vir_id not in import_vir_ids:
 			try:
-				_clean_existing_records([str(owb.name)], doctypes_to_clean, logger)
+				# _clean_existing_records([str(owb.name)], logger)
 				frappe.get_doc("Insights Workbook", str(owb.name)).delete()
+
 				logger.info(f"Removed old workbook: {owb.name}")
 			except Exception as e:
 				logger.error(f"Failed to remove old workbook {owb.name}: {e}")
@@ -154,6 +154,7 @@ def _create_workbook_lookup(
 	import_workbooks: list[CustomInsightsWorkbook], logger: Logger
 ) -> dict[int, WorkbookInfo] | None:
 	"""Create a lookup table for workbook IDs."""
+
 	try:
 		new_workbooks: list[CustomInsightsWorkbook] = frappe.get_all(
 			"Insights Workbook", fields=["name", "title", "vir_id"], filters={"is_default": 1}
@@ -196,21 +197,26 @@ def _configure_workbook_access(workbook: CustomInsightsWorkbook, logger: Logger)
 		logger.error(f"Failed to configure access for workbook '{workbook.get('title', 'Unknown')}': {e}")
 
 
-def _clean_existing_records(workbooks: list[str], doctypes: list[str], logger: Logger) -> None:
+def _clean_existing_records(workbook_names: list[str], logger: Logger) -> None:
 	"""This ensures that removed default charts won't remain in client database."""
-	for dt in doctypes:
-		try:
-			frappe.db.delete(dt, filters={"workbook": ["in", workbooks]})
-		except Exception as e:
-			logger.error(f"Failed to clean existing records for {dt}: {e}")
+	try:
+		frappe.db.delete("Insights Query v3", filters={"workbook": ["in", workbook_names]})
+		frappe.db.delete("Insights Chart v3", filters={"workbook": ["in", workbook_names]})
+		frappe.db.delete("Insights Dashboard v3", filters={"workbook": ["in", workbook_names]})
+	except Exception as e:
+		logger.error(f"Failed to clean existing records\n{e}")
 
 
-def _import_charts(workbook_lookup: dict[int, WorkbookInfo], doctypes: list[str], logger: Logger) -> None:
-	for dt in doctypes:
-		docs = load_documents_from_json(frappe.scrub(dt) + ".json", dt, logger)
+def _import_charts(
+	workbook_lookup: dict[int, WorkbookInfo], base_path: str, doctypes: list[str], logger: Logger
+) -> None:
+	for doctype in doctypes:
+		dt = frappe.scrub(doctype)
+		path = os.path.join(base_path, dt + ".json")
+		docs = load_documents_from_json(path, doctype, logger)
 
 		if not docs:
-			logger.warning(f"No {dt} found, skipping")
+			logger.warning(f"No {doctype} found, skipping")
 			continue
 
 		for doc in docs:
@@ -218,13 +224,15 @@ def _import_charts(workbook_lookup: dict[int, WorkbookInfo], doctypes: list[str]
 				old_doc = doc
 				workbook_id = old_doc.workbook
 				lookup = workbook_lookup.get(int(workbook_id))
+
 				if not lookup:
 					logger.warning(
-						f"No workbook mapping found for workbook_id: {workbook_id} in {dt} {doc.name}"
+						f"No workbook mapping found for workbook_id: {workbook_id} in {doctype} {doc.name}"
 					)
 					continue
+
 				old_doc.workbook = lookup["new_id"]
 				old_doc.insert(ignore_links=True, set_name=old_doc.name)
 			except Exception as e:
-				logger.error(f"Failed to process {dt} document {doc.name}: {e}")
+				logger.error(f"Failed to process {doctype} document {doc.name}: {e}")
 				continue
