@@ -108,6 +108,31 @@ class TestSyncDefaultCharts(unittest.TestCase):
 		self.assertEqual(len(results), 2)
 		mock_logger.error.assert_not_called()
 
+	def test_load_documents_from_json_create_list(self):
+		"""Test loading from file with a single element."""
+		mock_logger = MagicMock()
+
+		mock_data = {
+			"doctype": "Insights Workbook",
+			"name": 9998,
+			"title": "_Test Workbook 1",
+			"vir_id": "vir-test-workbook-1",
+			"is_default": 1,
+			"queries": "[]",
+			"charts": "[]",
+			"dashboards": "[]",
+		}
+
+		with (
+			patch("os.path.exists", return_value=True),
+			patch("vir_conto.util.read_doc_from_file", return_value=mock_data),
+		):
+			result = load_documents_from_json("test_file.json", "Insights Workbook", mock_logger)
+
+			self.assertIsNotNone(result)
+			self.assertIsInstance(result, list)
+			self.assertGreaterEqual(len(result), 1)
+
 	def test_load_documents_from_json_not_found(self):
 		"""Test loading from non-existent file."""
 		mock_logger = MagicMock()
@@ -175,6 +200,32 @@ class TestSyncDefaultCharts(unittest.TestCase):
 
 			mock_doc.delete.assert_called_once()
 
+	def test_remove_old_workbooks_exception(self):
+		"""Test removal of old workbooks, with DB exception."""
+		mock_logger = MagicMock()
+		mock_doc = MagicMock()
+		import_workbooks = [CustomInsightsWorkbook(wb) for wb in self.sample_workbook_data]
+
+		# Mock existing workbook that should be removed
+		old_workbook_data = {
+			"doctype": "Insights Workbook",
+			"name": "2",
+			"title": "Old Workbook",
+			"vir_id": "vir-old-workbook",
+			"is_default": 1,
+			"queries": "[]",
+			"charts": "[]",
+			"dashboards": "[]",
+		}
+		old_workbooks = frappe.get_doc(old_workbook_data)
+
+		with patch("frappe.db.get_all", return_value=[old_workbooks]), patch("frappe.get_doc", return_value=mock_doc):
+			mock_doc.delete.side_effect = Exception("Delete failed")
+
+			_remove_old_workbooks(import_workbooks, mock_logger)
+
+			mock_logger.error.assert_called_once()
+
 	def test_create_new_workbooks(self):
 		"""Test creation of new workbooks."""
 		mock_logger = MagicMock()
@@ -200,6 +251,20 @@ class TestSyncDefaultCharts(unittest.TestCase):
 
 			# Should not create any workbooks
 			mock_get_doc.assert_not_called()
+
+	def test_create_new_workbooks_exception(self):
+		"""Test creation of new workbooks fails."""
+		mock_logger = MagicMock()
+		import_workbooks = [CustomInsightsWorkbook(wb) for wb in self.sample_workbook_data]
+
+		with patch("frappe.db.exists", return_value=False), patch("frappe.get_doc") as mock_get_doc:
+			mock_doc = MagicMock()
+			mock_get_doc.return_value = mock_doc
+			mock_doc.insert.side_effect = Exception("Database Insert Exception")
+
+			_create_new_workbooks(import_workbooks, mock_logger)
+
+			self.assertEqual(mock_logger.error.call_count, 2)
 
 	def test_create_workbook_lookup_success(self):
 		"""Test successful creation of workbook lookup table.

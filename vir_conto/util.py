@@ -117,8 +117,8 @@ def _remove_old_workbooks(import_workbooks: list[CustomInsightsWorkbook], logger
 		if owb.vir_id not in import_vir_ids:
 			try:
 				# _clean_existing_records([str(owb.name)], logger)
-				frappe.get_doc("Insights Workbook", str(owb.name)).delete()
-
+				doc = frappe.get_doc("Insights Workbook", str(owb.name))
+				doc.delete()
 				logger.info(f"Removed old workbook: {owb.name}")
 			except Exception as e:
 				logger.error(f"Failed to remove old workbook {owb.name}: {e}")
