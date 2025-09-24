@@ -8,7 +8,7 @@ from frappe.desk.page.setup_wizard.setup_wizard import setup_complete
 from frappe.utils.password import update_password
 
 from vir_conto.patches import add_workbook_custom_fields
-from vir_conto.util import get_frappe_version, sync_default_charts
+from vir_conto.util import sync_default_charts
 
 
 def load_environment():
@@ -81,7 +81,8 @@ def create_system_user() -> None:
 	new_user.time_zone = "Europe/Budapest"
 
 	# Version 16 handles Role Profiles differently
-	if int(get_frappe_version().split(".")[0]) <= 15:
+	frappe_version = frappe.hooks.app_version
+	if int(frappe_version.split(".")[0]) <= 15:
 		new_user.role_profile_name = "conto_system_role_profile"
 		new_user.module_profile = "conto_system_module_profile"
 	else:

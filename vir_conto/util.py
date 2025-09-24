@@ -3,7 +3,6 @@ from logging import Logger
 from typing import TypedDict
 
 import frappe
-import frappe.hooks
 from frappe.model.document import Document
 from frappe.modules.import_file import read_doc_from_file
 
@@ -13,15 +12,6 @@ from vir_conto.overrides.insights_workbook import CustomInsightsWorkbook
 class WorkbookInfo(TypedDict):
 	new_id: str
 	vir_id: str
-
-
-def get_frappe_version() -> str:
-	"""
-	Returns Frappe version from environment variable.
-
-	:return	str: Frappe version number in string.
-	"""
-	return frappe.hooks.app_version
 
 
 def load_documents_from_json(path: str, dt: str, logger: Logger) -> list[Document] | None:
