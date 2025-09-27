@@ -91,7 +91,7 @@ class TestDataPacket(unittest.TestCase):
 		}
 		self.assertEqual("106/2025.03.22", get_name(test_composite_row))
 
-	def test_import_data_packet(self):
+	def test_integration_import_data_packet(self):
 		# Create mock Data Packet
 		file_name = "TEST-0001"
 		create_datapacket(file_name)

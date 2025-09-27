@@ -29,7 +29,7 @@ class TestSyncDefaultCharts(unittest.TestCase):
 	def setUp(self):
 		"""Set up test data before each test."""
 		# Sample test workbook data
-		base_path = os.path.join(frappe.get_app_path("vir_conto"), "tests")
+		base_path = os.path.join(frappe.get_app_path("vir_conto"), "tests", "test_imports")
 
 		with open(os.path.join(base_path, "insights_workbook.json")) as file:
 			self.sample_workbook_data = json.load(file)  # pyright: ignore[reportUninitializedInstanceVariable]
@@ -45,8 +45,11 @@ class TestSyncDefaultCharts(unittest.TestCase):
 
 	def tearDown(self):
 		"""Clean up after each test."""
-		frappe.db.rollback()
-		# frappe.db.delete("Insights Workbook")
+		# restart workbook id sequence
+		frappe.db.delete("Insights Dashboard v3", {"title": ["like", "_Test%"]})
+		frappe.db.delete("Insights Chart v3", {"title": ["like", "_Test%"]})
+		frappe.db.delete("Insights Query v3", {"title": ["like", "_Test%"]})
+		frappe.db.delete("Insights Workbook", {"title": ["like", "_Test%"]})
 
 	def test_sync_default_charts_no_workbooks(self):
 		"""Test sync function when no workbooks are found."""
@@ -101,7 +104,7 @@ class TestSyncDefaultCharts(unittest.TestCase):
 		"""Test successful loading of documents from file."""
 		mock_logger = MagicMock()
 
-		path = os.path.join(frappe.get_app_path("vir_conto"), "tests", "insights_workbook.json")
+		path = os.path.join(frappe.get_app_path("vir_conto"), "tests", "test_imports", "insights_workbook.json")
 		results = load_documents_from_json(path=path, dt="Insights Workbook", logger=mock_logger)
 
 		self.assertIsNotNone(results)
@@ -439,7 +442,7 @@ class TestSyncDefaultCharts(unittest.TestCase):
 		frappe.db.commit()
 
 		# Mock the file paths to use test directory instead of charts directory
-		test_path = os.path.join(frappe.get_app_path("vir_conto"), "tests")
+		test_path = os.path.join(frappe.get_app_path("vir_conto"), "tests", "test_imports")
 
 		# Execute the sync function with real test files
 		sync_default_charts(base_path=test_path)
