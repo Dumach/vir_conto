@@ -132,21 +132,6 @@ def run_setup_wizard():
 		frappe.throw(frappe._("Frappe setup failed"))
 
 
-def import_df_workbooks() -> None:
-	from frappe.utils.fixtures import import_doc
-
-	# Inspiration from frappe.utils.fixtures.import_fixtures
-	default_doctypes = ["Insights Workbook"]
-	for dt in default_doctypes:
-		file_path = frappe.get_app_path("vir_conto", "charts", frappe.scrub(dt) + ".json")
-		try:
-			import_doc(file_path)
-
-		except (ImportError, frappe.DoesNotExistError) as e:
-			# fixture updating for missing doctypes
-			print(f"Skipping fixture updating from the file {file_path}. Reason: {e}")
-
-
 def create_insights_teams():
 	try:
 		team_tulaj = frappe.new_doc("Insights Team")
