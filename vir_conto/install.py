@@ -24,9 +24,6 @@ def load_environment():
 
 # will run after app is installed on site
 def after_install() -> None:
-	# TODO:
-	# - set system settings to hungarian
-
 	load_environment()
 	run_setup_wizard()
 
@@ -45,10 +42,10 @@ def after_sync() -> None:
 
 	# Set insights app like: teams, fiscal year, etc...
 	create_insights_teams()
-	# By default is januar 1
 	current_date = frappe.utils.getdate()
 	frappe.db.set_single_value("Insights Settings", "fiscal_year_start", f"{current_date.year}-01-01")
 	frappe.db.set_single_value("Insights Settings", "week_starts_on", "Monday")
+	frappe.db.set_value("Currency", "HUF", "enabled", True)
 
 
 def create_system_user() -> None:
