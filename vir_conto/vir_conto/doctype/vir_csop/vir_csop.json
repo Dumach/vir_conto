@@ -8,6 +8,7 @@
  "field_order": [
   "rkod",
   "datum",
+  "ev",
   "ho",
   "tipus",
   "csop",
@@ -21,31 +22,36 @@
    "in_list_view": 1,
    "label": "rkod",
    "options": "raktnev",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "datum",
    "fieldtype": "Date",
    "label": "datum",
    "length": 10,
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "ho",
-   "fieldtype": "Data",
-   "label": "ho"
+   "fieldtype": "Int",
+   "label": "ho",
+   "search_index": 1
   },
   {
    "fieldname": "tipus",
    "fieldtype": "Data",
    "label": "tipus",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "csop",
    "fieldtype": "Link",
    "label": "csop",
-   "options": "tfocsop"
+   "options": "tfocsop",
+   "search_index": 1
   },
   {
    "default": "0",
@@ -58,12 +64,18 @@
    "fieldname": "bert",
    "fieldtype": "Currency",
    "label": "bert"
+  },
+  {
+   "fieldname": "ev",
+   "fieldtype": "Int",
+   "label": "ev",
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-03 14:37:13.055484",
+ "modified": "2025-09-29 18:57:54.759240",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_csop",

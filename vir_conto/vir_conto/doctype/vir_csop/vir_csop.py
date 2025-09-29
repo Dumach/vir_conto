@@ -17,10 +17,12 @@ class vir_csop(Document):
 		bert: DF.Currency
 		csop: DF.Link | None
 		datum: DF.Date
-		ho: DF.Data | None
+		ev: DF.Int
+		ho: DF.Int
 		nert: DF.Currency
 		rkod: DF.Link
 		tipus: DF.Data
 	# end: auto-generated types
 
-	pass
+	def before_save(self):
+		self.ev = self.datum.year

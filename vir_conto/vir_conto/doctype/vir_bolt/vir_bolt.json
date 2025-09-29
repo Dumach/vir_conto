@@ -9,6 +9,7 @@
   "rkod",
   "rnev",
   "datum",
+  "ev",
   "ho",
   "keszlet",
   "nbesz_kp",
@@ -35,13 +36,15 @@
    "in_list_view": 1,
    "label": "rkod",
    "options": "raktnev",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "rnev",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "rnev"
+   "label": "rnev",
+   "search_index": 1
   },
   {
    "fieldname": "datum",
@@ -49,13 +52,15 @@
    "in_list_view": 1,
    "label": "datum",
    "length": 10,
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "ho",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "ho"
+   "label": "ho",
+   "search_index": 1
   },
   {
    "default": "0",
@@ -159,12 +164,18 @@
    "fieldname": "bselejt",
    "fieldtype": "Currency",
    "label": "bselejt"
+  },
+  {
+   "fieldname": "ev",
+   "fieldtype": "Data",
+   "label": "ev",
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-03 15:02:04.822030",
+ "modified": "2025-09-29 18:49:49.399039",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",

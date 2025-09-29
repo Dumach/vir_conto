@@ -28,7 +28,8 @@
    "fieldname": "f_nev",
    "fieldtype": "Data",
    "label": "f_nev",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "f_nev2",
@@ -39,7 +40,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-08-03 14:36:55.808078",
+ "modified": "2025-09-29 18:49:11.446211",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "torzs",

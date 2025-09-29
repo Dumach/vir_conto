@@ -22,9 +22,10 @@ class vir_bolt(Document):
 		bselejt: DF.Currency
 		bszallrend: DF.Currency
 		datum: DF.Date
+		ev: DF.Int | None
 		haszon: DF.Float
 		hkulcs: DF.Float
-		ho: DF.Data | None
+		ho: DF.Int | None
 		keszlet: DF.Currency
 		kosara: DF.Currency
 		nbesz_kp: DF.Currency
@@ -37,4 +38,5 @@ class vir_bolt(Document):
 		vevok: DF.Int
 	# end: auto-generated types
 
-	pass
+	def before_save(self):
+		self.ev = self.datum.year
