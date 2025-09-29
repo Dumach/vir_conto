@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
+from frappe.utils import cast
 
 
 class vir_csop(Document):
@@ -25,4 +26,8 @@ class vir_csop(Document):
 	# end: auto-generated types
 
 	def before_save(self):
-		self.ev = self.datum.year
+		self.set_year()
+
+	def set_year(self):
+		date = cast("Date", self.datum)
+		self.ev = date.year
