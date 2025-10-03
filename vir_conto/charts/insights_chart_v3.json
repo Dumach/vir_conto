@@ -6,13 +6,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-05 12:49:53.564495",
+  "modified": "2025-10-03 10:55:49.127602",
   "name": "h0rm71oa7e",
   "old_name": null,
   "query": "6lca2ju8nh",
   "read_only": false,
   "title": "Boltok forgalma havonta bázissal",
-  "workbook": "6"
+  "workbook": "20"
  },
  {
   "chart_type": "Number",
@@ -21,28 +21,28 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-08 10:28:08.177412",
+  "modified": "2025-10-03 10:55:49.133432",
   "name": "m6t4lrov1j",
   "old_name": null,
   "query": "oqnoqd63jo",
   "read_only": false,
   "title": "Forgalom",
-  "workbook": "6"
+  "workbook": "20"
  },
  {
   "chart_type": "Bar",
-  "config": "{\n \"filters\": {\n  \"filters\": [\n   {\n    \"column\": {\n     \"column_name\": \"tipus\",\n     \"type\": \"column\"\n    },\n    \"operator\": \"in\",\n    \"value\": [\n     \"ERT\"\n    ]\n   }\n  ],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"order_by\": [],\n \"split_by\": {\n  \"dimension\": {\n   \"column_name\": \"csoport_nev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"csoport_nev\",\n   \"label\": \"csoport_nev\",\n   \"value\": \"csoport_nev\"\n  },\n  \"max_split_values\": 10\n },\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"ev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"ev\",\n   \"label\": \"ev\",\n   \"value\": \"ev\"\n  }\n },\n \"y_axis\": {\n  \"normalize\": false,\n  \"overlap\": false,\n  \"series\": [\n   {\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert\"\n    }\n   }\n  ],\n  \"show_axis_label\": false,\n  \"show_data_labels\": true,\n  \"show_scrollbar\": false,\n  \"stack\": true\n }\n}",
+  "config": "{\n \"filters\": {\n  \"filters\": [\n   {\n    \"column\": {\n     \"column_name\": \"tipus\",\n     \"type\": \"column\"\n    },\n    \"operator\": \"in\",\n    \"value\": [\n     \"ERT\"\n    ]\n   }\n  ],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"order_by\": [],\n \"split_by\": {\n  \"dimension\": {\n   \"column_name\": \"csoport_nev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"csoport_nev\",\n   \"label\": \"csoport_nev\",\n   \"value\": \"csoport_nev\"\n  },\n  \"max_split_values\": 10\n },\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"datum\",\n   \"data_type\": \"Date\",\n   \"dimension_name\": \"datum\",\n   \"granularity\": \"year\",\n   \"label\": \"datum\",\n   \"value\": \"datum\"\n  }\n },\n \"y_axis\": {\n  \"normalize\": false,\n  \"overlap\": false,\n  \"series\": [\n   {\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert\"\n    },\n    \"show_data_labels\": true\n   }\n  ],\n  \"show_axis_label\": false,\n  \"show_data_labels\": true,\n  \"show_scrollbar\": false,\n  \"stack\": true\n }\n}",
   "data_query": "ihd1d0n16f",
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-08 11:11:02.653767",
+  "modified": "2025-10-03 11:17:41.486261",
   "name": "ihdq4bu86o",
   "old_name": null,
   "query": "cu982kim7b",
   "read_only": false,
   "title": "Forgalom termékcsoportonként éves szinten",
-  "workbook": "6"
+  "workbook": "20"
  },
  {
   "chart_type": "Bar",
@@ -51,13 +51,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-13 09:14:25.174246",
+  "modified": "2025-10-03 10:55:49.141336",
   "name": "a5fdp2r2o4",
   "old_name": null,
   "query": "oqnoqd63jo",
   "read_only": false,
   "title": "Haszon napi bontásban",
-  "workbook": "6"
+  "workbook": "20"
  },
  {
   "chart_type": "Bar",
@@ -66,13 +66,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-08 11:22:41.217806",
+  "modified": "2025-10-03 10:55:49.145024",
   "name": "0sj7rttig8",
   "old_name": null,
   "query": "oqnoqd63jo",
   "read_only": false,
   "title": "Beszerzés éves szinten",
-  "workbook": "6"
+  "workbook": "20"
  },
  {
   "chart_type": "Bar",
@@ -81,13 +81,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-08 11:25:46.612067",
+  "modified": "2025-10-03 10:55:49.148978",
   "name": "40qouvc4e4",
   "old_name": null,
   "query": "oqnoqd63jo",
   "read_only": false,
   "title": "Beszerzés havi szinten",
-  "workbook": "6"
+  "workbook": "20"
  },
  {
   "chart_type": "Table",
@@ -96,13 +96,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-09-04 13:59:16.507264",
+  "modified": "2025-10-03 10:55:49.153142",
   "name": "96d0t6hpk7",
   "old_name": null,
   "query": "6v6acq7fu8",
   "read_only": false,
   "title": "_Haszon Kimutatás",
-  "workbook": "4"
+  "workbook": "18"
  },
  {
   "chart_type": "Bar",
@@ -111,13 +111,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-09-04 13:59:16.510395",
+  "modified": "2025-10-03 10:55:49.157084",
   "name": "a338jq8f0b",
   "old_name": null,
   "query": "6v6acq7fu8",
   "read_only": false,
   "title": "_Haszon Diagram",
-  "workbook": "4"
+  "workbook": "18"
  },
  {
   "chart_type": "Table",
@@ -126,13 +126,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-09-04 13:59:16.512433",
+  "modified": "2025-10-03 10:55:49.161179",
   "name": "b7u7v4kjrk",
   "old_name": null,
   "query": "6v6acq7fu8",
   "read_only": false,
   "title": "_Vevők Száma Kimutatás",
-  "workbook": "4"
+  "workbook": "18"
  },
  {
   "chart_type": "Bar",
@@ -141,13 +141,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-09-04 13:59:16.514454",
+  "modified": "2025-10-03 10:55:49.164982",
   "name": "bvd9cvftqi",
   "old_name": null,
   "query": "6v6acq7fu8",
   "read_only": false,
   "title": "_Vevők Száma Diagram",
-  "workbook": "4"
+  "workbook": "18"
  },
  {
   "chart_type": "Table",
@@ -156,13 +156,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-09-04 13:59:16.516581",
+  "modified": "2025-10-03 10:55:49.168496",
   "name": "d4a0gi22vm",
   "old_name": null,
   "query": "e199lomf7t",
   "read_only": false,
   "title": "_Készletérték Kimutatás",
-  "workbook": "4"
+  "workbook": "18"
  },
  {
   "chart_type": "Table",
@@ -171,13 +171,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-09-04 13:59:16.518694",
+  "modified": "2025-10-03 10:55:49.172064",
   "name": "l0im5njjll",
   "old_name": null,
   "query": "e199lomf7t",
   "read_only": false,
   "title": "_Készletérték Átlag Kimutatás",
-  "workbook": "4"
+  "workbook": "18"
  },
  {
   "chart_type": "Row",
@@ -186,88 +186,13 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-09-04 13:59:16.520637",
+  "modified": "2025-10-03 10:55:49.175527",
   "name": "p55s2d3jc8",
   "old_name": null,
   "query": "n30oaj7dgh",
   "read_only": false,
   "title": "_Értékesítés Főcsoport Nettó",
-  "workbook": "4"
- },
- {
-  "chart_type": "Line",
-  "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"order_by\": [],\n \"split_by\": {\n  \"dimension\": {\n   \"column_name\": \"rkod\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rkod\",\n   \"label\": \"rkod\",\n   \"value\": \"rkod\"\n  },\n  \"max_split_values\": \"5\"\n },\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"datum\",\n   \"data_type\": \"Date\",\n   \"dimension_name\": \"datum\",\n   \"granularity\": \"week\",\n   \"label\": \"datum\",\n   \"value\": \"datum\"\n  }\n },\n \"y_axis\": {\n  \"axis_label\": \"\\u00c9rt\\u00e9kes\\u00edt\\u00e9s\",\n  \"max\": \"\",\n  \"min\": \"\",\n  \"series\": [\n   {\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert_ossz\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert_ossz\"\n    }\n   }\n  ],\n  \"show_area\": true,\n  \"show_axis_label\": false,\n  \"show_data_labels\": true,\n  \"show_data_points\": true,\n  \"smooth\": true,\n  \"stack\": true\n }\n}",
-  "data_query": "2t4e7h2h41",
-  "docstatus": 0,
-  "doctype": "Insights Chart v3",
-  "is_public": 0,
-  "modified": "2025-09-04 13:59:16.522571",
-  "name": "2t4r84ssfc",
-  "old_name": null,
-  "query": "e199lomf7t",
-  "read_only": false,
-  "title": "Chart 9",
-  "workbook": "4"
- },
- {
-  "chart_type": "Number",
-  "config": "{\n \"date_column\": {},\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"number_column_options\": [],\n \"number_columns\": [\n  {\n   \"aggregation\": \"count\",\n   \"column_name\": \"name\",\n   \"data_type\": \"String\",\n   \"measure_name\": \"Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development. Its purpose is to permit a page layout to be designed\"\n  }\n ],\n \"order_by\": []\n}",
-  "data_query": "8m10p5rq36",
-  "docstatus": 0,
-  "doctype": "Insights Chart v3",
-  "is_public": 0,
-  "modified": "2025-09-04 13:59:16.524426",
-  "name": "8m1rvla5qd",
-  "old_name": null,
-  "query": "e199lomf7t",
-  "read_only": false,
-  "title": "This is a really long number chart",
-  "workbook": "4"
- },
- {
-  "chart_type": "Number",
-  "config": "{\n \"date_column\": {},\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"number_column_options\": [],\n \"number_columns\": [\n  {\n   \"aggregation\": \"count\",\n   \"column_name\": \"name\",\n   \"data_type\": \"String\",\n   \"measure_name\": \"count_of_name\"\n  }\n ],\n \"order_by\": []\n}",
-  "data_query": "j0qtr13k88",
-  "docstatus": 0,
-  "doctype": "Insights Chart v3",
-  "is_public": 0,
-  "modified": "2025-09-04 13:59:16.526439",
-  "name": "j0q2n0glst",
-  "old_name": null,
-  "query": "h7fsijb352",
-  "read_only": false,
-  "title": "_Adatcsomagok Száma",
-  "workbook": "8"
- },
- {
-  "chart_type": "Table",
-  "config": "{\n \"columns\": [\n  {\n   \"column_name\": \"rnev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rnev\",\n   \"label\": \"rnev\",\n   \"value\": \"rnev\"\n  }\n ],\n \"enable_color_scale\": true,\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"order_by\": [\n  {\n   \"column\": {\n    \"column_name\": \"datum\",\n    \"type\": \"column\"\n   },\n   \"direction\": \"desc\"\n  }\n ],\n \"rows\": [\n  {\n   \"column_name\": \"datum\",\n   \"data_type\": \"Date\",\n   \"dimension_name\": \"datum\",\n   \"granularity\": \"month\",\n   \"label\": \"datum\",\n   \"value\": \"datum\"\n  }\n ],\n \"show_column_totals\": true,\n \"show_filter_row\": true,\n \"show_row_totals\": true,\n \"values\": [\n  {\n   \"aggregation\": \"sum\",\n   \"column_name\": \"nert_ossz\",\n   \"data_type\": \"Decimal\",\n   \"measure_name\": \"sum_of_nert_ossz\"\n  }\n ]\n}",
-  "data_query": "hvvpf28hgf",
-  "docstatus": 0,
-  "doctype": "Insights Chart v3",
-  "is_public": 0,
-  "modified": "2025-08-08 15:37:42.606129",
-  "name": "hvvntnv469",
-  "old_name": null,
-  "query": "oqnoqd63jo",
-  "read_only": false,
-  "title": "Boltok forgalma havonta",
-  "workbook": "6"
- },
- {
-  "chart_type": "Bar",
-  "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"order_by\": [],\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"rnev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rnev\",\n   \"label\": \"rnev\",\n   \"value\": \"rnev\"\n  }\n },\n \"y_axis\": {\n  \"series\": [\n   {\n    \"color\": [\n     \"#e0bfbf\"\n    ],\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert_ossz_bazis\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert_ossz_bazis\"\n    }\n   },\n   {\n    \"color\": [],\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert_ossz\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert_ossz\"\n    }\n   }\n  ],\n  \"show_data_labels\": true,\n  \"stack\": false\n }\n}",
-  "data_query": "dv95ri6rtg",
-  "docstatus": 0,
-  "doctype": "Insights Chart v3",
-  "is_public": 0,
-  "modified": "2025-08-13 09:18:19.703958",
-  "name": "dv9t1c79dv",
-  "old_name": null,
-  "query": "vqvclp2vkn",
-  "read_only": false,
-  "title": "Éves forgalom mai napig",
-  "workbook": "6"
+  "workbook": "18"
  },
  {
   "chart_type": "Bar",
@@ -276,12 +201,42 @@
   "docstatus": 0,
   "doctype": "Insights Chart v3",
   "is_public": 0,
-  "modified": "2025-08-07 11:16:20.588215",
+  "modified": "2025-10-03 10:55:49.196789",
   "name": "1qjp2edlnv",
   "old_name": null,
   "query": "6lca2ju8nh",
   "read_only": false,
   "title": "Boltok forgalma az elmúlt X napban",
-  "workbook": "6"
+  "workbook": "20"
+ },
+ {
+  "chart_type": "Table",
+  "config": "{\n \"columns\": [\n  {\n   \"column_name\": \"rnev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rnev\",\n   \"label\": \"rnev\",\n   \"value\": \"rnev\"\n  }\n ],\n \"enable_color_scale\": true,\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"order_by\": [\n  {\n   \"column\": {\n    \"column_name\": \"datum\",\n    \"type\": \"column\"\n   },\n   \"direction\": \"desc\"\n  }\n ],\n \"rows\": [\n  {\n   \"column_name\": \"datum\",\n   \"data_type\": \"Date\",\n   \"dimension_name\": \"datum\",\n   \"granularity\": \"month\",\n   \"label\": \"datum\",\n   \"value\": \"datum\"\n  }\n ],\n \"show_column_totals\": true,\n \"show_filter_row\": true,\n \"show_row_totals\": true,\n \"values\": [\n  {\n   \"aggregation\": \"sum\",\n   \"column_name\": \"nert_ossz\",\n   \"data_type\": \"Decimal\",\n   \"measure_name\": \"sum_of_nert_ossz\"\n  }\n ]\n}",
+  "data_query": "hvvpf28hgf",
+  "docstatus": 0,
+  "doctype": "Insights Chart v3",
+  "is_public": 0,
+  "modified": "2025-10-03 10:55:49.189661",
+  "name": "hvvntnv469",
+  "old_name": null,
+  "query": "oqnoqd63jo",
+  "read_only": false,
+  "title": "Boltok forgalma havonta",
+  "workbook": "20"
+ },
+ {
+  "chart_type": "Bar",
+  "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": 100,\n \"order_by\": [],\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"rnev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rnev\",\n   \"label\": \"rnev\",\n   \"value\": \"rnev\"\n  }\n },\n \"y_axis\": {\n  \"series\": [\n   {\n    \"color\": [\n     \"#e0bfbf\"\n    ],\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert_ossz_bazis\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert_ossz_bazis\"\n    }\n   },\n   {\n    \"color\": [],\n    \"measure\": {\n     \"aggregation\": \"sum\",\n     \"column_name\": \"nert_ossz\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"sum_of_nert_ossz\"\n    }\n   }\n  ],\n  \"show_data_labels\": true,\n  \"stack\": false\n }\n}",
+  "data_query": "dv95ri6rtg",
+  "docstatus": 0,
+  "doctype": "Insights Chart v3",
+  "is_public": 0,
+  "modified": "2025-10-03 10:55:49.193192",
+  "name": "dv9t1c79dv",
+  "old_name": null,
+  "query": "vqvclp2vkn",
+  "read_only": false,
+  "title": "Éves forgalom mai napig",
+  "workbook": "20"
  }
 ]
