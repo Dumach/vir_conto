@@ -35,7 +35,7 @@ class vir_bolt(Document):
 		nert_ossz: DF.Currency
 		nszallrend: DF.Currency
 		rkod: DF.Link
-		rnev: DF.Data | None
+		rnev: DF.Data
 		vevok: DF.Int
 	# end: auto-generated types
 

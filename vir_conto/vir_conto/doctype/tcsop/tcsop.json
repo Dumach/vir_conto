@@ -18,6 +18,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "nev",
+   "length": 100,
    "search_index": 1
   },
   {
@@ -31,20 +32,24 @@
    "fieldname": "tarhely",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "tarhely"
+   "label": "tarhely",
+   "length": 6
   },
   {
    "fieldname": "focsop",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "focsop",
-   "options": "tfocsop"
+   "length": 20,
+   "options": "tfocsop",
+   "search_index": 1
   },
   {
    "fieldname": "kod",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "kod",
+   "length": 20,
    "reqd": 1,
    "unique": 1
   }
@@ -52,7 +57,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-29 18:48:43.810818",
+ "modified": "2025-10-03 18:21:51.181624",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "tcsop",

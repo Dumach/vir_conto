@@ -35,6 +35,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "rkod",
+   "length": 20,
    "options": "raktnev",
    "reqd": 1,
    "search_index": 1
@@ -44,6 +45,8 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "rnev",
+   "length": 30,
+   "reqd": 1,
    "search_index": 1
   },
   {
@@ -175,7 +178,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-03 11:11:59.631266",
+ "modified": "2025-10-03 18:20:47.129769",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",

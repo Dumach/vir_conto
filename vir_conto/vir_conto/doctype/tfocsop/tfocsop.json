@@ -15,6 +15,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "kod",
+   "length": 20,
    "reqd": 1,
    "unique": 1
   },
@@ -23,12 +24,13 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "nev",
+   "length": 100,
    "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "links": [],
- "modified": "2025-09-29 18:48:52.715688",
+ "modified": "2025-10-03 18:22:06.331681",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "tfocsop",

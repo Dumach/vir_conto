@@ -21,6 +21,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "rkod",
+   "length": 20,
    "options": "raktnev",
    "reqd": 1,
    "search_index": 1
@@ -43,6 +44,7 @@
    "fieldname": "tipus",
    "fieldtype": "Data",
    "label": "tipus",
+   "length": 20,
    "reqd": 1,
    "search_index": 1
   },
@@ -50,6 +52,7 @@
    "fieldname": "csop",
    "fieldtype": "Link",
    "label": "csop",
+   "length": 10,
    "options": "tfocsop",
    "search_index": 1
   },
@@ -75,7 +78,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-29 18:57:54.759240",
+ "modified": "2025-10-03 18:21:13.802849",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_csop",

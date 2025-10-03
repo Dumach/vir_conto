@@ -21,6 +21,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "f_kod",
+   "length": 8,
    "reqd": 1,
    "unique": 1
   },
@@ -28,19 +29,21 @@
    "fieldname": "f_nev",
    "fieldtype": "Data",
    "label": "f_nev",
+   "length": 70,
    "reqd": 1,
    "search_index": 1
   },
   {
    "fieldname": "f_nev2",
    "fieldtype": "Data",
-   "label": "f_nev2"
+   "label": "f_nev2",
+   "length": 70
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-29 18:49:11.446211",
+ "modified": "2025-10-03 18:16:32.993004",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "torzs",
