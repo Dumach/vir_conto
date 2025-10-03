@@ -23,10 +23,10 @@ class vir_bolt(Document):
 		bselejt: DF.Currency
 		bszallrend: DF.Currency
 		datum: DF.Date
-		ev: DF.Int | None
+		ev: DF.Int
 		haszon: DF.Float
 		hkulcs: DF.Float
-		ho: DF.Int | None
+		ho: DF.Int
 		keszlet: DF.Currency
 		kosara: DF.Currency
 		nbesz_kp: DF.Currency

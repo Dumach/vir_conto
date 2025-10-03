@@ -57,7 +57,7 @@
   },
   {
    "fieldname": "ho",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "in_list_view": 1,
    "label": "ho",
    "search_index": 1
@@ -167,7 +167,7 @@
   },
   {
    "fieldname": "ev",
-   "fieldtype": "Data",
+   "fieldtype": "Int",
    "label": "ev",
    "search_index": 1
   }
@@ -175,7 +175,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-09-29 18:49:49.399039",
+ "modified": "2025-10-03 11:11:59.631266",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",
