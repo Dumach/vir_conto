@@ -53,11 +53,6 @@ def export_default_charts(base_path: str) -> int:
 	if len(default_workbooks) < 1:
 		return 0
 
-	# Generate vir_id and set is_default for workbooks that don't have them
-	for wb in default_workbooks:
-		workbook: CustomInsightsWorkbook = frappe.get_doc("Insights Workbook", wb)
-		workbook.generate_vir_id()
-
 	default_workbooks = [wb["name"] for wb in default_workbooks]
 
 	fixtures = [

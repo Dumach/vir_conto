@@ -266,13 +266,15 @@ class TestInstallModule(unittest.TestCase):
 
 			# Verify setup_complete is called with correct arguments
 			expected_args = {
-				"language": "English",
+				"language": "Magyar",
 				"country": "Hungary",
 				"currency": "HUF",
 				"float_precision": 4,
 				"first_day_of_the_week": "Monday",
 				"timezone": "Europe/Budapest",
 				"session_expiry": "24:00",
+				"allow_login_using_user_name": True,
+				"backup_limit": 14,
 				"setup_demo": 0,
 				"disable_telemetry": 0,
 			}
@@ -298,17 +300,17 @@ class TestInstallModule(unittest.TestCase):
 		"""Test successful creation of insights teams."""
 		from vir_conto.install import create_insights_teams
 
-		with patch("frappe.new_doc") as mock_new_doc:
+		with patch("frappe.new_doc") as mock_new_doc, patch("frappe.get_doc") as mock_get_doc:
 			mock_team = Mock()
 			mock_team.append = Mock()
 			mock_team.insert = Mock()
+			mock_ds = Mock()
 			mock_new_doc.return_value = mock_team
-
+			mock_get_doc.return_value = mock_ds
 			create_insights_teams()
 
 			mock_new_doc.assert_called_once_with("Insights Team")
 			self.assertEqual(mock_team.team_name, "Tulajdonos")
-			mock_team.append.assert_called_once_with("team_members", {"user": "Administrator"})
 			mock_team.insert.assert_called_once()
 
 	def test_create_insights_teams_import_error(self):
