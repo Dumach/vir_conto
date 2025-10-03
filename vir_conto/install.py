@@ -45,6 +45,7 @@ def after_sync() -> None:
 	current_date = frappe.utils.getdate()
 	frappe.db.set_single_value("Insights Settings", "fiscal_year_start", f"{current_date.year}-01-01")
 	frappe.db.set_single_value("Insights Settings", "week_starts_on", "Monday")
+	frappe.db.set_single_value("Insights Settings", "enable_permissions", True)
 	frappe.db.set_value("Currency", "HUF", "enabled", True)
 
 
@@ -109,7 +110,7 @@ def run_setup_wizard():
 		return
 
 	args = {
-		"language": "English",
+		"language": "Magyar",
 		"country": "Hungary",
 		"currency": "HUF",
 		"float_precision": 4,
@@ -119,6 +120,8 @@ def run_setup_wizard():
 		# "email": "admin@example.com",
 		# "password": os.environ.get("ADMIN_PASSWORD"),
 		"session_expiry": "24:00",
+		"allow_login_using_user_name": True,
+		"backup_limit": 14,
 		"setup_demo": 0,
 		"disable_telemetry": 0,
 	}
@@ -137,6 +140,20 @@ def create_insights_teams():
 		team_tulaj = frappe.new_doc("Insights Team")
 		team_tulaj.team_name = "Tulajdonos"
 		team_tulaj.append("team_members", {"user": "Administrator"})
+
+		# add Vir Conto module to Insights Table v3
+		ds = frappe.get_doc("Insights Data Source v3", "Site DB")
+		ds.update_table_list()
+
+		# add Doctypes to permission
+		doctypes = frappe.db.get_list("Primary Key", pluck="name")
+		doctypes = ["tab" + dt for dt in doctypes]
+		resource_names = frappe.db.get_list(
+			"Insights Table v3", filters={"data_source": "Site DB", "label": ["in", doctypes]}
+		)
+
+		for name in resource_names:
+			team_tulaj.append("team_permissions", {"resource_type": "Insights Table v3", "resource_name": name})
 
 		team_tulaj.insert()
 	except ImportError as error:
