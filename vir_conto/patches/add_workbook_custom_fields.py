@@ -42,7 +42,17 @@ def execute():
 	workbooks = frappe.db.get_list("Insights Workbook")
 	for wb in workbooks:
 		workbook: CustomInsightsWorkbook = frappe.get_doc("Insights Workbook", wb)
-		workbook.generate_vir_id()
-	frappe.db.commit()
 
+		# Generate `vir_id` and set `is_default`
+		# for default workbooks in migration
+		if not workbook.title.startswith("_"):
+			continue
+
+		# Generate vir_id if not already set
+		clean_title = workbook.title.lstrip("_").lower().replace(" ", "_")
+		workbook.vir_id = f"vir-{clean_title}"
+		workbook.is_default = 1
+		workbook.save()
+
+	frappe.db.commit()
 	print("Successfully added 'is_default' and 'vir_id' custom fields to Insights Workbook")
