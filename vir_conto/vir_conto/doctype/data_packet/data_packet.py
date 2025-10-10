@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import os
+import shutil
 import zipfile
 
 import dbf
@@ -86,15 +87,15 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 
 	try:
 		table = dbf.Table(dbf_file, codepage=encoding, on_disk=True)
-		field_names = table.field_names
 		table.open()
 
+		field_names = table.field_names
+		field_infos = {field_name: table.field_info(field_name) for field_name in field_names}
 		for record in table:
 			row = {}
 			for field_name in field_names:
-				field_info = table.field_info(field_name)
-				if field_info.py_type is str:
-					# Strings are not trimmed by default
+				# Trim strings
+				if field_infos[field_name].py_type is str:
 					value = str(record[field_name]).strip()
 				else:
 					value = record[field_name]
@@ -108,6 +109,8 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 
 	except dbf.exceptions.DbfError as e:
 		logger.exception(e.message)
+	except Exception as e:
+		logger.exception(str(e))
 
 
 def remove_from_db(row):
@@ -205,7 +208,6 @@ def clear_old_packets() -> None:
 
 	In order to prevent exploding database sizes.
 	"""
-	import shutil
 
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 	logger.setLevel("INFO")
@@ -235,5 +237,4 @@ def clear_old_packets() -> None:
 		after_delete = frappe.db.count("Data Packet")
 		logger.info(f"Removed {before_delete - after_delete} old packet(s)")
 	except Exception as e:
-		logger.error(e)
-	frappe.db.commit()
+		logger.exception(e)

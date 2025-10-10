@@ -5,6 +5,7 @@ import os.path
 import shutil
 import unittest
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 import frappe
 import frappe.utils
@@ -14,6 +15,9 @@ from vir_conto.vir_conto.doctype.data_packet.data_packet import (
 	clear_old_packets,
 	get_name,
 	import_new_packets,
+	insert_into_db,
+	process_dbf,
+	remove_from_db,
 )
 
 
@@ -48,17 +52,50 @@ def copy_datapacket(data_packet: DataPacket, file_name: str) -> bool:
 
 
 class TestDataPacket(unittest.TestCase):
-	def test_datapacket_return_correct_paths(self):
-		# Create mock Data Packet
-		file_name = "TEST-0001"
-		create_datapacket(file_name)
+	"""Test suite for Data Packet doctype."""
 
+	@classmethod
+	def setUpClass(cls):
+		"""Set up test class with required test records."""
+		frappe.set_user("Administrator")
+
+	def setUp(self) -> None:
+		"""Set up before each test"""
+		self.dbf_table_mock = MagicMock()
+		self.dbf_table_mock.field_names = ["id", "name"]
+		self.dbf_table_mock.__iter__.return_value = [
+			{"id": 1, "name": "Alice "},
+			{"id": 2, "name": " Bob"},
+		]
+		self.dbf_table_mock.field_info.side_effect = lambda name: (
+			MagicMock(py_type=int) if name == "id" else MagicMock(py_type=str)
+		)
+
+	def tearDown(self):
+		"""Clean up after each test."""
+		frappe.db.rollback()
+		frappe.db.delete("Data Packet")
+
+	def test_datapacket_return_correct_paths(self):
+		"""
+		Test if 'get_file_url' and 'get_extraction_dir' returns correct paths.
+		"""
+		# Create mock Data Packet
+		file_name = "TEST-0001.ZIP"
+		create_datapacket(file_name)
 		doc: DataPacket = frappe.get_doc("Data Packet", file_name)
 
+		# Execute function
 		self.assertEqual(doc.get_file_url(), f"{frappe.get_site_path()}/private/files/{file_name}")
 		self.assertEqual(doc.get_extraction_dir(), f"{frappe.get_site_path()}/private/files/storage/{file_name}")
 
 	def test_get_name_return_correctly(self):
+		"""
+		Test to generate name field for Vir Conto doctypes when presented a document.
+
+		Name is generated from Primary Key doctype.
+		"""
+		# Check with simple key
 		test_row = {
 			"kod": "901",
 			"nev": "GÖNGYÖLEG",
@@ -69,7 +106,7 @@ class TestDataPacket(unittest.TestCase):
 		}
 		self.assertEqual("901", get_name(test_row))
 
-		# Check with composite key as well
+		# Check with composite key
 		test_composite_row = {
 			"rkod": "106",
 			"rnev": "ZG Húsbolt",
@@ -96,6 +133,100 @@ class TestDataPacket(unittest.TestCase):
 		}
 		self.assertEqual("106/2025.03.22", get_name(test_composite_row))
 
+	def test_import_insert_db(self):
+		mock_data = {
+			"kod": "901",
+			"nev": "GÖNGYÖLEG",
+			"rend": 0,
+			"tarhely": "",
+			"focsop": "200",
+			"doctype": "tcsop",
+		}
+		mock_doc = MagicMock()
+
+		with (
+			patch("vir_conto.vir_conto.doctype.data_packet.data_packet.get_name"),
+			patch("frappe.db.exists", return_value=False),
+			patch("frappe.get_doc", return_value=mock_doc),
+		):
+			# Execute function
+			insert_into_db(mock_data)
+			mock_doc.insert.assert_called_once()
+
+	def test_import_update_db(self):
+		mock_data = {
+			"kod": "901",
+			"nev": "GÖNGYÖLEG",
+			"rend": 0,
+			"tarhely": "",
+			"focsop": "200",
+			"doctype": "tcsop",
+		}
+		mock_doc = MagicMock()
+
+		with (
+			patch("vir_conto.vir_conto.doctype.data_packet.data_packet.get_name"),
+			patch("frappe.db.exists", return_value=True),
+			patch("frappe.get_doc", return_value=mock_doc),
+		):
+			# Execute function
+			insert_into_db(mock_data)
+			mock_doc.update.assert_called_once()
+			mock_doc.save.assert_called_once()
+
+	def test_process_dbf_inserts_records(self):
+		"""Test call insert_into_db, if doctype != 'torolt'."""
+		with (
+			patch("dbf.Table", return_value=self.dbf_table_mock),
+			patch("vir_conto.vir_conto.doctype.data_packet.data_packet.insert_into_db") as mock_insert,
+			patch("vir_conto.vir_conto.doctype.data_packet.data_packet.remove_from_db") as mock_remove,
+			patch("frappe.logger") as _mock_logger,
+		):
+			# Execute function
+			process_dbf("dummy.dbf", doctype="partner", encoding="cp1250")
+
+			self.dbf_table_mock.open.assert_called_once()
+			mock_insert.assert_any_call({"id": 1, "name": "Alice", "doctype": "partner"})
+			mock_insert.assert_any_call({"id": 2, "name": "Bob", "doctype": "partner"})
+			mock_remove.assert_not_called()
+
+	def test_process_dbf_removes_records(self):
+		"""Test call remove_from_db, if doctype == 'torolt'."""
+		with (
+			patch("vir_conto.vir_conto.doctype.data_packet.data_packet.dbf.Table", return_value=self.dbf_table_mock),
+			patch("vir_conto.vir_conto.doctype.data_packet.data_packet.insert_into_db") as mock_insert,
+			patch("vir_conto.vir_conto.doctype.data_packet.data_packet.remove_from_db") as mock_remove,
+			patch("frappe.logger"),
+		):
+			process_dbf("dummy.dbf", doctype="torolt", encoding="utf-8")
+
+			mock_remove.assert_any_call({"id": 1, "name": "Alice", "doctype": "torolt"})
+			mock_remove.assert_any_call({"id": 2, "name": "Bob", "doctype": "torolt"})
+			mock_insert.assert_not_called()
+
+	def test_process_dbf_handles_dbferror(self):
+		"""Test if exception in opening Dbase file, logs error"""
+		import dbf
+
+		with (
+			patch(
+				"vir_conto.vir_conto.doctype.data_packet.data_packet.dbf.Table",
+				side_effect=dbf.exceptions.DbfError("Dbf Error"),
+			),
+			patch("frappe.logger") as mock_logger,
+		):
+			process_dbf("broken.dbf", "partner", "utf-8")
+			mock_logger.return_value.exception.assert_called()
+
+	def test_process_dbf_handles_any_error(self):
+		"""Test if exception in opening Dbase file, logs error"""
+		with (
+			patch("vir_conto.vir_conto.doctype.data_packet.data_packet.dbf.Table", side_effect=Exception("Error")),
+			patch("frappe.logger") as mock_logger,
+		):
+			process_dbf("broken.dbf", "partner", "utf-8")
+			mock_logger.return_value.exception.assert_called()
+
 	def test_integration_import_data_packet(self):
 		# Create mock Data Packet
 		file_name = "TEST-0001.LZH"
@@ -113,7 +244,7 @@ class TestDataPacket(unittest.TestCase):
 		frappe.db.delete("vir_bolt")
 		frappe.db.delete("vir_csop")
 
-		# Call import_data manually
+		# Execute function
 		data_packet.import_data()
 
 		# Cleanup Data Packets
@@ -135,58 +266,101 @@ class TestDataPacket(unittest.TestCase):
 		self.assertEqual(174, frappe.db.count("vir_bolt"))
 		self.assertEqual(927, frappe.db.count("vir_csop"))
 
-	def test_import_new_packets_queues_packets_correctly(self):
-		# Clear Data Packet table, so the function returns if there are no packets
-		frappe.db.delete("Data Packet")
-		self.assertEqual(0, import_new_packets())
+	def test_import_data_creates_extraction_dir(self):
+		mock_zip = MagicMock()
 
-		# Create mock Data Packets
-		file_names = ["TEST-0001.LZH", "TEST-0002.LZH"]
-		data_packets = []
-		for file_name in file_names:
-			create_datapacket(file_name)
-			data_packet: DataPacket = frappe.get_doc("Data Packet", file_name)
-			data_packet.processed = False
-			data_packet.save()
-
-			copy_datapacket(data_packet, file_name)
-			data_packets.append(data_packet)
-
-		# Call import_data manually
-		self.assertEqual(import_new_packets(), len(data_packets))
-
-		# Cleanup Data Packets
-		for data_packet in data_packets:
-			print("Removing dir: ", data_packet.get_extraction_dir())
-			shutil.rmtree(data_packet.get_extraction_dir())
-			print("Removing file: ", data_packet.get_file_url())
-			os.remove(data_packet.get_file_url())
-
-	def test_clear_old_packets(self):
-		frappe.set_user("Administrator")
-
-		# Create mock DataPacket
-		file_name = "TEST-0001"
+		# Create mock Data Packet
+		file_name = "TEST-0001.LZH"
 		create_datapacket(file_name)
+		data_packet: DataPacket = frappe.get_doc("Data Packet", file_name)
 
+		with (
+			patch("os.path.exists", return_value=False),
+			patch("os.makedirs") as mock_makedirs,
+			patch("zipfile.ZipFile", return_value=mock_zip),
+			patch("frappe.db.get_list", return_value=[]),
+		):
+			# Execute function
+			data_packet.import_data()
+			mock_makedirs.assert_called_once_with(data_packet.get_extraction_dir())
+
+	def test_import_queues_datapackets_correctly(self):
+		mock_packets = ["TEST-0001.LZH", "TEST-0002.LZH"]
+
+		with (
+			patch("frappe.utils.nowtime", return_value="12:30:00"),
+			patch("frappe.logger"),
+			patch("frappe.enqueue_doc") as mock_enqueue,
+			patch("frappe.db.get_list", return_value=mock_packets),
+		):
+			# Execute function
+			result = import_new_packets()
+
+			self.assertEqual(result, 2)
+			mock_enqueue.assert_any_call("Data Packet", "TEST-0001.LZH", method="import_data")
+			mock_enqueue.assert_any_call("Data Packet", "TEST-0002.LZH", method="import_data")
+
+	def test_import_returns_zero_when_no_packets(self):
+		""""""
+		with (
+			patch("frappe.utils.nowtime", return_value="12:30:00"),
+			patch("frappe.logger") as mock_logger,
+			patch("frappe.enqueue_doc") as mock_enqueue,
+			patch("frappe.db.get_list", return_value=[]),
+		):
+			# Execute function
+			result = import_new_packets()
+
+		self.assertEqual(result, 0)
+		mock_enqueue.assert_not_called()
+		mock_logger.return_value.info.assert_not_called()
+
+	def test_import_logs_message_at_midnight(self):
+		"""Éjfélkor logolja a background job állapotát."""
+		mock_logger = MagicMock()
+		with (
+			patch("frappe.logger", return_value=mock_logger),
+			patch("frappe.utils.nowtime", return_value="00:05:00"),
+			patch("frappe.get_list", return_value=[]),
+		):
+			# Execute function
+			import_new_packets()
+
+			mock_logger.info.assert_any_call("Background job is alive")
+
+	def test_import_logs_error_if_enqueue_fails(self):
+		"""Ha enqueue_doc exception-t dob, logger.error hívódik."""
+		mock_logger = MagicMock()
+		mock_packets = ["TEST-0001.LZH", "TEST-0002.LZH"]
+
+		with (
+			patch("frappe.logger", return_value=mock_logger),
+			patch("frappe.utils.nowtime", return_value="12:30:00"),
+			patch("frappe.get_list", return_value=mock_packets),
+			patch("frappe.enqueue_doc", side_effect=Exception("Error")),
+		):
+			# Execute function
+			import_new_packets()
+			mock_logger.error.assert_called_once()
+			mock_logger.info.assert_any_call("Beginning to import new packets")
+
+	def test_integration_clear_old_packets(self):
+		# Create mock DataPacket
+		file_name = "TEST-0001.ZIP"
+		create_datapacket(file_name)
 		doc: DataPacket = frappe.get_doc("Data Packet", file_name)
 		frappe.db.set_value("Data Packet", file_name, "creation", frappe.utils.nowdate(), update_modified=False)
 		frappe.db.commit()  # nosemgrep
-		extraction_dir = doc.get_extraction_dir()
+
 		file_url = doc.get_file_url()
 
-		# Copy mock file
-		src_path = "../apps/vir_conto/vir_conto/vir_conto/doctype/data_packet/TEST-0001"
-
-		shutil.copy(src_path + ".LZH", file_url)
-		if not os.path.exists(extraction_dir):
-			os.makedirs(extraction_dir)
+		copy_datapacket(doc, file_name)
 		# Track uploaded archive packet
 		file = Path(file_url)
 
 		clear_old_packets()
 
-		# Here Data Packet SHOULD exist because its date is fresh
+		# SHOULD exist because its date is fresh
 		self.assertIsNotNone(frappe.db.exists("Data Packet", file_name))
 		self.assertTrue(file.exists())
 
@@ -200,3 +374,15 @@ class TestDataPacket(unittest.TestCase):
 		self.assertIsNone(frappe.db.exists("Data Packet", file_name))
 		self.assertFalse(file.exists())
 		frappe.db.commit()  # nosemgrep
+
+	def test_clear_old_packets_logs_error_when_exception_occurs(self):
+		mock_logger = MagicMock()
+
+		with (
+			patch("frappe.logger", return_value=mock_logger),
+			patch("frappe.db.get_all", side_effect=Exception("DB Error")),
+		):
+			# Execute functions
+			clear_old_packets()
+
+			mock_logger.exception.assert_called_once()
