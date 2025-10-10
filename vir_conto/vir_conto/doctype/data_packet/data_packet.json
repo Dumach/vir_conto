@@ -11,8 +11,10 @@
  ],
  "fields": [
   {
+   "description": "Only file's name not PATH",
    "fieldname": "file_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "File Name",
    "unique": 1
   },
@@ -20,13 +22,14 @@
    "default": "0",
    "fieldname": "processed",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Processed"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-05-22 10:16:55.501514",
+ "modified": "2025-10-10 12:00:45.751552",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "Data Packet",

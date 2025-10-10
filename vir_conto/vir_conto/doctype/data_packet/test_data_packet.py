@@ -9,7 +9,12 @@ from pathlib import Path
 import frappe
 import frappe.utils
 
-from .data_packet import DataPacket, clear_old_packets, get_name, import_new_packets
+from vir_conto.vir_conto.doctype.data_packet.data_packet import (
+	DataPacket,
+	clear_old_packets,
+	get_name,
+	import_new_packets,
+)
 
 
 def create_datapacket(file_name: str):
@@ -33,7 +38,7 @@ def copy_datapacket(data_packet: DataPacket, file_name: str) -> bool:
 			os.makedirs(extraction_dir)
 
 		src_path = "../apps/vir_conto/vir_conto/vir_conto/doctype/data_packet/TEST-0001.LZH"
-		dest_path = os.path.join(frappe.get_site_path("private", "files"), file_name + ".LZH")
+		dest_path = os.path.join(frappe.get_site_path("private", "files"), file_name)
 		shutil.copy(src_path, dest_path)
 	except Exception as error:
 		print(error)
@@ -50,7 +55,7 @@ class TestDataPacket(unittest.TestCase):
 
 		doc: DataPacket = frappe.get_doc("Data Packet", file_name)
 
-		self.assertEqual(doc.get_file_url(), f"{frappe.get_site_path()}/private/files/{file_name}.LZH")
+		self.assertEqual(doc.get_file_url(), f"{frappe.get_site_path()}/private/files/{file_name}")
 		self.assertEqual(doc.get_extraction_dir(), f"{frappe.get_site_path()}/private/files/storage/{file_name}")
 
 	def test_get_name_return_correctly(self):
@@ -93,7 +98,7 @@ class TestDataPacket(unittest.TestCase):
 
 	def test_integration_import_data_packet(self):
 		# Create mock Data Packet
-		file_name = "TEST-0001"
+		file_name = "TEST-0001.LZH"
 		create_datapacket(file_name)
 		data_packet: DataPacket = frappe.get_doc("Data Packet", file_name)
 
@@ -136,7 +141,7 @@ class TestDataPacket(unittest.TestCase):
 		self.assertEqual(0, import_new_packets())
 
 		# Create mock Data Packets
-		file_names = ["TEST-0001", "TEST-0002"]
+		file_names = ["TEST-0001.LZH", "TEST-0002.LZH"]
 		data_packets = []
 		for file_name in file_names:
 			create_datapacket(file_name)
@@ -151,7 +156,6 @@ class TestDataPacket(unittest.TestCase):
 		self.assertEqual(import_new_packets(), len(data_packets))
 
 		# Cleanup Data Packets
-		print(os.getcwd())
 		for data_packet in data_packets:
 			print("Removing dir: ", data_packet.get_extraction_dir())
 			shutil.rmtree(data_packet.get_extraction_dir())

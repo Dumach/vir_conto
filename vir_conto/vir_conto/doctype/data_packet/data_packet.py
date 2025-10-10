@@ -26,7 +26,7 @@ class DataPacket(Document):
 	# end: auto-generated types
 
 	def get_file_url(self) -> str:
-		return os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
+		return os.path.join(frappe.get_site_path("private", "files"), str(self.file_name))
 
 	def get_extraction_dir(self) -> str:
 		return os.path.join(frappe.get_site_path("private", "files", "storage"), str(self.file_name))
@@ -74,7 +74,7 @@ class DataPacket(Document):
 
 
 def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
-	"""Method for processing a Dbase file.
+	"""Method for processing a DBase file.
 
 	Args:
 	        dbf_file: Source path of debase file.
@@ -214,29 +214,26 @@ def clear_old_packets() -> None:
 	max_date = frappe.utils.add_days(frappe.utils.getdate(), -30)
 
 	try:
-		before_delete = frappe.db.count("Data Packet")
-
 		old_packets = frappe.db.get_all("Data Packet", {"creation": ["<", max_date]}, pluck="name")
+
+		# Remove from `tabFile`
+		before_delete = frappe.db.count("File", filters={"file_name": ["in", old_packets]})
+		frappe.db.delete(
+			"File",
+			filters={"creation": ["<", max_date], "file_name": ["in", old_packets]},
+		)
+		after_delete = frappe.db.count("File", filters={"file_name": ["in", old_packets]})
+		logger.info(f"Removed {before_delete - after_delete} old file(s)")
+
+		# Remove from `tabData Packet` and filesystem
+		before_delete = frappe.db.count("Data Packet")
 		for p in old_packets:
 			packet: DataPacket = frappe.get_doc("Data Packet", p)
 			shutil.rmtree(packet.get_extraction_dir())
 			os.remove(packet.get_file_url())
 			packet.delete()
-
-		# Removing data packet entries
 		after_delete = frappe.db.count("Data Packet")
 		logger.info(f"Removed {before_delete - after_delete} old packet(s)")
-
-		# remove from `tabFile`
-		before_delete = frappe.db.count("File", filters={"file_name": ["like", "%.LZH"]})
-		frappe.db.delete(
-			"File",
-			filters={"creation": ["<", max_date], "file_name": ["like", "%.LZH"]},
-		)
-
-		after_delete = frappe.db.count("File", filters={"file_name": ["like", "%.LZH"]})
-		logger.info(f"Removed {before_delete - after_delete} old file(s)")
 	except Exception as e:
 		logger.error(e)
-
 	frappe.db.commit()
