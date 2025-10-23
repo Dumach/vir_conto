@@ -2,12 +2,73 @@
  {
   "docstatus": 0,
   "doctype": "Insights Dashboard v3",
+  "has_workbook_access": true,
   "is_public": 0,
   "is_shared_with_organization": false,
   "items": "[\n {\n  \"chart\": \"1qjp2edlnv\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"ls18ncfw\",\n   \"moved\": false,\n   \"w\": 9,\n   \"x\": 0,\n   \"y\": 4\n  },\n  \"type\": \"chart\"\n },\n {\n  \"filter_name\": \"Napok sz\\u00e1ma\",\n  \"filter_type\": \"Number\",\n  \"layout\": {\n   \"h\": 1,\n   \"i\": \"adqf773o\",\n   \"moved\": false,\n   \"w\": 4,\n   \"x\": 0,\n   \"y\": 0\n  },\n  \"links\": {\n   \"1qjp2edlnv\": \"`6lca2ju8nh`.`nap`\"\n  },\n  \"type\": \"filter\"\n },\n {\n  \"chart\": \"hvvntnv469\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"7v9b71ch\",\n   \"moved\": false,\n   \"w\": 20,\n   \"x\": 0,\n   \"y\": 12\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"m6t4lrov1j\",\n  \"layout\": {\n   \"h\": 3,\n   \"i\": \"lqqnoq1n\",\n   \"moved\": false,\n   \"w\": 20,\n   \"x\": 0,\n   \"y\": 1\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"dv9t1c79dv\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"154x7abv\",\n   \"moved\": false,\n   \"w\": 10,\n   \"x\": 9,\n   \"y\": 4\n  },\n  \"type\": \"chart\"\n },\n {\n  \"filter_name\": \"H\\u00f3nap(ok)\",\n  \"filter_type\": \"String\",\n  \"layout\": {\n   \"h\": 1,\n   \"i\": \"dndkzvyq\",\n   \"moved\": false,\n   \"w\": 4,\n   \"x\": 4,\n   \"y\": 0\n  },\n  \"links\": {\n   \"dv9t1c79dv\": \"`vqvclp2vkn`.`ho`\"\n  },\n  \"type\": \"filter\"\n },\n {\n  \"filter_name\": \"Bolt(ok)\",\n  \"filter_type\": \"String\",\n  \"layout\": {\n   \"h\": 1,\n   \"i\": \"jaac2fo8\",\n   \"moved\": false,\n   \"w\": 4,\n   \"x\": 8,\n   \"y\": 0\n  },\n  \"links\": {\n   \"1qjp2edlnv\": \"`6lca2ju8nh`.`rnev`\",\n   \"dv9t1c79dv\": \"`vqvclp2vkn`.`rnev`\",\n   \"hvvntnv469\": \"`oqnoqd63jo`.`rnev`\",\n   \"m6t4lrov1j\": \"`oqnoqd63jo`.`rnev`\"\n  },\n  \"type\": \"filter\"\n }\n]",
   "linked_charts": [
    {
     "chart": "1qjp2edlnv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "1qjp2edlnv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "1qjp2edlnv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "1qjp2edlnv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "1qjp2edlnv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "1qjp2edlnv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "hvvntnv469",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "hvvntnv469",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "hvvntnv469",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "hvvntnv469",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "hvvntnv469",
     "parent": "0ns61tkdaj",
     "parentfield": "linked_charts",
     "parenttype": "Insights Dashboard v3"
@@ -25,13 +86,73 @@
     "parenttype": "Insights Dashboard v3"
    },
    {
+    "chart": "m6t4lrov1j",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "m6t4lrov1j",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "m6t4lrov1j",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "m6t4lrov1j",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "m6t4lrov1j",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "dv9t1c79dv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "dv9t1c79dv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "dv9t1c79dv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "dv9t1c79dv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "dv9t1c79dv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
     "chart": "dv9t1c79dv",
     "parent": "0ns61tkdaj",
     "parentfield": "linked_charts",
     "parenttype": "Insights Dashboard v3"
    }
   ],
-  "modified": "2025-10-03 11:19:00.072380",
+  "modified": "2025-10-23 09:29:25.514626",
   "name": "0ns61tkdaj",
   "old_name": null,
   "people_with_access": [],
