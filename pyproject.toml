@@ -59,3 +59,12 @@ docstring-code-format = true
 
 [tool.basedpyright]
 extraPaths = ["../frappe", "../insights"]
+
+[tool.pyrefly]
+project-includes = ["**/*"]
+search-path = ["../frappe", "../insights"]
+project-excludes = [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/*venv/**/*",
+]
