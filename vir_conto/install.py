@@ -3,6 +3,7 @@ import os
 
 import frappe
 from dotenv import load_dotenv
+from frappe.core.doctype.system_settings.system_settings import SystemSettings
 from frappe.core.doctype.user.user import User
 from frappe.desk.page.setup_wizard.setup_wizard import setup_complete
 from frappe.utils.password import update_password
@@ -24,12 +25,53 @@ def load_environment():
 
 # will run after app is installed on site
 def after_install() -> None:
-	load_environment()
 	run_setup_wizard()
+
+	print("Hardening Frappe Security Settings")
+	settings: SystemSettings = frappe.get_doc("System Settings")
+	settings.deny_multiple_sessions = True
+	settings.allow_login_using_user_name = True
+	settings.allow_consecutive_login_attempts = 5
+	settings.allow_login_after_fail = 300
+	settings.session_expiry = "03:00"
+	settings.allow_error_traceback = False
+	settings.enable_telemetry = False
+	settings.backup_limit = 14
+
+	print("Changing Default Settings")
+	settings.float_precision = "4"
+	settings.first_day_of_the_week = "Monday"
+	settings.save()
 
 	# Patch does not run after app install, so we need to manually call it instead,
 	# if a site is already installed the patch will run normally
 	add_workbook_custom_fields.execute()
+
+
+def run_setup_wizard():
+	"""Method for completing the setup wizard."""
+	if frappe.db.get_single_value("System Settings", "setup_complete"):
+		print("Setup already completed.")
+		return
+
+	args = {
+		"language": "English",
+		"country": "Hungary",
+		"currency": "HUF",
+		"timezone": "Europe/Budapest",
+		# "full_name": "Administrator",
+		# "email": "admin@example.com",
+		# "password": os.environ.get("ADMIN_PASSWORD"),
+		"setup_demo": 0,
+	}
+
+	# CI set to true otherwise Insights will install demo data
+	os.environ["CI"] = "1"
+
+	setup_status = setup_complete(args=args)
+
+	if setup_status.get("status") != "ok":
+		frappe.throw(frappe._("Frappe setup failed"))
 
 
 # will run after app fixtures are synced
@@ -103,38 +145,6 @@ def create_system_user() -> None:
 		json.dump({"api_key": api_key, "api_secret": api_secret}, json_file, ensure_ascii=True)
 
 
-def run_setup_wizard():
-	"""Method for completing the setup wizard."""
-	if frappe.db.get_single_value("System Settings", "setup_complete"):
-		print("Setup already completed.")
-		return
-
-	args = {
-		"language": "Magyar",
-		"country": "Hungary",
-		"currency": "HUF",
-		"float_precision": 4,
-		"first_day_of_the_week": "Monday",
-		"timezone": "Europe/Budapest",
-		# "full_name": "Administrator",
-		# "email": "admin@example.com",
-		# "password": os.environ.get("ADMIN_PASSWORD"),
-		"session_expiry": "24:00",
-		"allow_login_using_user_name": True,
-		"backup_limit": 14,
-		"setup_demo": 0,
-		"disable_telemetry": 0,
-	}
-
-	# CI set to true otherwise Insights will install demo data
-	os.environ["CI"] = "1"
-
-	setup_status = setup_complete(args=args)
-
-	if setup_status.get("status") != "ok":
-		frappe.throw(frappe._("Frappe setup failed"))
-
-
 def create_insights_teams():
 	try:
 		team_tulaj = frappe.new_doc("Insights Team")
@@ -142,8 +152,9 @@ def create_insights_teams():
 		team_tulaj.append("team_members", {"user": "Administrator"})
 
 		# add Vir Conto module to Insights Table v3
-		ds = frappe.get_doc("Insights Data Source v3", "Site DB")
-		ds.update_table_list()
+		if not frappe.db.get_single_value("System Settings", "setup_complete"):
+			ds = frappe.get_doc("Insights Data Source v3", "Site DB")
+			ds.update_table_list()
 
 		# add Doctypes to permission
 		doctypes = frappe.db.get_list("Primary Key", pluck="name")
