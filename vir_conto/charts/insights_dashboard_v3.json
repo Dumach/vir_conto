@@ -44,6 +44,18 @@
     "parenttype": "Insights Dashboard v3"
    },
    {
+    "chart": "1qjp2edlnv",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "hvvntnv469",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
     "chart": "hvvntnv469",
     "parent": "0ns61tkdaj",
     "parentfield": "linked_charts",
@@ -111,6 +123,18 @@
    },
    {
     "chart": "m6t4lrov1j",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "m6t4lrov1j",
+    "parent": "0ns61tkdaj",
+    "parentfield": "linked_charts",
+    "parenttype": "Insights Dashboard v3"
+   },
+   {
+    "chart": "dv9t1c79dv",
     "parent": "0ns61tkdaj",
     "parentfield": "linked_charts",
     "parenttype": "Insights Dashboard v3"
@@ -152,7 +176,7 @@
     "parenttype": "Insights Dashboard v3"
    }
   ],
-  "modified": "2025-10-23 09:29:25.514626",
+  "modified": "2025-10-23 12:33:05.412602",
   "name": "0ns61tkdaj",
   "old_name": null,
   "people_with_access": [],
@@ -161,6 +185,6 @@
   "share_link": null,
   "title": "Forgalom",
   "vertical_compact_layout": 0,
-  "workbook": "20"
+  "workbook": "6"
  }
 ]
