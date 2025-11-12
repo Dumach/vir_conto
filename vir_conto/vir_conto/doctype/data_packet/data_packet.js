@@ -1,8 +1,19 @@
-// Copyright (c) 2025, Alex Nagy and contributors
-// For license information, please see license.txt
-
-// frappe.ui.form.on("Data Packet", {
-// 	refresh(frm) {
-
-// 	},
-// });
+frappe.ui.form.on("Data Packet", {
+  refresh(frm) {
+    frm.add_custom_button(__("Import Data"), function () {
+      frappe.call({
+        // Call as a *document method*:
+        doc: frm.doc,
+        method: "import_data",
+        freeze: true,
+        freeze_message: __("Importing data..."),
+        callback: function (r) {
+          if (!r.exc) {
+            frappe.msgprint(__("Import completed successfully."));
+            frm.reload_doc();
+          }
+        },
+      });
+    });
+  },
+});

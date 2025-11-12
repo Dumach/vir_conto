@@ -27,14 +27,15 @@ class DataPacket(Document):
 	# end: auto-generated types
 
 	def get_file_url(self) -> str:
-		return os.path.join(frappe.get_site_path("private", "files"), str(self.file_name))
+		return os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
 
 	def get_extraction_dir(self) -> str:
-		return os.path.join(frappe.get_site_path("private", "files", "storage"), str(self.file_name))
+		return os.path.join(frappe.get_site_path("private", "files", "storage"), str(self.file_name) + ".LZH")
 
 	def after_insert(self) -> None:
 		frappe.enqueue_doc("Data Packet", self.name, method="import_data")
 
+	@frappe.whitelist()
 	def import_data(self) -> None:
 		"""
 		Import logic for Conto export files. It extracts than processes the debase files.
