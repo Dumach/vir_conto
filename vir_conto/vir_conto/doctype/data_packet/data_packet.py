@@ -27,10 +27,10 @@ class DataPacket(Document):
 	# end: auto-generated types
 
 	def get_file_url(self) -> str:
-		return os.path.join(frappe.get_site_path("private", "files"), str(self.file_name) + ".LZH")
+		return os.path.join(frappe.get_site_path("private", "files"), str(self.file_name))
 
 	def get_extraction_dir(self) -> str:
-		return os.path.join(frappe.get_site_path("private", "files", "storage"), str(self.file_name) + ".LZH")
+		return os.path.join(frappe.get_site_path("private", "files", "storage"), str(self.file_name))
 
 	def after_insert(self) -> None:
 		frappe.enqueue_doc("Data Packet", self.name, method="import_data")
