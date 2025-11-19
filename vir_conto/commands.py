@@ -60,6 +60,7 @@ def export_default_charts(base_path: str) -> int:
 		{"dt": "Insights Query v3", "filters": [["workbook", "in", default_workbooks]]},
 		{"dt": "Insights Chart v3", "filters": [["workbook", "in", default_workbooks]]},
 		{"dt": "Insights Dashboard v3", "filters": [["workbook", "in", default_workbooks]]},
+		{"dt": "Insights Folder", "filters": [["workbook", "in", default_workbooks]]},
 	]
 
 	for fixture in fixtures:

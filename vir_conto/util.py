@@ -77,7 +77,7 @@ def sync_default_charts(base_path="") -> None:
 			logger.error("No workbooks found to import, aborting synchronization.")
 			return
 
-		doctypes_to_clean = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3"]
+		doctypes_to_clean = ["Insights Query v3", "Insights Chart v3", "Insights Dashboard v3", "Insights Folder"]
 
 		# Step 2: Remove unwanted workbooks
 		_remove_old_workbooks(import_workbooks, logger)

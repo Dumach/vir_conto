@@ -4,6 +4,12 @@ from insights.insights.doctype.insights_workbook.insights_workbook import Insigh
 
 
 class CustomInsightsWorkbook(InsightsWorkbook):
+	def validate(self):
+		if self.is_default and not self.vir_id:
+			frappe.throw(
+				_("The workbook is set to default but 'vir_id' is empty. Please set 'vir_id' or set to false.")
+			)
+
 	def before_save(self):
 		self.check_default_title_schema()
 		super().before_save()
