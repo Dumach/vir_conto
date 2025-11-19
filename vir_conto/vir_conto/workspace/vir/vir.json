@@ -1,0 +1,148 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"DpjfO6PYAr\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">VIR Munkafel\u00fclet</span>\",\"col\":12}},{\"id\":\"Xp2XpVjPu0\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tov\u00e1bb az Insights-ra\",\"col\":3}},{\"id\":\"z9sJKkimN9\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"0lfjP1JLBd\",\"type\":\"card\",\"data\":{\"card_name\":\"Vir-Conto t\u00e1bl\u00e1k\",\"col\":4}},{\"id\":\"Aflkr321o4\",\"type\":\"card\",\"data\":{\"card_name\":\"Adatfelt\u00f6lt\u00e9s k\u00e9zzel\",\"col\":4}},{\"id\":\"bGKAbaxMgw\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Import\u00e1lt T\u00e1bl\u00e1k sz\u00e1ma\",\"col\":3}}]",
+ "creation": "2025-11-19 09:27:05.621345",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "filter",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "VIR",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Vir-Conto t\u00e1bl\u00e1k",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "torzs",
+   "link_count": 0,
+   "link_to": "torzs",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "raktnev",
+   "link_count": 0,
+   "link_to": "raktnev",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "tfocsop",
+   "link_count": 0,
+   "link_to": "tfocsop",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "tcsop",
+   "link_count": 0,
+   "link_to": "tcsop",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "vir_bolt",
+   "link_count": 0,
+   "link_to": "vir_bolt",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "vir_csop",
+   "link_count": 0,
+   "link_to": "vir_csop",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Adatfelt\u00f6lt\u00e9s k\u00e9zzel",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "1. l\u00e9p\u00e9s: F\u00e1jl felt\u00f6lt\u00e9s",
+   "link_count": 0,
+   "link_to": "File",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "2. l\u00e9p\u00e9s: Data Packet l\u00e9trehoz\u00e1s",
+   "link_count": 0,
+   "link_to": "Data Packet",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-11-19 09:34:54.405955",
+ "modified_by": "Administrator",
+ "module": "Vir Conto",
+ "name": "VIR",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Administrator"
+  }
+ ],
+ "sequence_id": 28.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Tov\u00e1bb az Insights-ra",
+   "link_to": "insights",
+   "type": "Page"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Import\u00e1lt T\u00e1bl\u00e1k sz\u00e1ma",
+   "link_to": "Primary Key",
+   "stats_filter": "[[\"Primary Key\",\"enabled\",\"=\",1,false]]",
+   "type": "DocType"
+  }
+ ],
+ "title": "VIR"
+}
