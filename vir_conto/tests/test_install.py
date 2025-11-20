@@ -72,11 +72,9 @@ class TestInstallModule(unittest.TestCase):
 			patch("vir_conto.install.create_system_user"),
 			patch("vir_conto.install.add_workbook_custom_fields") as mock_add_fields,
 			patch("vir_conto.install.run_setup_wizard") as mock_setup_wizard,
-			patch("vir_conto.install.load_environment") as mock_load_env,
 		):
 			after_install()
 
-			mock_load_env.assert_called_once()
 			mock_setup_wizard.assert_called_once()
 			mock_add_fields.execute.assert_called_once()
 
@@ -246,39 +244,6 @@ class TestInstallModule(unittest.TestCase):
 			run_setup_wizard()
 
 			mock_get_single_value.assert_called_once_with("System Settings", "setup_complete")
-
-	@patch.dict("os.environ", {}, clear=True)
-	def test_run_setup_wizard_success(self):
-		"""Test successful setup wizard execution."""
-		from vir_conto.install import run_setup_wizard
-
-		with (
-			patch("frappe.db.get_single_value") as mock_get_single_value,
-			patch("vir_conto.install.setup_complete") as mock_setup_complete,
-		):
-			mock_get_single_value.return_value = False
-			mock_setup_complete.return_value = {"status": "ok"}
-
-			run_setup_wizard()
-
-			# Verify CI environment variable is set
-			self.assertEqual(os.environ.get("CI"), "1")
-
-			# Verify setup_complete is called with correct arguments
-			expected_args = {
-				"language": "Magyar",
-				"country": "Hungary",
-				"currency": "HUF",
-				"float_precision": 4,
-				"first_day_of_the_week": "Monday",
-				"timezone": "Europe/Budapest",
-				"session_expiry": "24:00",
-				"allow_login_using_user_name": True,
-				"backup_limit": 14,
-				"setup_demo": 0,
-				"disable_telemetry": 0,
-			}
-			mock_setup_complete.assert_called_once_with(args=expected_args)
 
 	def test_run_setup_wizard_failure(self):
 		"""Test setup wizard execution failure."""

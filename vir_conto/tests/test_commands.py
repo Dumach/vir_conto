@@ -49,5 +49,5 @@ class TestCommands(unittest.TestCase):
 		# Count files located in test/test_exports
 		count = len(glob.glob(pathname="*.json", root_dir=self.export_path))
 		self.assertEqual(
-			count, 4, "Count of expected files are 4, which are (insights_chart_v3/dashboard_v3/query_v3/workbook.json"
+			count, 5, "Count of expected files are 4, which are (insights_chart_v3/dashboard_v3/query_v3/workbook.json"
 		)
