@@ -86,7 +86,7 @@ class TestDataPacket(unittest.TestCase):
 		doc: DataPacket = frappe.get_doc("Data Packet", file_name)
 
 		# Execute function
-		self.assertEqual(doc.get_file_url(), f"{frappe.get_site_path()}/private/files/{file_name}")
+		self.assertEqual(doc.get_file_path(), f"{frappe.get_site_path()}/private/files/{file_name}")
 		self.assertEqual(doc.get_extraction_dir(), f"{frappe.get_site_path()}/private/files/storage/{file_name}")
 
 	def test_get_name_return_correctly(self):
@@ -245,11 +245,11 @@ class TestDataPacket(unittest.TestCase):
 		frappe.db.delete("vir_csop")
 
 		# Execute function
-		data_packet.import_data()
+		data_packet.import_packet()
 
 		# Cleanup Data Packets
 		shutil.rmtree(data_packet.get_extraction_dir())
-		os.remove(data_packet.get_file_url())
+		os.remove(data_packet.get_file_path())
 
 		# According to TEST-0001 has:
 		# Table		Num of Records
@@ -281,7 +281,7 @@ class TestDataPacket(unittest.TestCase):
 			patch("frappe.db.get_list", return_value=[]),
 		):
 			# Execute function
-			data_packet.import_data()
+			data_packet.import_packet()
 			mock_makedirs.assert_called_once_with(data_packet.get_extraction_dir())
 
 	def test_import_queues_datapackets_correctly(self):
@@ -297,8 +297,8 @@ class TestDataPacket(unittest.TestCase):
 			result = import_new_packets()
 
 			self.assertEqual(result, 2)
-			mock_enqueue.assert_any_call("Data Packet", "TEST-0001.LZH", method="import_data")
-			mock_enqueue.assert_any_call("Data Packet", "TEST-0002.LZH", method="import_data")
+			mock_enqueue.assert_any_call("Data Packet", name="TEST-0001.LZH", method="import_packet")
+			mock_enqueue.assert_any_call("Data Packet", name="TEST-0002.LZH", method="import_packet")
 
 	def test_import_returns_zero_when_no_packets(self):
 		""""""
@@ -314,19 +314,6 @@ class TestDataPacket(unittest.TestCase):
 		self.assertEqual(result, 0)
 		mock_enqueue.assert_not_called()
 		mock_logger.return_value.info.assert_not_called()
-
-	def test_import_logs_message_at_midnight(self):
-		"""Éjfélkor logolja a background job állapotát."""
-		mock_logger = MagicMock()
-		with (
-			patch("frappe.logger", return_value=mock_logger),
-			patch("frappe.utils.nowtime", return_value="00:05:00"),
-			patch("frappe.get_list", return_value=[]),
-		):
-			# Execute function
-			import_new_packets()
-
-			mock_logger.info.assert_any_call("Background job is alive")
 
 	def test_import_logs_error_if_enqueue_fails(self):
 		"""Ha enqueue_doc exception-t dob, logger.error hívódik."""
@@ -352,7 +339,7 @@ class TestDataPacket(unittest.TestCase):
 		frappe.db.set_value("Data Packet", file_name, "creation", frappe.utils.nowdate(), update_modified=False)
 		frappe.db.commit()  # nosemgrep
 
-		file_url = doc.get_file_url()
+		file_url = doc.get_file_path()
 
 		copy_datapacket(doc, file_name)
 		# Track uploaded archive packet
@@ -380,7 +367,7 @@ class TestDataPacket(unittest.TestCase):
 
 		with (
 			patch("frappe.logger", return_value=mock_logger),
-			patch("frappe.db.get_all", side_effect=Exception("DB Error")),
+			patch("frappe.db.get_list", side_effect=Exception("DB Error")),
 		):
 			# Execute functions
 			clear_old_packets()

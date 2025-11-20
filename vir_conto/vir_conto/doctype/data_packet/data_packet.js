@@ -4,7 +4,7 @@ frappe.ui.form.on("Data Packet", {
       frappe.call({
         // Call as a *document method*:
         doc: frm.doc,
-        method: "import_data",
+        method: "import_packet",
         freeze: true,
         freeze_message: __("Importing data..."),
         callback: function (r) {
