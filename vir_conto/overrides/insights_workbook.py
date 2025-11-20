@@ -9,10 +9,7 @@ class CustomInsightsWorkbook(InsightsWorkbook):
 			frappe.throw(
 				_("The workbook is set to default but 'vir_id' is empty. Please set 'vir_id' or set to false.")
 			)
-
-	def before_save(self):
 		self.check_default_title_schema()
-		super().before_save()
 
 	def check_default_title_schema(self):
 		"""Informs user and modifies the title if similar to the default Workbook title schema"""
