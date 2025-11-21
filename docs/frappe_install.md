@@ -211,6 +211,12 @@ Check if Node is correctly installed by running `node --version`
 sudo pip3 install frappe-bench
 ```
 
+Note: There is a problem with Python 3.13 and Debian 13; workaround:
+
+```bash
+sudo rm /usr/lib/python3.*/EXTERNALLY-MANAGED
+```
+
 Check if Frappe Bench is correctly installed by running `bench --version`
 
 ### 5.2 Initialize Frappe Bench
