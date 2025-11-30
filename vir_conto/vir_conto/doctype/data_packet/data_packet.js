@@ -5,13 +5,19 @@ frappe.ui.form.on("Data Packet", {
         // Call as a *document method*:
         doc: frm.doc,
         method: "import_packet",
-        freeze: true,
-        freeze_message: __("Importing data..."),
-        callback: function (r) {
+        args: { verbose: "web" },
+        // freeze: true,
+        // freeze_message: __("Importing data..."),
+        callback: (r) => {
           if (!r.exc) {
+            if (cur_dialog) cur_dialog.hide();
             frappe.msgprint(__("Import completed successfully."));
             frm.reload_doc();
           }
+        },
+        error: (r) => {
+          // on error
+          frappe.msgprint(r.message);
         },
       });
     });

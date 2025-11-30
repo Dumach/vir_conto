@@ -4,6 +4,7 @@
 import os
 import shutil
 import zipfile
+from typing import Literal
 
 import dbf
 import frappe
@@ -34,13 +35,15 @@ class DataPacket(Document):
 		frappe.enqueue_doc("Data Packet", self.name, method="import_packet")
 
 	@frappe.whitelist()
-	def import_packet(self):
-		"""
-		Import logic for Conto export files. It extracts than processes the DBase files.
+	def import_packet(self, verbose: Literal["console", "web"] | None = None):
+		"""Import logic for Conto export files. It extracts than processes the DBase files.
+
+		Args:
+		        verbose (Literal[&quot;console&quot;, &quot;web&quot;] | None): Show progress on console or web. Defaults to None.
 		"""
 		extraction_dir = self.get_extraction_dir()
 
-		# Create the extraction directory if it doesn't exist
+		# Create the extraction directory if Trueit doesn't exist
 		if not os.path.exists(extraction_dir):
 			os.makedirs(extraction_dir)
 
@@ -62,16 +65,23 @@ class DataPacket(Document):
 		logger.setLevel("INFO")
 		logger.info(f"Beginning to import Data Packet: {self.name}")
 
-		for doctype in doctypes:
+		for idx, doctype in enumerate(doctypes):
+			if verbose == "console":
+				frappe.utils.update_progress_bar(f"Importing {doctype.name} doctype", idx, len(doctypes))
+			if verbose == "web":
+				frappe.publish_progress(
+					(idx / len(doctypes)) * 100, title="Importing", description=f"Processing {doctype.name} doctype"
+				)
+
 			dbf_file = os.path.join(extraction_dir, doctype.name + ".dbf")
 			if not doctype.updateable:
 				# clean all entries because the whole dataset is sent
 				frappe.db.delete(doctype.name)
 			process_dbf(dbf_file, doctype.name, encoding)
+			frappe.db.commit()  # nosemgrep
 
 		self.processed = True
 		self.save()
-		frappe.db.commit()  # nosemgrep
 
 
 def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
@@ -88,6 +98,8 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 	try:
 		table = dbf.Table(dbf_file, codepage=encoding, on_disk=True)
 		table.open()
+
+		logger.info(f"Importing {len(table):n} records from {dbf_file}")
 
 		fields = table.field_names
 		field_infos = {field_name: table.field_info(field_name) for field_name in fields}
