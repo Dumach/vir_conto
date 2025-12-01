@@ -170,10 +170,10 @@ scheduler_events = {
 		# 		"vir_conto.tasks.daily"
 		"vir_conto.vir_conto.doctype.data_packet.data_packet.clear_old_packets"
 	],
-	"hourly": [
-		# 		"vir_conto.tasks.hourly"
-		"vir_conto.vir_conto.doctype.data_packet.data_packet.import_new_packets"
-	],
+	# "hourly": [
+	# 		"vir_conto.tasks.hourly"
+	# ],
+	"hourly_maintenance": ["vir_conto.vir_conto.doctype.data_packet.data_packet.import_new_packets"],
 	# "weekly": [
 	# 		"vir_conto.tasks.weekly"
 	# ],
