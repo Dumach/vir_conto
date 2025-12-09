@@ -112,7 +112,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-11-19 09:34:54.405955",
+ "modified": "2025-12-09 13:48:38.775980",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "VIR",
@@ -124,6 +124,9 @@
  "roles": [
   {
    "role": "Administrator"
+  },
+  {
+   "role": "Insights Admin"
   }
  ],
  "sequence_id": 28.0,

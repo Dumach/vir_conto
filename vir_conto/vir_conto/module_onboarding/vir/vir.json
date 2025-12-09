@@ -1,0 +1,38 @@
+{
+ "allow_roles": [
+  {
+   "role": "Insights User"
+  },
+  {
+   "role": "Insights Admin"
+  },
+  {
+   "role": "conto_system"
+  }
+ ],
+ "creation": "2025-12-09 13:21:30.843151",
+ "docstatus": 0,
+ "doctype": "Module Onboarding",
+ "documentation_url": "https://github.com/Dumach/vir_conto",
+ "idx": 0,
+ "is_complete": 0,
+ "modified": "2025-12-09 13:40:07.130545",
+ "modified_by": "Administrator",
+ "module": "Vir Conto",
+ "name": "VIR",
+ "owner": "Administrator",
+ "steps": [
+  {
+   "step": "VIR Upload File"
+  },
+  {
+   "step": "VIR Create Data Packet"
+  },
+  {
+   "step": "VIR Visit Insights"
+  }
+ ],
+ "subtitle": "Gyors bevezet\u00e9s",
+ "success_message": "Sikeresen v\u00e9grehajtotta",
+ "title": "VIR - Bevezet\u00e9s"
+}

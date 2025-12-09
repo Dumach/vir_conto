@@ -1,0 +1,20 @@
+{
+ "action": "Go to Page",
+ "creation": "2025-12-09 13:18:45.283783",
+ "description": "L\u00e1togasson el az Insights fel\u00fclet\u00e9re \u00e9s kezdjen bele az adatok elemz\u00e9s\u00e9be",
+ "docstatus": 0,
+ "doctype": "Onboarding Step",
+ "idx": 0,
+ "is_complete": 0,
+ "is_single": 0,
+ "is_skipped": 0,
+ "modified": "2025-12-09 13:40:02.327586",
+ "modified_by": "Administrator",
+ "name": "VIR Visit Insights",
+ "owner": "Administrator",
+ "path": "/insights",
+ "show_form_tour": 0,
+ "show_full_form": 0,
+ "title": "VIR - Insights Megtekint\u00e9se",
+ "validate_action": 1
+}

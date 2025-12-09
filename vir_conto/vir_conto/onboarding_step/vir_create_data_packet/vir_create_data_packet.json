@@ -1,0 +1,21 @@
+{
+ "action": "Create Entry",
+ "action_label": "Adatcsomag L\u00e9trehoz\u00e1sa",
+ "creation": "2025-12-09 13:17:53.277469",
+ "description": "Hozzon l\u00e9tre egy Adatcsomagot (Data Packet) \u00e9s \u00e1ll\u00edtsd be a f\u00e1jl nev\u00e9t a felt\u00f6lt\u00f6tt arch\u00edvum nev\u00e9vel \u00e9s (kiterjeszt\u00e9ssel egy\u00fctt)",
+ "docstatus": 0,
+ "doctype": "Onboarding Step",
+ "idx": 0,
+ "is_complete": 0,
+ "is_single": 0,
+ "is_skipped": 0,
+ "modified": "2025-12-09 13:40:00.449357",
+ "modified_by": "Administrator",
+ "name": "VIR Create Data Packet",
+ "owner": "Administrator",
+ "reference_document": "Data Packet",
+ "show_form_tour": 0,
+ "show_full_form": 1,
+ "title": "VIR - Adatcsomag L\u00e9trehoz\u00e1sa",
+ "validate_action": 1
+}

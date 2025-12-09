@@ -1,0 +1,22 @@
+{
+ "action": "Go to Page",
+ "action_label": "F\u00e1jl Felt\u00f6lt\u00e9se",
+ "creation": "2025-12-09 13:15:27.463797",
+ "description": "L\u00e1togasson el a File-ok k\u00f6z\u00e9 \u00e9s t\u00f6lts\u00f6n fel egy arch\u00edvumot a C-Conto-b\u00f3l az **'+ Add File'** gomb seg\u00edts\u00e9g\u00e9vel.\n\nFontos, hogy felt\u00f6lt\u00e9skor a f\u00e1jl l\u00e1that\u00f3s\u00e1g\u00e1t **priv\u00e1tra** \u00e1ll\u00edtsa!",
+ "docstatus": 0,
+ "doctype": "Onboarding Step",
+ "idx": 0,
+ "is_complete": 0,
+ "is_single": 0,
+ "is_skipped": 0,
+ "modified": "2025-12-09 13:39:46.785571",
+ "modified_by": "Administrator",
+ "name": "VIR Upload File",
+ "owner": "Administrator",
+ "path": "/app/file",
+ "reference_document": "File",
+ "show_form_tour": 0,
+ "show_full_form": 1,
+ "title": "VIR - Arch\u00edvum F\u00e1jl Felt\u00f6lt\u00e9se",
+ "validate_action": 1
+}
