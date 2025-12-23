@@ -32,7 +32,7 @@ class DataPacket(Document):
 		return frappe.get_site_path("private", "files", "storage", self.file_name)
 
 	def after_insert(self) -> None:
-		frappe.enqueue_doc("Data Packet", self.name, method="import_packet")
+		frappe.enqueue_doc("Data Packet", self.name, method="import_packet", timeout=3600)
 
 	@frappe.whitelist()
 	def import_packet(self, verbose: Literal["console", "web"] | None = None):
@@ -217,7 +217,7 @@ def import_new_packets() -> int:
 	logger.info("Beginning to import new packets")
 	try:
 		for p in packets:
-			frappe.enqueue_doc("Data Packet", name=p, method="import_packet")
+			frappe.enqueue_doc("Data Packet", name=p, method="import_packet", timeout=3600)
 	except Exception as e:
 		logger.error(e)
 
