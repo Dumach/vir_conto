@@ -237,7 +237,6 @@ def clear_old_packets() -> None:
 
 	logger.info("Beginning to clean old packets")
 	max_date = frappe.utils.add_days(frappe.utils.getdate(), -30)
-
 	try:
 		old_packets: list[str] = frappe.db.get_list("Data Packet", {"creation": ["<", max_date]}, pluck="name")
 
@@ -265,3 +264,4 @@ def clear_old_packets() -> None:
 		logger.info(f"Removed {before_delete - after_delete} old packet(s)")
 	except Exception as e:
 		logger.exception(e)
+		frappe.throw(str(e), type(e))
