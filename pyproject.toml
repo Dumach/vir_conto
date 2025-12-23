@@ -12,6 +12,7 @@ dependencies = [
     # "frappe~=15.0.0" # Installed and managed by bench.
     "dotenv>=0.9.9",
     "click>=8.2.1",
+    "pypika>=0.48.9",
 ]
 
 [build-system]
@@ -68,3 +69,6 @@ project-excludes = [
     "**/__pycache__",
     "**/*venv/**/*",
 ]
+
+[tool.ty.environment]
+extra-paths = ["../frappe", "../insights"]
