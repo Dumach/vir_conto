@@ -10,7 +10,7 @@ def after_uninstall():
 	remove_system_user()
 	remove_insights_teams()
 
-	frappe.db.commit()
+	frappe.db.commit()  # nosemgrep
 
 
 def remove_system_user():

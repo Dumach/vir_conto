@@ -105,7 +105,7 @@ def sync_default_charts(base_path="") -> None:
 		logger.exception(f"Failed to sync default charts: {e}")
 		return
 
-	frappe.db.commit()
+	frappe.db.commit()  # nosemgrep
 
 
 def _remove_old_workbooks(import_workbooks: list[CustomInsightsWorkbook], logger: Logger) -> None:

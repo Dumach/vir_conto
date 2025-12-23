@@ -45,7 +45,7 @@ def copy_datapacket(data_packet: DataPacket, file_name: str) -> bool:
 		dest_path = os.path.join(frappe.get_site_path("private", "files"), file_name)
 		shutil.copy(src_path, dest_path)
 	except Exception as error:
-		print(error)
+		frappe.throw(str(error), type(error))
 		return False
 
 	return True
