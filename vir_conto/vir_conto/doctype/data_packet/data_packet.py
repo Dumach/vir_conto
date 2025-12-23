@@ -82,6 +82,7 @@ class DataPacket(Document):
 
 		self.processed = True
 		self.save()
+		logger.info(f"Finished importing Data Packet: {self.name}")
 
 
 def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
