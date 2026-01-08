@@ -7,7 +7,7 @@
   "doctype": "Insights Workbook",
   "folders": "[]",
   "is_default": 1,
-  "modified": "2025-10-03 13:03:46.455506",
+  "modified": "2026-01-08 11:17:07.223852",
   "name": 18,
   "queries": "[\n {\n  \"folder\": null,\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"oqnoqd63jo\",\n  \"sort_order\": 0,\n  \"title\": \"tabvir_bolt\"\n },\n {\n  \"folder\": null,\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"9kd19o9obh\",\n  \"sort_order\": 1,\n  \"title\": \"tabvir_bolt_bazis\"\n },\n {\n  \"folder\": null,\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"cu982kim7b\",\n  \"sort_order\": 2,\n  \"title\": \"tabvir_csop\"\n },\n {\n  \"folder\": null,\n  \"is_builder_query\": 0,\n  \"is_native_query\": 1,\n  \"is_script_query\": 0,\n  \"name\": \"vqvclp2vkn\",\n  \"sort_order\": 3,\n  \"title\": \"vir_bolt_akt_eves_bazissal\"\n },\n {\n  \"folder\": null,\n  \"is_builder_query\": 0,\n  \"is_native_query\": 1,\n  \"is_script_query\": 0,\n  \"name\": \"6lca2ju8nh\",\n  \"sort_order\": 4,\n  \"title\": \"vir_bolt_elmult_X_napban\"\n }\n]",
   "read_only": false,
