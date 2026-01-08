@@ -10,6 +10,7 @@
   "datum",
   "ev",
   "ho",
+  "ho_nap",
   "tipus",
   "csop",
   "nert",
@@ -73,12 +74,19 @@
    "fieldtype": "Int",
    "label": "ev",
    "search_index": 1
+  },
+  {
+   "fieldname": "ho_nap",
+   "fieldtype": "Int",
+   "label": "ho_nap",
+   "length": 4,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-03 18:21:13.802849",
+ "modified": "2026-01-08 16:03:45.164020",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_csop",

@@ -6,3 +6,4 @@
 # Patches added in this section will be executed after doctypes are migrated
 vir_conto.patches.add_workbook_custom_fields
 vir_conto.patches.set_ev_field_with_data
+vir_conto.patches.set_ho_nap_field

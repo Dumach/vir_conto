@@ -11,6 +11,7 @@
   "datum",
   "ev",
   "ho",
+  "ho_nap",
   "keszlet",
   "nbesz_kp",
   "bbesz_kp",
@@ -41,6 +42,7 @@
    "search_index": 1
   },
   {
+   "fetch_from": "rkod.rnev",
    "fieldname": "rnev",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -173,12 +175,19 @@
    "fieldtype": "Int",
    "label": "ev",
    "search_index": 1
+  },
+  {
+   "fieldname": "ho_nap",
+   "fieldtype": "Int",
+   "label": "ho_nap",
+   "length": 4,
+   "search_index": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-10-03 18:20:47.129769",
+ "modified": "2026-01-08 16:03:18.563170",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",

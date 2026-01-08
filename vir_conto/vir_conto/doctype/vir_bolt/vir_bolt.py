@@ -27,6 +27,7 @@ class vir_bolt(Document):
 		haszon: DF.Float
 		hkulcs: DF.Float
 		ho: DF.Int
+		ho_nap: DF.Int
 		keszlet: DF.Currency
 		kosara: DF.Currency
 		nbesz_kp: DF.Currency
@@ -40,8 +41,10 @@ class vir_bolt(Document):
 	# end: auto-generated types
 
 	def before_save(self):
-		self.set_year()
+		self.set_dates()
 
-	def set_year(self):
+	def set_dates(self):
 		date = cast("Date", self.datum)
 		self.ev = date.year
+		self.ho = date.month
+		self.ho_nap = self.datum[5:7] + self.datum[8:10]

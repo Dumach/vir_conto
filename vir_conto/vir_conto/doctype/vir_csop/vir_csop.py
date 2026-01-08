@@ -20,14 +20,17 @@ class vir_csop(Document):
 		datum: DF.Date
 		ev: DF.Int
 		ho: DF.Int
+		ho_nap: DF.Int
 		nert: DF.Currency
 		rkod: DF.Link
 		tipus: DF.Data
 	# end: auto-generated types
 
 	def before_save(self):
-		self.set_year()
+		self.set_dates()
 
-	def set_year(self):
+	def set_dates(self):
 		date = cast("Date", self.datum)
 		self.ev = date.year
+		self.ho = date.month
+		self.ho_nap = self.datum[5:7] + self.datum[8:10]
