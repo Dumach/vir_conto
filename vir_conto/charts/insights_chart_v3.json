@@ -154,23 +154,6 @@
  },
  {
   "chart_type": "Bar",
-  "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": \"24\",\n \"order_by\": [],\n \"split_by\": {\n  \"dimension\": {\n   \"column_name\": \"rnev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rnev\",\n   \"label\": \"rnev\",\n   \"value\": \"rnev\"\n  },\n  \"max_split_values\": \"30\"\n },\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"datum\",\n   \"data_type\": \"Date\",\n   \"dimension_name\": \"datum\",\n   \"granularity\": \"month\",\n   \"label\": \"datum\",\n   \"value\": \"datum\"\n  }\n },\n \"y_axis\": {\n  \"series\": [\n   {\n    \"measure\": {\n     \"aggregation\": \"avg\",\n     \"column_name\": \"neg_keszlm\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"avg_of_neg_keszlm\"\n    }\n   }\n  ],\n  \"stack\": true\n }\n}",
-  "data_query": "a9ik55tgnv",
-  "docstatus": 0,
-  "doctype": "Insights Chart v3",
-  "folder": null,
-  "is_public": 0,
-  "modified": "2026-01-08 11:59:26.583513",
-  "name": "a9i42cdia0",
-  "old_name": null,
-  "query": "oqnoqd63jo",
-  "read_only": false,
-  "sort_order": 13,
-  "title": "Negatív készlet érték",
-  "workbook": "18"
- },
- {
-  "chart_type": "Bar",
   "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": \"24\",\n \"order_by\": [],\n \"split_by\": {\n  \"dimension\": {\n   \"column_name\": \"rnev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rnev\",\n   \"label\": \"rnev\",\n   \"value\": \"rnev\"\n  },\n  \"max_split_values\": \"30\"\n },\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"datum\",\n   \"data_type\": \"Date\",\n   \"dimension_name\": \"datum\",\n   \"granularity\": \"month\",\n   \"label\": \"datum\",\n   \"value\": \"datum\"\n  }\n },\n \"y_axis\": {\n  \"series\": [\n   {\n    \"measure\": {\n     \"aggregation\": \"avg\",\n     \"column_name\": \"bert_eng\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"avg_of_bert_eng\"\n    }\n   }\n  ],\n  \"stack\": true\n }\n}",
   "data_query": "a9ik55tgnv",
   "docstatus": 0,
@@ -252,6 +235,23 @@
   "read_only": false,
   "sort_order": 6,
   "title": "Forgalom termék főcsoportonként",
+  "workbook": "18"
+ },
+ {
+  "chart_type": "Bar",
+  "config": "{\n \"filters\": {\n  \"filters\": [],\n  \"logical_operator\": \"And\"\n },\n \"limit\": \"24\",\n \"order_by\": [],\n \"split_by\": {\n  \"dimension\": {\n   \"column_name\": \"rnev\",\n   \"data_type\": \"String\",\n   \"dimension_name\": \"rnev\",\n   \"label\": \"rnev\",\n   \"value\": \"rnev\"\n  },\n  \"max_split_values\": \"30\"\n },\n \"x_axis\": {\n  \"dimension\": {\n   \"column_name\": \"datum\",\n   \"data_type\": \"Date\",\n   \"dimension_name\": \"datum\",\n   \"granularity\": \"month\",\n   \"label\": \"datum\",\n   \"value\": \"datum\"\n  }\n },\n \"y_axis\": {\n  \"series\": [\n   {\n    \"measure\": {\n     \"aggregation\": \"avg\",\n     \"column_name\": \"neg_keszlm\",\n     \"data_type\": \"Decimal\",\n     \"measure_name\": \"avg_of_neg_keszlm\"\n    }\n   }\n  ],\n  \"stack\": true\n }\n}",
+  "data_query": "a9ik55tgnv",
+  "docstatus": 0,
+  "doctype": "Insights Chart v3",
+  "folder": null,
+  "is_public": 0,
+  "modified": "2026-01-08 11:59:26.583513",
+  "name": "a9i42cdia0",
+  "old_name": null,
+  "query": "oqnoqd63jo",
+  "read_only": false,
+  "sort_order": 13,
+  "title": "Negatív készlet érték",
   "workbook": "18"
  },
  {
