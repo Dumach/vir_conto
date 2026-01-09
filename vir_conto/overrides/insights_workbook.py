@@ -7,22 +7,21 @@ class CustomInsightsWorkbook(InsightsWorkbook):
 	def validate(self):
 		if self.is_default and not self.vir_id:
 			frappe.throw(
-				_("The workbook is set to default but 'vir_id' is empty. Please set 'vir_id' or set to false.")
+				_("The workbook is set to default but 'vir_id' is empty." + " Please set 'vir_id' or set to false.")
 			)
-		self.check_default_title_schema()
-
-	def check_default_title_schema(self):
-		"""Informs user and modifies the title if similar to the default Workbook title schema"""
-		user_roles = set(frappe.get_roles(frappe.session.user))
-		admin_roles = {"System Manager"}
 
 		# Only change title if user has none of the admin roles
+		if self.title is None:
+			return
+
+		user_roles = set(frappe.get_roles(frappe.session.user))
+		admin_roles = {"System Manager"}
 		if self.title.startswith("_") and user_roles.isdisjoint(admin_roles):
 			self.title = self.title.lstrip("_")
 			self.is_default = 0
-			frappe.msgprint(
+			frappe.throw(
 				_(
-					"Workbook creation with default title schema like (_Account) is not allowed. Workbook title renamed."
+					"Workbook creation with default title schema like (_Account) is not allowed."
+					+ " Workbook title renamed."
 				),
-				indicator="yellow",
 			)
