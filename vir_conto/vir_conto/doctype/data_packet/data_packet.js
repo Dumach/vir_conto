@@ -1,6 +1,6 @@
 frappe.ui.form.on("Data Packet", {
   refresh(frm) {
-    frm.add_custom_button(__("Import Data"), function () {
+    frm.add_custom_button(__("Import Data"), () => {
       frappe.call({
         // Call as a *document method*:
         doc: frm.doc,
@@ -20,6 +20,14 @@ frappe.ui.form.on("Data Packet", {
           frappe.msgprint(r.message);
         },
       });
+    });
+
+    frm.add_custom_button(__("Go to File"), () => {
+      frappe.db
+        .get_doc("File", null, { file_name: frm.doc.name })
+        .then((doc) => {
+          frappe.set_route("file", doc.name);
+        });
     });
   },
 });
