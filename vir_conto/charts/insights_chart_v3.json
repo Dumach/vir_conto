@@ -279,13 +279,13 @@
   "doctype": "Insights Chart v3",
   "folder": null,
   "is_public": 0,
-  "modified": "2026-01-14 10:45:10.791808",
+  "modified": "2026-01-14 10:49:39.611237",
   "name": "ncaqiu4c5t",
   "old_name": null,
   "query": "oqnoqd63jo",
   "read_only": false,
-  "sort_order": 16,
-  "title": "Negatív készlet érték",
+  "sort_order": 13,
+  "title": "Negatív készlet mennyiség",
   "workbook": "18"
  }
 ]
