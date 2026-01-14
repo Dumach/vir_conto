@@ -21,6 +21,11 @@ repos:
     # Ruff version.
     rev: v0.14.11
     hooks:
+      # Run the importer sorter.
+      - id: ruff
+        name: 'Run ruff import sorter'
+        args: ['--select=I', '--fix']
+
       # Run the linter.
       - id: ruff-check
         name: 'Run ruff linter and apply fixes'
@@ -46,7 +51,7 @@ repos:
           )$
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.0.0
+    rev: v8.44.0
     hooks:
       - id: eslint
         types_or: [javascript]
