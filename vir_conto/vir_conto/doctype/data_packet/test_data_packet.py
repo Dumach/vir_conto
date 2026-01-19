@@ -297,8 +297,8 @@ class TestDataPacket(unittest.TestCase):
 			result = import_new_packets()
 
 			self.assertEqual(result, 2)
-			mock_enqueue.assert_any_call("Data Packet", name="TEST-0001.LZH", method="import_packet")
-			mock_enqueue.assert_any_call("Data Packet", name="TEST-0002.LZH", method="import_packet")
+			mock_enqueue.assert_any_call("Data Packet", name="TEST-0001.LZH", method="import_packet", timeout=3600)
+			mock_enqueue.assert_any_call("Data Packet", name="TEST-0002.LZH", method="import_packet", timeout=3600)
 
 	def test_import_returns_zero_when_no_packets(self):
 		""""""

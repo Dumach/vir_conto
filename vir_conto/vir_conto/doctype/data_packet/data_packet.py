@@ -45,7 +45,7 @@ class DataPacket(Document):
 		"""Import logic for Conto export files. It extracts than processes the DBase files.
 
 		Args:
-		        verbose (Literal[&quot;console&quot;, &quot;web&quot;] | None): Show progress on console or web. Defaults to None.
+				verbose (Literal[&quot;console&quot;, &quot;web&quot;] | None): Show progress on console or web. Defaults to None.
 		"""
 		extraction_dir = self.get_extraction_dir()
 
@@ -86,6 +86,7 @@ class DataPacket(Document):
 			process_dbf(dbf_file, doctype.name, encoding)
 			frappe.db.commit()  # nosemgrep
 
+		self.reload()
 		self.processed = True
 		self.save()
 		logger.info(f"Finished importing Data Packet: {self.name}")
@@ -95,9 +96,9 @@ def process_dbf(dbf_file: str, doctype: str, encoding: str) -> None:
 	"""Method for processing a DBase file.
 
 	Args:
-	        dbf_file: Source path of debase file.
-	        doctype: What doctype it needs to create.
-	        encoding: Debase file encoded in.
+			dbf_file: Source path of debase file.
+			doctype: What doctype it needs to create.
+			encoding: Debase file encoded in.
 	"""
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
 	logger.setLevel("INFO")
@@ -138,7 +139,7 @@ def remove_from_db(row):
 	"""Method for removing an Item from Vir-Conto.
 
 	Args:
-	        row (_type_): A DBase record, that contains the TIPUS field
+			row (_type_): A DBase record, that contains the TIPUS field
 	"""
 	# Get the doctype, that is associated with the TIPUS parameter from C-Conto
 	doctype = frappe.db.get_value("Primary Key", {"type": row["tipus"]}, "frappe_name", cache=True)
@@ -160,10 +161,10 @@ def get_name(row: dict) -> str:
 	Method for creating / accessing a primary key for Conto doctypes.
 
 	Args:
-	        row: Data row must contain a 'doctype' field in order to create the key.
+			row: Data row must contain a 'doctype' field in order to create the key.
 
 	Returns:
-	        str: The correct primary key as a string.
+			str: The correct primary key as a string.
 	"""
 	# Selects the primary key for the correct doctype
 	primary_keys = frappe.db.get_value(
@@ -188,7 +189,7 @@ def insert_into_db(row: dict) -> None:
 	Inserts a row into Frappe DB.
 
 	Args
-	        row: Data row must contain a 'doctype' field in order to create a new Frappe document.
+			row: Data row must contain a 'doctype' field in order to create a new Frappe document.
 	"""
 	docname = get_name(row)
 	doctype = row["doctype"]
@@ -208,7 +209,7 @@ def import_new_packets() -> int:
 	"""Job to import new packets.
 
 	Returns:
-	        int: The number of packages imported.
+			int: The number of packages imported.
 	"""
 
 	logger = frappe.logger("import", allow_site=True, file_count=5, max_size=250000)
@@ -270,4 +271,4 @@ def clear_old_packets() -> None:
 		logger.info(f"Removed {before_delete - after_delete} old packet(s)")
 	except Exception as e:
 		logger.exception(e)
-		frappe.throw(str(e), type(e))
+		frappe.log_error(str(e), frappe.get_traceback(), "Data Packet")
