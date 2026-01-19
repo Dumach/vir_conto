@@ -32,6 +32,12 @@ class DataPacket(Document):
 		return frappe.get_site_path("private", "files", "storage", self.file_name)
 
 	def after_insert(self) -> None:
+		fname = frappe.db.get_value("File", {"file_name": self.file_name}, ["name"])
+		if fname and isinstance(fname, str):
+			file = frappe.get_doc("File", fname)
+			file.attached_to_doctype = "Data Packet"
+			file.attached_to_name = self.name
+			file.save()
 		frappe.enqueue_doc("Data Packet", self.name, method="import_packet", timeout=3600)
 
 	@frappe.whitelist()
