@@ -1,7 +1,7 @@
 {
  "actions": [],
+ "allow_bulk_edit": 1,
  "allow_rename": 1,
- "autoname": "format:{rkod}/{datum}",
  "creation": "2025-03-24 23:14:55.793127",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -28,7 +28,8 @@
   "neg_keszlm",
   "bert_eng",
   "bsaj_felh",
-  "bselejt"
+  "bselejt",
+  "pg_torolt"
  ],
  "fields": [
   {
@@ -182,16 +183,22 @@
    "label": "ho_nap",
    "length": 4,
    "search_index": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "pg_torolt",
+   "fieldtype": "Currency",
+   "label": "pg_torolt"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-14 11:39:03.390017",
+ "modified": "2026-08-03 14:16:18.138552",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",
- "naming_rule": "Expression",
+ "naming_rule": "By script",
  "owner": "Administrator",
  "permissions": [
   {

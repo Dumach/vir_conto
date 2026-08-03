@@ -26,6 +26,10 @@ class vir_csop(Document):
 		tipus: DF.Data
 	# end: auto-generated types
 
+	def autoname(self):
+		datum = self.datum.replace('-', '.')
+		self.name = f"{self.tipus}/{self.csop}/{self.rkod}/{datum}"
+
 	def before_save(self):
 		self.set_dates()
 

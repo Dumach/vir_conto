@@ -35,10 +35,15 @@ class vir_bolt(Document):
 		neg_keszlm: DF.Currency
 		nert_ossz: DF.Currency
 		nszallrend: DF.Currency
+		pg_torolt: DF.Currency
 		rkod: DF.Link
 		rnev: DF.Data
 		vevok: DF.Int
 	# end: auto-generated types
+
+	def autoname(self):
+		datum = self.datum.replace('-', '.')
+		self.name = f"{self.rkod}/{datum}"
 
 	def before_save(self):
 		self.set_dates()
