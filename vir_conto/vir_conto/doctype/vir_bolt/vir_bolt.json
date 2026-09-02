@@ -13,6 +13,7 @@
   "ho",
   "ho_nap",
   "keszlet",
+  "keszlet_nyilvar",
   "nbesz_kp",
   "bbesz_kp",
   "nbesz_nkp",
@@ -189,12 +190,18 @@
    "fieldname": "pg_torolt",
    "fieldtype": "Currency",
    "label": "pg_torolt"
+  },
+  {
+   "default": "0",
+   "fieldname": "keszlet_nyilvar",
+   "fieldtype": "Currency",
+   "label": "keszlet_nyilvar"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-08-03 14:16:18.138552",
+ "modified": "2026-09-02 20:36:55.503274",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",

@@ -29,6 +29,7 @@ class vir_bolt(Document):
 		ho: DF.Int
 		ho_nap: DF.Int
 		keszlet: DF.Currency
+		keszlet_nyilvar: DF.Currency
 		kosara: DF.Currency
 		nbesz_kp: DF.Currency
 		nbesz_nkp: DF.Currency
