@@ -13,7 +13,7 @@
   "ho",
   "ho_nap",
   "keszlet",
-  "keszlet_nyilvar",
+  "keszlet_ny",
   "nbesz_kp",
   "bbesz_kp",
   "nbesz_nkp",
@@ -193,15 +193,15 @@
   },
   {
    "default": "0",
-   "fieldname": "keszlet_nyilvar",
+   "fieldname": "keszlet_ny",
    "fieldtype": "Currency",
-   "label": "keszlet_nyilvar"
+   "label": "keszlet_ny"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 20:36:55.503274",
+ "modified": "2026-09-03 08:22:07.408990",
  "modified_by": "Administrator",
  "module": "Vir Conto",
  "name": "vir_bolt",
