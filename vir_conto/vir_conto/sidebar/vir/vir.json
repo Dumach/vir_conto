@@ -1,0 +1,63 @@
+{
+ "app": "vir_conto",
+ "creation": "2026-11-07 22:20:57.141218",
+ "docstatus": 0,
+ "doctype": "Sidebar",
+ "header_icon": "filter",
+ "idx": 0,
+ "items": [
+  {
+   "added": 0,
+   "child": 0,
+   "collapsible": 1,
+   "hidden": 0,
+   "indent": 0,
+   "is_default_module": 0,
+   "keep_closed": 0,
+   "label": "Kezd\u0151lap",
+   "link_to": "VIR",
+   "link_type": "Workspace",
+   "open_in_new_tab": 1,
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "added": 0,
+   "child": 0,
+   "collapsible": 1,
+   "hidden": 0,
+   "indent": 0,
+   "is_default_module": 0,
+   "keep_closed": 0,
+   "label": "Tov\u00e1bb az Insights-ra",
+   "link_to": "insights",
+   "link_type": "Page",
+   "open_in_new_tab": 1,
+   "show_arrow": 0,
+   "type": "Link"
+  },
+  {
+   "added": 0,
+   "child": 0,
+   "collapsible": 1,
+   "hidden": 0,
+   "indent": 0,
+   "is_default_module": 0,
+   "keep_closed": 0,
+   "label": "Import\u00e1lt T\u00e1bl\u00e1k sz\u00e1ma",
+   "link_to": "Primary Key",
+   "link_type": "DocType",
+   "open_in_new_tab": 1,
+   "show_arrow": 0,
+   "type": "Link"
+  }
+ ],
+ "merged_from": "[\"VIR\"]",
+ "modified": "2026-11-07 22:25:29.707117",
+ "modified_by": "Administrator",
+ "module": "Vir Conto",
+ "name": "VIR",
+ "owner": "Administrator",
+ "standard": 1,
+ "title": "VIR"
+}
