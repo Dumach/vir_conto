@@ -10,6 +10,7 @@ import dbf
 import frappe
 import frappe.utils
 from frappe.model.document import Document
+from insights.utils import File
 
 
 class DataPacket(Document):
@@ -34,7 +35,7 @@ class DataPacket(Document):
 	def after_insert(self) -> None:
 		fname = frappe.db.get_value("File", {"file_name": self.file_name}, ["name"])
 		if fname and isinstance(fname, str):
-			file = frappe.get_doc("File", fname)
+			file: File = frappe.get_doc("File", fname)
 			file.attached_to_doctype = "Data Packet"
 			file.attached_to_name = self.name
 			file.save()
@@ -243,7 +244,7 @@ def clear_old_packets() -> None:
 	logger.setLevel("INFO")
 
 	logger.info("Beginning to clean old packets")
-	max_date = frappe.utils.add_days(frappe.utils.getdate(), -30)
+	max_date = frappe.utils.add_days(frappe.utils.today(), -30)
 	try:
 		old_packets: list[str] = frappe.db.get_list("Data Packet", {"creation": ["<", max_date]}, pluck="name")
 

@@ -5,6 +5,8 @@ from typing import TypedDict
 import frappe
 from frappe.model.document import Document
 from frappe.modules.import_file import read_doc_from_file
+from frappe.utils import cint
+from insights.utils import DocShare
 
 from vir_conto.overrides.insights_workbook import CustomInsightsWorkbook
 
@@ -154,12 +156,21 @@ def _create_workbook_lookup(
 
 		for new_workbook in new_workbooks:
 			_configure_workbook_access(new_workbook, logger)
-			import_workbook = import_workbook_map.get(new_workbook.vir_id)
-			if import_workbook:
-				workbook_lookup[import_workbook.name] = {
-					"new_id": new_workbook.name,
-					"vir_id": import_workbook.vir_id,
-				}
+			import_workbook: CustomInsightsWorkbook | None = import_workbook_map.get(new_workbook.vir_id)
+
+			if not import_workbook:
+				continue
+
+			if not import_workbook.name or import_workbook.name == "":
+				continue
+
+			if not new_workbook.name or new_workbook.name == "":
+				continue
+
+			workbook_lookup[cint(import_workbook.name)] = {
+				"new_id": new_workbook.name,
+				"vir_id": import_workbook.vir_id,
+			}
 		return workbook_lookup
 
 	except Exception as e:
@@ -170,8 +181,6 @@ def _create_workbook_lookup(
 def _configure_workbook_access(workbook: CustomInsightsWorkbook, logger: Logger) -> None:
 	"""Configure public access for a workbook."""
 	try:
-		from insights.utils import DocShare
-
 		public_docshare = DocShare.get_or_create_doc(
 			share_doctype="Insights Workbook",
 			share_name=workbook.name,

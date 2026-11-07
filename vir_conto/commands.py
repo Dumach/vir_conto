@@ -1,17 +1,21 @@
 import os
+from typing import TypedDict
 
 import click
 import frappe
+from click.core import Command
 from frappe.commands import pass_context
 from frappe.core.doctype.data_import.data_import import export_json
 from frappe.exceptions import SiteNotSpecifiedError
 
-from vir_conto.overrides.insights_workbook import CustomInsightsWorkbook
 
+class ExportFixtures(TypedDict):
+	dt: str
+	filters: list[list[str]]
 
 @click.command("export-insights")
 @pass_context
-def export_insights(context):
+def export_insights(context) -> None:
 	"""Command wrapper for export_default_charts().
 
 	Args:
@@ -48,14 +52,12 @@ def export_default_charts(base_path: str) -> int:
 	        base_path: Base path of which the files will be exported.
 	"""
 
-	default_workbooks = frappe.get_all("Insights Workbook", filters={"is_default": True})
+	default_workbooks = frappe.get_list("Insights Workbook", filters={"is_default": True}, pluck="name")
 
 	if len(default_workbooks) < 1:
 		return 0
 
-	default_workbooks = [wb["name"] for wb in default_workbooks]
-
-	fixtures = [
+	fixtures: list[ExportFixtures] = [
 		{"dt": "Insights Workbook", "filters": [["name", "in", default_workbooks]]},
 		{"dt": "Insights Query v3", "filters": [["workbook", "in", default_workbooks]]},
 		{"dt": "Insights Chart v3", "filters": [["workbook", "in", default_workbooks]]},
@@ -75,4 +77,4 @@ def export_default_charts(base_path: str) -> int:
 	return len(default_workbooks)
 
 
-commands = [export_insights]
+commands: list[Command] = [export_insights]

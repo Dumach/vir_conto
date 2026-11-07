@@ -4,6 +4,13 @@ from insights.insights.doctype.insights_workbook.insights_workbook import Insigh
 
 
 class CustomInsightsWorkbook(InsightsWorkbook):
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		vir_id: DF.Data
+
 	def validate(self):
 		if self.is_default and not self.vir_id:
 			frappe.throw(

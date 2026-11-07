@@ -1,9 +1,11 @@
 # Copyright (c) 2025, Alex Nagy and contributors
 # For license information, please see license.txt
 
+from datetime import date
+
 import frappe
 from frappe.model.document import Document
-from frappe.utils import cast
+from frappe.utils import cast, cint
 
 
 class vir_bolt(Document):
@@ -42,15 +44,15 @@ class vir_bolt(Document):
 		vevok: DF.Int
 	# end: auto-generated types
 
-	def autoname(self):
-		datum = self.datum.replace('-', '.')
-		self.name = f"{self.rkod}/{datum}"
+	def autoname(self) -> None:
+		datum_str = str(self.datum).replace('-', '.')
+		self.name = f"{self.rkod}/{datum_str}"
 
-	def before_save(self):
+	def before_save(self) -> None:
 		self.set_dates()
 
-	def set_dates(self):
-		date = cast("Date", self.datum)
-		self.ev = date.year
-		self.ho = date.month
+	def set_dates(self) -> None:
+		create_date: date = cast("Date", self.datum)
+		self.ev = create_date.year
+		self.ho = create_date.month
 		self.ho_nap = self.datum[5:7] + self.datum[8:10]
